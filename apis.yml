@@ -1,7 +1,27 @@
 aid: rubicon-project
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/rubicon-project.png
 name: Rubicon Project
-description: Rubicon Project is a company surfaced as a portfolio company of mayfield and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Rubicon Project is a Los Angeles-based advertising technology company, founded in 2007,
+  that built and operated one of the largest real-time bidding advertising exchanges,
+  connecting digital publishers (the sell side) with advertisers and demand-side platforms.
+  In 2020 Rubicon Project merged with Telaria and rebranded as Magnite, now positioned as
+  the world's largest independent sell-side (SSP) advertising company, spanning connected TV
+  (CTV), online video, display, and audio across its DV+, SpringServe, and ClearLine
+  platforms. This profile tracks the company as it exists today under the Magnite brand.
+  Rubicon Project / Magnite publishes no public self-serve developer API or documentation
+  portal — platform access is enterprise and partner-gated through the Magnite Help Center.
 url: https://raw.githubusercontent.com/api-evangelist/rubicon-project/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,12 +31,42 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
+- Advertising
+- AdTech
+- Programmatic Advertising
+- Sell-Side Platform
+- SSP
+- Real-Time Bidding
+- Connected TV
+- Media
 apis: []
+common:
+- type: DomainSecurity
+  url: security/rubicon-project-domain-security.yml
+- type: Website
+  url: https://www.magnite.com
+- type: Blog
+  url: https://www.magnite.com/blog/
+- type: Support
+  url: https://help.magnite.com/help
+- type: TrustCenter
+  url: https://www.magnite.com/trust-center/
+- type: Compliance
+  url: https://www.magnite.com/trust-center/
+- type: PrivacyPolicy
+  url: https://www.magnite.com/legal/magnite-website-privacy-policy/
+- type: Legal
+  url: https://www.magnite.com/legal/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 2
+  pass: local-v1

@@ -1,0 +1,33 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.magnite.com/trust-center/
+probe: true
+url: https://www.magnite.com/trust-center/
+certifications:
+- SOC 2 Type I
+- SOC 1 Type II
+compliance_programs:
+- name: SOC 2 Type II
+  status: in-progress
+  note: Audit expected to complete by end of 2026 per the trust center.
+- name: Sarbanes-Oxley (SOX)
+  status: subject-to
+  note: Applies as a publicly traded company (Magnite, NASDAQ MGNI).
+- name: GDPR
+  status: aligned
+- name: CCPA
+  status: aligned
+- name: IAB Transparency and Consent Framework (TCF) 2.0
+  status: registered-vendor
+pillars:
+- Security
+- Privacy
+- Compliance
+evidence:
+- source: https://www.magnite.com/trust-center/
+  keywords: [soc 2, soc 1, trust center, compliance, gdpr, ccpa]
+notes: >-
+  Magnite (formerly Rubicon Project) publishes a trust center covering layered
+  security, privacy/data-minimization, and a compliance program. No ISO 27001
+  certification is held as of mid-2026. No dedicated responsible/vulnerability
+  disclosure program or public security contact was found on the trust center.
