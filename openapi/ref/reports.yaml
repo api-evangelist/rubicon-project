@@ -1,0 +1,152 @@
+---
+openapi: 3.1.2
+components:
+  schemas:
+    reportParameters:
+      type: object
+      properties:
+        date_range:
+          "$ref": "#/components/schemas/dateRange"
+        custom_date_range:
+          description: 'The custom date range to use if `"date_range"` is `"Custom"`
+
+            '
+          allOf:
+          - "$ref": "#/components/schemas/customDateRange"
+        interval:
+          type:
+          - string
+          - 'null'
+          enum:
+          -
+          - Hour
+          - Day
+          - Week
+          - Month
+          - Quarter
+        interval_start_day:
+          type: string
+          enum:
+          - Sunday
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+        currency:
+          "$ref": "./concerns/currency.yaml#/components/schemas/CurrencyList"
+        dimensions:
+          type: array
+          items:
+            type: string
+          examples:
+          - - supply_tag_id
+        filters:
+          type: array
+          items:
+            type: object
+            properties:
+              dimension:
+                type: string
+                examples:
+                - supply_tag_id
+              type:
+                type: string
+                enum:
+                - values
+                - lists
+                examples:
+                - values
+              values:
+                type: array
+                items:
+                  anyOf:
+                  - type: string
+                  - type: number
+                  - type: integer
+                  - type: boolean
+              list_ids:
+                type: array
+                items:
+                  type: integer
+              is_include:
+                type: boolean
+                examples:
+                - true
+              is_exact_match:
+                type: boolean
+                examples:
+                - false
+            examples:
+            - dimension: supply_tag_id
+              type: values
+              values:
+              - 1
+              is_include: true
+              is_exact_match: false
+        having:
+          type: array
+          items:
+            type: object
+            properties:
+              metric:
+                type: string
+              max:
+                type: boolean
+              value:
+                type: number
+            examples:
+            - metric: impressions
+              max: false
+              value: 0
+        metrics:
+          type: array
+          items:
+            type: string
+          examples:
+          - - impressions
+    dateRange:
+      type: string
+      enum:
+      - Today
+      - Yesterday
+      - Last 24 Hours
+      - Last 72 Hours
+      - Last 7 Days
+      - Month to Date
+      - Last 30 Days
+      - Last Month
+      - Quarter to Date
+      - Custom
+      - All time
+    customDateRange:
+      anyOf:
+      - type: object
+        required:
+        - start_date
+        - end_date
+        properties:
+          start_date:
+            type: string
+            examples:
+            - 25-01-01T00:00
+          end_date:
+            type: string
+            examples:
+            - 25-01-31T23:59
+      - type: string
+        examples:
+        - 01/01/25 0:00 - 01/31/25 23:59
+    reportParameterError:
+      type: object
+      properties:
+        error:
+          type: string
+          examples:
+          - 'Could not parse report parameters: ...'
+info:
+  title: SubDocIgnored
+  version: SubDocIgnored
+paths: {}
+tags: []

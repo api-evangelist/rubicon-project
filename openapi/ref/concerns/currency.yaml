@@ -1,0 +1,46 @@
+---
+openapi: 3.1.2
+components:
+  schemas:
+    CurrencyList:
+      type: string
+      enum:
+      - ARS
+      - AUD
+      - BRL
+      - CAD
+      - CHF
+      - CLP
+      - CNY
+      - COP
+      - DKK
+      - EGP
+      - EUR
+      - GBP
+      - HKD
+      - IDR
+      - ILS
+      - INR
+      - JPY
+      - KRW
+      - MXN
+      - MYR
+      - NOK
+      - NZD
+      - PEN
+      - PHP
+      - PLN
+      - SEK
+      - SGD
+      - THB
+      - TRY
+      - TWD
+      - UAH
+      - USD
+      - UYU
+      - VND
+      - ZAR
+info:
+  title: SubDocIgnored
+  version: SubDocIgnored
+tags: []

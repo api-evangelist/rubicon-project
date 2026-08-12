@@ -1,0 +1,123 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/rubicon-project-springserve-v1-openapi.yml, openapi/rubicon-project-springserve-v0-openapi.yml
+docs:
+- https://console.springserve.com/api-docs
+applies_to:
+- rubicon-project-springserve-v1-api
+- rubicon-project-springserve-v0-api
+- rubicon-project-clearline-api
+format: ad-hoc-json
+rfc9457: false
+media_type: application/json
+envelope:
+  fields:
+  - name: error
+    type: string
+    required: true
+    description: Human-readable message. The only field present on every error shape.
+  - name: errors
+    type: object
+    required: false
+    description: >-
+      Field-keyed validation detail, each value an array of strings —
+      {"name": ["can't be blank"]}. Present on validation (422) responses.
+  - name: status
+    type: integer
+    required: false
+    description: Integer duplicate of the HTTP status, on some schemas only.
+  note: >-
+    Rails/ActiveRecord-shaped. No type URI, no stable machine-readable error code, no
+    problem+json. A client cannot branch on failure without string-matching English prose.
+coverage:
+  operations_total: 668
+  operations_v1: 379
+  operations_v0: 289
+  error_responses_declared_v1: 66
+  error_responses_declared_v0: 3
+  note: >-
+    Error documentation is extremely thin relative to surface area. In v0, only 3 of 289
+    operations declare any 4xx/5xx response at all — all three the same
+    "bad request - invalid credentials" on the auth endpoint. In v1, 66 error responses are
+    declared across 379 operations, so most operations document only their success case.
+problem_types:
+- status: 400
+  title: Bad request
+  declared_count: 12
+  variants:
+  - bad request - invalid credentials
+  - Bad request - no objects provided
+  - Bad request - invalid request body
+  - Bad Request - No demand tag IDs provided
+  - Bad Request - No router IDs provided
+  - Bad Request - No supply tag IDs provided
+  remediation: >-
+    On the auth endpoints this means the email/password pair was rejected. On bulk
+    operations it means the request body omitted the required array of object IDs.
+- status: 401
+  title: Unauthorized / Not authorized
+  declared_count: 5
+  schema: '{"error": "<string>"}'
+  remediation: >-
+    The Authorization token is missing, malformed, or expired. Tokens expire after two
+    hours; re-POST /api/v1/auth to obtain a new one. There is no refresh endpoint.
+  example_operations:
+  - session_get
+- status: 403
+  title: Not authorized to run as this user
+  declared_count: 1
+  example: '{"error": "You are not authorized to access this page."}'
+  operation: run_as_start_post
+  remediation: The authenticated user lacks the impersonation grant for the target user.
+- status: 404
+  title: Not Found
+  declared_count: 11
+  schema_ref: openapi/ref/errors.yaml#/components/schemas/notFoundError
+  example: '{"error": "Object not found"}'
+  remediation: >-
+    The path id does not exist, or exists outside the caller's active account context. Check
+    x-auth-context / GET /api/v1/accounts/current before assuming the object is gone.
+- status: 422
+  title: Unprocessable Content (validation failure)
+  declared_count: 35
+  schema_ref: openapi/ref/errors.yaml#/components/schemas/validationError
+  example: '{"error": "Name can''t be blank", "errors": {"name": ["can''t be blank"]}}'
+  variants:
+  - Unprocessable Content
+  - Unprocessable request
+  - Unprocessable Entity
+  - All updates failed - no objects were updated successfully
+  remediation: >-
+    Read errors{} for the per-field cause. On bulk endpoints, "All updates failed" means the
+    whole batch was rejected — these endpoints are not partially applied on total failure,
+    but partial success semantics for mixed batches are not documented.
+  named_schemas:
+  - CityListErrorResponse
+  - CountryListErrorResponse
+  - MetroAreaListErrorResponse
+  - PostalCodeListErrorResponse
+  - StateListErrorResponse
+  - UnsupportedContentErrorResponse
+- status: 500
+  title: Report serialization failure
+  declared_count: 2
+  schema_ref: '#/components/responses/reportSerializationError'
+  example: '{"error": "Could not serialize report template with /api/v1 format: ..."}'
+  operations:
+  - reports_templates_id_get
+  remediation: >-
+    A saved report template cannot be rendered in the v1 format. A companion schema,
+    reportParameterError ("Could not parse report parameters: ..."), is defined in
+    components but is not attached to any operation response.
+undeclared:
+- status: 429
+  note: >-
+    Not declared on any operation, in either version, despite three published numeric rate
+    limits (240/min account, 10/min reporting, 3/min reporting by domain/app bundle). The
+    status returned on exhaustion is undocumented.
+gaps:
+- No RFC 9457 application/problem+json.
+- No stable error codes or type URIs — only English strings.
+- No 429 declared anywhere despite published rate limits.
+- v0 declares error responses on 3 of 289 operations.
+- reportParameterError is defined in components but wired to no operation.

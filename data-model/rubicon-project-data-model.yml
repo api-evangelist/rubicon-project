@@ -1,0 +1,315 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/rubicon-project-springserve-v1-openapi.yml
+docs:
+- https://console.springserve.com/api-docs
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1585119232/Supply
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1585119247/Demand
+applies_to:
+- rubicon-project-springserve-v1-api
+- rubicon-project-clearline-api
+schema_count: 139
+id_style: integer surrogate keys
+id_prefixes: []
+id_note: >-
+  No prefixed or namespaced identifiers. Every object is addressed by a bare integer `id`
+  in the path (`/api/v1/demand_tags/{id}`), so an id carries no type information and an id
+  from one resource is indistinguishable from another. Cross-references are plain
+  `<entity>_id` / `<entity>_ids` integer fields.
+tenancy:
+  root_entity: account
+  note: >-
+    `account` is the tenancy root and the single most-referenced entity in the schema —
+    `account_id` appears on 21 of the 139 component schemas. Every request executes in the
+    caller's active account context (see conventions/rubicon-project-conventions.yml,
+    x-auth-context), so account scoping is implicit in the session rather than expressed in
+    the path.
+domains:
+- name: Supply
+  description: Publisher-side inventory that generates ad requests.
+  entities:
+  - supply_partner
+  - supply_tag
+  - supply_router
+  - supply_label
+  - supply_name_list
+  - connected_supply
+- name: Demand
+  description: Buyer-side sources that bid on or fill inventory.
+  entities:
+  - demand_partner
+  - demand_tag
+  - demand_label
+  - campaign
+  - connected_demand
+  - direct_connection
+  - programmatic_guaranteed
+  - curated_marketplace
+- name: Creative
+  description: The ad assets served against filled requests.
+  entities:
+  - video_creative
+  - audio_creative
+  - display_creative
+  - tag_creative
+  - tile_creative
+  - filepath_creative
+  - scanned_creative_list
+- name: Targeting
+  description: Reusable inclusion/exclusion lists bound to supply or demand.
+  entities:
+  - domain_list
+  - app_bundle_list
+  - app_name_list
+  - geo_list
+  - city_list
+  - state_list
+  - country_list
+  - metro_area_list
+  - postal_code_list
+  - isp_list
+  - ip_list
+  - deal_list
+  - partner_segment
+  - audience
+- name: Yield
+  description: Pricing and delivery control.
+  entities:
+  - hb_bid_map
+  - header_bidding_platform
+  - bid_modifier
+  - delivery_modifier
+  - dynamic_floor_settings
+  - dynamic_floor_rule
+  - global_fcap_pixel
+- name: Reporting
+  description: Query, template and delivery of performance data.
+  entities:
+  - report
+  - report_template
+  - scheduled_report
+  - dashboard
+  - changelog
+- name: Administration
+  description: Tenancy, identity and billing.
+  entities:
+  - account
+  - user
+  - user_account
+  - permission
+  - vendor
+  - bill
+  - currency
+  - timezone
+  - white_label
+  - system_setting
+relationships:
+- from: supply_label
+  to: account
+  type: belongs_to
+  via: account_id
+- from: supply_label
+  to: supply_tag
+  type: has_many
+  via: supply_tag_ids
+- from: demand_label
+  to: account
+  type: belongs_to
+  via: account_id
+- from: demand_label
+  to: demand_tag
+  type: has_many
+  via: demand_tag_ids
+- from: demand_tag
+  to: demand_partner
+  type: belongs_to
+  via: demand_partner_id
+- from: demand_tag
+  to: spring_serve_deal
+  type: belongs_to
+  via: spring_serve_deal_id
+- from: demand_partner
+  to: account
+  type: belongs_to
+  via: account_id
+- from: demand_partner
+  to: direct_connect_account
+  type: belongs_to
+  via: direct_connect_account_id
+- from: demand_tag_priority
+  to: supply_tag
+  type: belongs_to
+  via: supply_tag_id
+- from: streaming_demand_tag_priority
+  to: demand_tag
+  type: belongs_to
+  via: demand_tag_id
+- from: streaming_demand_tag_priority
+  to: streaming
+  type: belongs_to
+  via: streaming_id
+- from: programmatic_guaranteed
+  to: demand_partner
+  type: belongs_to
+  via: demand_partner_id
+- from: programmatic_guaranteed
+  to: campaign
+  type: belongs_to
+  via: campaign_id
+- from: programmatic_guaranteed
+  to: demand_label
+  type: has_many
+  via: demand_label_ids
+- from: programmatic_guaranteed
+  to: mediaocean_prisma_order
+  type: belongs_to
+  via: mediaocean_prisma_order_id
+  note: External reference into Mediaocean Prisma, not a SpringServe-owned object.
+- from: programmatic_guaranteed
+  to: mediaocean_prisma_campaign
+  type: belongs_to
+  via: mediaocean_prisma_campaign_id
+- from: programmatic_guaranteed
+  to: mediaocean_prisma_placement
+  type: belongs_to
+  via: mediaocean_prisma_placement_id
+- from: delivery_modifier
+  to: account
+  type: belongs_to
+  via: account_id
+- from: delivery_modifier
+  to: demand_tag
+  type: has_many
+  via: demand_tag_ids
+- from: partner_segment
+  to: vendor
+  type: belongs_to
+  via: vendor_id
+- from: dynamic_floor_settings
+  to: dynamic_floor_rule
+  type: has_many
+  via: dynamic_floor_rules
+- from: dynamic_floor_settings
+  to: supply_partner
+  type: has_many
+  via: supply_partners
+- from: dynamic_floor_settings
+  to: supply_tag
+  type: has_many
+  via: supply_tags
+- from: dynamic_floor_settings
+  to: demand_partner
+  type: has_many
+  via: demand_partners
+- from: dynamic_floor_settings
+  to: demand_tag
+  type: has_many
+  via: demand_tags
+- from: hb_bid_map
+  to: account
+  type: belongs_to
+  via: account_id
+- from: hb_bid_map
+  to: hb_bid_map_entry
+  type: has_many
+  via: hb_bid_map_entries
+- from: scheduled_report
+  to: account
+  type: belongs_to
+  via: account_id
+- from: scheduled_report
+  to: user_account
+  type: belongs_to
+  via: user_account_id
+- from: scheduled_report
+  to: scheduled_report_recipient
+  type: has_many
+  via: scheduled_report_recipients
+- from: scheduled_report
+  to: scheduled_report_external_recipient
+  type: has_many
+  via: scheduled_report_external_recipients
+- from: user_account
+  to: user
+  type: belongs_to
+  via: user_id
+- from: user_account
+  to: account
+  type: belongs_to
+  via: account_id
+- from: showcase
+  to: showcase_category
+  type: has_many
+  via: showcase_categories
+- from: showcase
+  to: showcase_account
+  type: has_many
+  via: showcase_accounts
+- from: showcase_account
+  to: account
+  type: belongs_to
+  via: account_id
+- from: showcase_account
+  to: showcase
+  type: belongs_to
+  via: showcase_id
+- from: package
+  to: showcase
+  type: belongs_to
+  via: showcase_id
+- from: geo_list
+  to: account
+  type: belongs_to
+  via: account_id
+- from: city_list
+  to: account
+  type: belongs_to
+  via: account_id
+- from: state_list
+  to: account
+  type: belongs_to
+  via: account_id
+- from: country_list
+  to: account
+  type: belongs_to
+  via: account_id
+- from: metro_area_list
+  to: account
+  type: belongs_to
+  via: account_id
+- from: postal_code_list
+  to: account
+  type: belongs_to
+  via: account_id
+- from: domain_list
+  to: account
+  type: belongs_to
+  via: account_id
+- from: global_fcap_pixel
+  to: account
+  type: belongs_to
+  via: account_id
+- from: creative
+  to: demand_partner
+  type: belongs_to
+  via: demand_partner_id
+  note: Applies to tile and display creative create/update payloads.
+- from: macro_suggester
+  to: ad_server
+  type: belongs_to
+  via: ad_server_id
+traversal:
+  expansion_param: includes
+  discovery_field: includable_fields
+  note: >-
+    Relationships are traversable at request time via the `includes` query parameter, and
+    each list response advertises what is expandable through `includable_fields` — the
+    contract is self-describing at runtime even though the OpenAPI does not model the
+    associations as $refs on most response schemas.
+gaps:
+- >-
+  Schema coverage is uneven: v1 defines 139 component schemas for 379 operations, while v0
+  defines only 2 for 289 operations, so most v0 responses are untyped.
+- Most associations are expressed as bare integer `_id` fields rather than $ref links, so
+  the entity graph must be inferred from naming convention rather than read from the spec.
+- No id prefixes or type-tagged identifiers.

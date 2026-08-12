@@ -1,0 +1,99 @@
+generated: '2026-08-12'
+method: searched
+source: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+docs:
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+- https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- https://console.springserve.com/api-docs
+derived_from:
+- openapi/rubicon-project-springserve-v1-openapi.yml
+- openapi/rubicon-project-springserve-v0-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  oauth2: false
+  openid_connect: false
+  mutual_tls: false
+  credential_issuance: self-service-within-account
+schemes:
+- name: api_key
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: >-
+    SpringServe authorization token based authentication. The opaque token returned by
+    POST /api/v1/auth (or /api/v0/auth) is sent bare in the Authorization header, with no
+    scheme prefix — `Authorization: <token>`.
+  sources:
+  - openapi/rubicon-project-springserve-v0-openapi.yml
+  - openapi/rubicon-project-springserve-v1-openapi.yml
+- name: bearer_token
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: >-
+    SpringServe bearer token authentication. The same POST /api/v1/auth response also
+    carries a bearer_token, sent as `Authorization: Bearer <token>`.
+  sources:
+  - openapi/rubicon-project-springserve-v0-openapi.yml
+  - openapi/rubicon-project-springserve-v1-openapi.yml
+token_endpoint:
+  method: POST
+  paths:
+  - /api/v1/auth
+  - /api/v0/auth
+  operation_ids:
+  - auth_post
+  request_body:
+    email: API user email
+    password: API user password
+  response_fields:
+  - token
+  - bearer_token
+  note: >-
+    Credentials are a console user's own email and password — there is no separate client
+    ID / client secret. The docs recommend creating a dedicated API user with a plus-address
+    (name+api@example.com) via Settings -> Users so API-originated changes are attributable
+    in the changelog.
+token_lifetime:
+  value: 2
+  unit: hours
+  source: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  note: 'Published verbatim: "A token expires after two hours."'
+session:
+  cookie_auth: true
+  note: >-
+    The hosted Swagger UI at /api-docs authenticates with the console session cookie by
+    default; token and bearer auth take precedence when supplied. Cookie/session auth is a
+    property of the docs host, not a documented integration path.
+  inspect_operations:
+  - session_get
+  - session_delete
+account_context:
+  header: x-auth-context
+  description: >-
+    Every authenticated request runs in the context of the caller's currently active
+    account. Read it with GET /api/v1/accounts/current, change it with
+    POST /api/v1/accounts/{id}/set_current, or override it per-request with the
+    x-auth-context header. Multi-account integrations must set this explicitly.
+  operations:
+  - accounts_current_get
+  - accounts_id_set_current_post
+impersonation:
+  supported: true
+  operations:
+  - run_as_start_post
+  - run_as_stop_post
+  note: >-
+    A privileged "run as" surface exists (POST /api/v1/run_as/start, /stop) and returns 403
+    "You are not authorized to access this page." when the caller lacks the grant.
+gaps:
+- No OAuth 2.0, OIDC or mTLS surface is published; there is no scoped third-party
+  authorization flow, so an integration holds full user-equivalent rights.
+- Password-grant style authentication means an integration stores a human user's console
+  password, and the docs offer no key rotation or revocation endpoint.
+- The 2-hour token lifetime is documented but no refresh endpoint is published; clients
+  must re-POST /auth.

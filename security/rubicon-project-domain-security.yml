@@ -1,13 +1,25 @@
-generated: '2026-07-21'
+generated: '2026-08-12'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.magnite.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Aug 15 18:43:09 2026 GMT
+  cert_expires: Sep  4 17:48:00 2026 GMT
   hsts: true
   hsts_max_age: 31557600
+- host: springserve.atlassian.net
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb  6 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: console.springserve.com
+  https: true
+  tls_version: TLSv1.2
+  cert_expires: Nov 26 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
 domains:
 - domain: magnite.com
   dnssec: false
@@ -15,3 +27,13 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: quarantine
+- domain: atlassian.net
+  dnssec: false
+  caa:
+  - 0 issue "digicert.com; account=c2eb0f50ca113d7543d58a10f523d0469ff922f115e5e4e9056f3d5f87d3356c"
+  - 0 issuewild "amazon.com"
+  - 0 issuewild "digicert.com; account=c2eb0f50ca113d7543d58a10f523d0469ff922f115e5e4e9056f3d5f87d3356c"
+  - 0 issue "amazon.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject

@@ -1,0 +1,154 @@
+generated: '2026-08-12'
+method: searched
+source: https://console.springserve.com/api-docs/swagger/v1/swagger.yaml
+docs:
+- https://console.springserve.com/api-docs
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+applies_to:
+- rubicon-project-springserve-v1-api
+- rubicon-project-springserve-v0-api
+- rubicon-project-clearline-api
+versioning:
+  scheme: path-prefix
+  current: v1
+  supported:
+  - version: v1
+    path: /api/v1
+    spec: openapi/rubicon-project-springserve-v1-openapi.yml
+    info_version: 1.0.0
+    operations: 379
+    status: current
+  - version: v0
+    path: /api/v0
+    spec: openapi/rubicon-project-springserve-v0-openapi.yml
+    info_version: 0.1.0
+    operations: 289
+    status: supported
+  policy_quote: >-
+    "Please note we are in the process of creating V1 endpoints for all existing V0
+    endpoints, but while that work is in progress not all endpoints will be supported on V1.
+    We advise reviewing both swagger pages to determine what is supported in each version."
+  note: >-
+    Magnite publishes both versions side by side in the same Swagger UI dropdown. v0 is NOT
+    deprecated — it remains the only home for capability v1 has not reached yet (campaigns,
+    connected supply/demand, direct connections, forecasting, key-values, segments all
+    appear as v0-only tags). A consumer is expected to read both specs and pick per
+    endpoint, which is the migration burden carried by the caller rather than the provider.
+  shared_tags: 24
+  v1_only_tags:
+  - Account Partner Segments
+  - Audiences
+  - Changelogs
+  - Content Categories
+  - Creatives Audio
+  - Creatives Filepaths
+  - Creatives Tag
+  - Creatives Tile
+  - Creatives Video
+  - Curated Marketplaces
+  - Currencies
+  - Dashboards
+  - Geo Lists
+  - Header Bidding Platforms
+  - ISP Lists
+  - Magnite Programmatic
+  - Notifications
+  - Permissions
+  - Report Templates
+  - Run As
+  - Scanned Creative Lists
+  - Scheduled Reports
+  - Search
+  - Session
+  - Supply Name Lists
+  - System Settings
+  - Timezones
+  - User Accounts
+  - Vendors
+  - White Labels
+  v0_only_tags:
+  - Advertiser Domain Lists
+  - Audios
+  - Bid Maps
+  - Campaigns
+  - Connected Demand
+  - Connected Supply
+  - Deal Id Lists
+  - Demand Partners
+  - Direct Connection Clearing Terms
+  - Direct Connections
+  - First Party Partner Segments
+  - Forecast
+  - Ip Lists
+  - Keys
+  - Operative
+  - Parameter Lists
+  - Publisher Id Lists
+  - Segments
+  - Supply Partners
+  - Tag Creatives
+  - Tiles
+  - Value Lists
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: 0
+  note: >-
+    No deprecation or sunset policy is published, and not one of the 668 operations across
+    v1 and v0 carries `deprecated: true`. There is no Sunset or Deprecation header
+    contract, no advance-notice window, and no documented end-of-life date for v0. No
+    Deprecation pointer is emitted in apis.yml because no deprecation policy exists to
+    point at.
+sla:
+  published: false
+  note: No public SLA, uptime target or credit schedule.
+status_page:
+  published: false
+  probes:
+  - url: https://status.magnite.com
+    status: 0
+    result: NXDOMAIN
+  - url: https://status.springserve.com
+    status: 0
+    result: NXDOMAIN
+  - url: https://magnite.statuspage.io
+    status: 200
+    result: >-
+      Statuspage.io's own marketing site, not a Magnite status page — the response is
+      statuspage.io's generic page and /api/v2/status.json returns the same HTML rather
+      than a status document.
+  - url: https://springserve.statuspage.io
+    status: 200
+    result: Same generic statuspage.io response; not a Magnite status page.
+  note: >-
+    No status page found on any Magnite-controlled host. No StatusPage pointer is emitted.
+    Incident communication appears to run through the account team and the login-gated help
+    center.
+changelog:
+  release_notes_published: false
+  note: >-
+    Magnite's "Product Release Notes" section on help.magnite.com is login-gated, and the
+    anonymous help center answers every /help/<slug> path with the same 122,137-byte
+    landing page. The pages named "Changelog" in the public Confluence space document a
+    product FEATURE — a per-account audit log of who changed which tag, readable via the
+    Changelogs API (changelogs_get) — not an API release changelog. No dated public
+    changelog exists, so no changelog/ artifact and no ChangeLog pointer are emitted.
+  product_feature:
+    tag: Changelogs
+    operations:
+    - changelogs_get
+    docs:
+    - https://springserve.atlassian.net/wiki/spaces/SSD/pages/1620377834/Changelog
+    - https://springserve.atlassian.net/wiki/spaces/CLD/pages/4047667201/CL+-+Changelog+API
+token_lifecycle:
+  auth_token_ttl: 2 hours
+  refresh_endpoint: null
+  revocation_endpoint: null
+  note: See authentication/rubicon-project-authentication.yml.
+gaps:
+- No deprecation policy, Sunset/Deprecation headers, or v0 end-of-life date.
+- Zero operations flagged deprecated despite two live versions with uneven coverage.
+- No public status page and no public SLA.
+- No public dated release notes for the API.

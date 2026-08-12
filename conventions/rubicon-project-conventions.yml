@@ -1,0 +1,162 @@
+generated: '2026-08-12'
+method: searched
+source: https://console.springserve.com/api-docs/swagger/v1/swagger.yaml
+docs:
+- https://console.springserve.com/api-docs
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1623818239/Pagination+API
+derived_from:
+- openapi/rubicon-project-springserve-v1-openapi.yml
+- openapi/rubicon-project-springserve-v0-openapi.yml
+applies_to:
+- rubicon-project-springserve-v1-api
+- rubicon-project-springserve-v0-api
+- rubicon-project-clearline-api
+note: >-
+  Cross-cutting runtime semantics for the SpringServe / ClearLine REST API, taken verbatim
+  from the OpenAPI info.description that Magnite serves at
+  console.springserve.com/api-docs and from the public Confluence documentation space.
+
+auth:
+  style: opaque token or JWT bearer in Authorization header
+  detail: see authentication/rubicon-project-authentication.yml
+  token_endpoint: POST /api/v1/auth
+  token_lifetime: 2 hours
+  account_context_header: x-auth-context
+
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    No idempotency key is published, declared, or referenced anywhere in either
+    specification (zero matches for /idempoten/i across 668 operations) or in the public
+    docs. Retrying a failed POST is not safe by contract. This is a real gap, not an
+    unrecorded feature.
+
+pagination:
+  style: page-number
+  default_page_size: 50
+  max_page_size: 1000
+  request_params:
+  - name: page
+    description: 1-indexed page number; first page is 1.
+  - name: per
+    description: Results per page. Default 50, maximum 1000.
+  response_fields:
+  - name: count
+    description: How many results are in this response.
+  - name: total_count
+    description: How many results exist across all pages.
+  - name: current_page
+    description: The current page of results.
+  - name: total_pages
+    description: How many total pages of results there are.
+  - name: results
+    description: The array of resource results.
+  note: >-
+    Applies to virtually all list endpoints. The v0 docs state a hard 50-object cap on any
+    GET unless `per` is supplied. There is no cursor/keyset option, so deep paging over
+    large accounts is offset-bound and interacts badly with the 240 req/min account cap.
+
+filtering:
+  style: 'query-param-per-attribute with :: operator suffix'
+  form: '<attribute>=<value> or <attribute>::<operator>=<value>'
+  operators:
+  - operator: '::gt'
+    meaning: greater than
+  - operator: '::gte'
+    meaning: greater than or equal to
+  - operator: '::lt'
+    meaning: less than
+  - operator: '::lte'
+    meaning: less than or equal to
+  - operator: '::in'
+    meaning: in the comma-delimited list of values
+  - operator: '::null'
+    meaning: attribute is null (true or 1) or not null (false or 0)
+  scope: >-
+    Every first-level attribute on the entity (not attributes on associations). Some
+    endpoints expose additional filters documented on that endpoint.
+  examples:
+  - id::gt=3
+  - updated_at::lte=2025-01-01
+
+sorting:
+  param: sort
+  style: comma-delimited, leading '-' for descending
+  example: sort=name,-id
+  scope: First-level attributes by default; some endpoints expose custom orderable fields.
+
+search:
+  param: search
+  note: Free-text search supported on virtually all list endpoints.
+
+expansion:
+  param: includes
+  style: comma-delimited association names
+  discovery_field: includable_fields
+  default: A logical default set of associations is included when the param is omitted.
+  opt_out: 'Pass an empty value (includes=) to include no associations — the documented way to speed up list calls.'
+  also_applies_to: single-resource GET endpoints
+  additional_data:
+    param: additional_data
+    discovery_field: additional_data_fields
+    example_value: quickstats
+    note: Pulls extra computed blocks (e.g. quickstats) onto list results.
+
+metadata:
+  supported: false
+  note: No customer-defined metadata / custom-field envelope is published. Labels
+    (supply_labels, demand_labels) are the nearest first-class tagging surface.
+
+request_id_tracing:
+  published: false
+  note: >-
+    No request-id or correlation-id header is documented or declared in the spec. There is
+    no published way for a caller to quote an identifier back to Magnite support for a
+    specific failed call.
+
+versioning:
+  scheme: path-prefix
+  current: v1
+  also_live: v0
+  paths:
+  - /api/v1
+  - /api/v0
+  policy: >-
+    Both versions are live and documented side by side. The spec states verbatim: "we are
+    in the process of creating V1 endpoints for all existing V0 endpoints, but while that
+    work is in progress not all endpoints will be supported on V1. We advise reviewing both
+    swagger pages to determine what is supported in each version." v0 is therefore not
+    deprecated — it is still the only home for some capability.
+  detail: see lifecycle/rubicon-project-lifecycle.yml
+
+errors:
+  envelope: 'ad-hoc JSON: {"error": "<message>"} plus optional {"errors": {"<field>": ["<message>"]}}'
+  rfc9457: false
+  problem_json: false
+  status_field: 'Some schemas also carry an integer "status" field duplicating the HTTP status.'
+  note: >-
+    Rails-style validation envelope, not RFC 9457. There is no machine-readable error code
+    or type URI anywhere — only human-readable strings — so agents must string-match to
+    branch on failure. Detail: errors/rubicon-project-problem-types.yml.
+
+rate_limits:
+  published: true
+  headers_published: false
+  detail: see rate-limits/rubicon-project-rate-limits.yml
+
+content_types:
+  request:
+  - application/json
+  response:
+  - application/json
+  - text/csv
+  note: text/csv appears on three report/export operations in v1.
+
+gaps:
+- No idempotency keys.
+- No request-id / correlation-id header.
+- No RFC 9457 problem+json, no stable machine-readable error codes.
+- No cursor pagination.
+- No rate-limit response headers despite published numeric caps.

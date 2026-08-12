@@ -1,0 +1,36 @@
+generated: '2026-08-12'
+method: searched
+source: https://www.magnite.com/
+docs: []
+plan_count: 0
+currency: null
+pricing_model: enterprise-negotiated
+self_serve: false
+free_tier: false
+trial: false
+note: >-
+  Magnite publishes no plans, tiers, list prices or rate card of any kind. www.magnite.com
+  has no /pricing page (probed, HTTP 404) and none of the 97 URLs Magnite lists in its own
+  llms.txt is a pricing page — the site routes buyers and sellers to "Contact Us" and an
+  account team. This is expected for a sell-side ad platform: Magnite's commercial model is
+  a negotiated revenue share / take rate on media transacted through the exchange, and the
+  API is a control surface bundled with a platform contract rather than a metered product.
+  Access to the SpringServe / ClearLine API requires a console account, which requires a
+  signed platform agreement; API credentials are then created self-service inside that
+  account (Settings -> Users). The contract itself is anonymously readable at
+  console.springserve.com/api-docs — the SPEC is public, the ACCESS is not.
+plans: []
+evidence:
+- url: https://www.magnite.com/pricing
+  status: 404
+- url: https://www.magnite.com/llms.txt
+  status: 200
+  note: 97 published URLs, no pricing page among them.
+- url: https://www.magnite.com/contact-us/
+  status: 200
+- url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+  status: 200
+  note: >-
+    "To create a new API user, simply login into your account, and in the Settings -> Users
+    section, create a new user" — credentials are gated on an existing platform account,
+    not purchasable.

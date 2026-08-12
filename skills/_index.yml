@@ -1,0 +1,52 @@
+generated: '2026-08-12'
+method: generated
+source: >-
+  openapi/rubicon-project-springserve-v1-openapi.yml and
+  openapi/rubicon-project-springserve-v0-openapi.yml, plus the public SpringServe
+  documentation space (springserve.atlassian.net/wiki/spaces/SSD). Magnite publishes no
+  AGENTS.md, skills/ directory or agent operating guide on any host, so these are authored
+  by API Evangelist from the provider's own machine-readable contract.
+applies_to:
+- rubicon-project-springserve-v1-api
+- rubicon-project-springserve-v0-api
+- rubicon-project-clearline-api
+grounding: >-
+  Every operationId referenced in every skill below was grepped out of the published
+  OpenAPI documents in openapi/ and verified to exist verbatim. No operation, parameter,
+  field or example value is invented — request examples are quoted from the provider's own
+  components.examples blocks.
+constraints_every_skill_inherits:
+  auth: Console email + password exchanged for a 2-hour token; no OAuth, no scopes.
+  account_context: Session-scoped; override per request with the x-auth-context header.
+  idempotency: none — no idempotency key exists anywhere in 668 operations.
+  sandbox: none — Magnite publishes no test environment; every write lands on production.
+  rate_limits: 240 req/min per account; 10 req/min reporting; 3 req/min reporting by domain/app bundle; no headers, no declared 429.
+  errors: '{"error": "<message>"} with optional {"errors": {field: [messages]}}; not RFC 9457.'
+  versions: v1 and v0 both live; v1 is not yet a superset of v0.
+skills:
+- file: rubicon-project-authenticate-and-set-account.md
+  name: Authenticate to SpringServe and set the account context
+  api: openapi/rubicon-project-springserve-v1-openapi.yml
+  operations: [auth_post, accounts_current_get, accounts_displayable_get, accounts_id_set_current_post, session_get]
+  prerequisite_for: all
+- file: rubicon-project-run-revenue-report.md
+  name: Run a SpringServe revenue or delivery report
+  api: openapi/rubicon-project-springserve-v1-openapi.yml
+  operations: [reports_post, report_post, reports_id_get, reports_download_id_get]
+- file: rubicon-project-schedule-recurring-report.md
+  name: Schedule a recurring SpringServe report
+  api: openapi/rubicon-project-springserve-v1-openapi.yml
+  operations: [scheduled_reports_post, scheduled_reports_get, scheduled_reports_id_get, scheduled_reports_id_patch, scheduled_reports_id_delete, scheduled_reports_bulk_update_same_attributes_put, reports_templates_post, reports_templates_get, reports_templates_id_patch, reports_templates_id_set_default_post]
+- file: rubicon-project-audit-supply-and-demand-tags.md
+  name: Audit SpringServe supply and demand tags
+  api: openapi/rubicon-project-springserve-v1-openapi.yml
+  operations: [supply_tags_get, supply_tags_id_get, supply_tags_id_demand_tag_priorities_get, demand_tags_get, demand_tags_id_get, demand_tags_post, demand_tags_id_patch, supply_tags_post, supply_tags_id_put]
+  note: supply_tags_post and supply_tags_id_put are v0-only — openapi/rubicon-project-springserve-v0-openapi.yml.
+- file: rubicon-project-manage-domain-block-lists.md
+  name: Manage SpringServe domain block and allow lists
+  api: openapi/rubicon-project-springserve-v1-openapi.yml
+  operations: [domain_lists_get, domain_lists_post, domain_lists_id_get, domain_lists_id_patch, domain_lists_id_domains_get, domain_lists_id_domains_bulk_create_post, domain_lists_id_domains_bulk_replace_post, domain_lists_id_domains_bulk_delete_delete, domain_lists_id_resource_type_get, domain_lists_id_resource_type_post, domain_lists_id_duplicate_post, domain_lists_id_delete]
+- file: rubicon-project-trace-account-changes.md
+  name: Trace who changed what in a SpringServe account
+  api: openapi/rubicon-project-springserve-v1-openapi.yml
+  operations: [changelogs_get, changelogs_id_get, changelogs_versioned_type_versioned_type_get, changelogs_versioned_type_versioned_type_versioned_id_get, changelogs_versioned_types_for_current_account_get, changelogs_user_emails_get]

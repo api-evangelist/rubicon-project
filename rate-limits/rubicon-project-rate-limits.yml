@@ -1,0 +1,64 @@
+generated: '2026-08-12'
+method: searched
+source: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+docs:
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+- https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+applies_to:
+- rubicon-project-springserve-v1-api
+- rubicon-project-springserve-v0-api
+- rubicon-project-clearline-api
+limit_count: 3
+limits:
+- name: Account-wide API cap
+  scope: per-account
+  limit: 240
+  unit: requests
+  window: 1m
+  endpoints: all
+  quote: max 240 request/minute per account
+- name: Reporting API cap
+  scope: per-account
+  limit: 10
+  unit: requests
+  window: 1m
+  endpoints:
+  - /api/v1/report
+  - /api/v1/reports
+  - /api/v0/report
+  - /api/v0/reports
+  quote: max 10 requests/minute to the reporting API endpoint
+- name: Reporting API cap by domain / app bundle
+  scope: per-account-per-dimension
+  dimension: domain or app bundle
+  limit: 3
+  unit: requests
+  window: 1m
+  endpoints:
+  - /api/v1/report
+  - /api/v0/report
+  quote: max 3 requests/minute to the reporting API endpoint by domain/app bundle
+response_headers:
+  published: []
+  observed: []
+  note: >-
+    Magnite publishes the numbers but no rate-limit response headers. Neither the OpenAPI
+    (openapi/rubicon-project-springserve-v1-openapi.yml) nor the getting-started page
+    documents X-RateLimit-*, RateLimit-* or Retry-After, and no operation declares a 429
+    response — the v1 spec's response codes are 200/201/204/400/401/403/404/422/500. An
+    agent therefore has no runtime signal for remaining budget or backoff and must
+    self-throttle to the documented ceilings.
+exhaustion:
+  status_code: null
+  note: >-
+    Undocumented. No 429 response is declared anywhere in either specification, and the
+    behaviour on exceeding the cap is not stated in the docs. Recorded as unknown rather
+    than assumed.
+retry_guidance:
+  published: false
+  note: No published backoff or retry policy.
+gaps:
+- No RateLimit-* / X-RateLimit-* headers published or declared in the spec.
+- No 429 (or any) response declared for exhaustion in 668 operations across v1 and v0.
+- No documented burst allowance, quota reset semantics, or per-key (as opposed to
+  per-account) accounting.

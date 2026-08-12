@@ -1,0 +1,145 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/rubicon-project-springserve-v1-openapi.yml, grpc/rubicon-project-openrtb-xapi.proto, security/rubicon-project-trust-center.yml
+docs:
+- https://console.springserve.com/api-docs
+- https://www.magnite.com/trust-center/
+- https://github.com/MagniteEngineering/xapi-proto
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1720778754/SpringServe+in+ads.txt
+applies_to:
+- rubicon-project-springserve-v1-api
+- rubicon-project-springserve-v0-api
+- rubicon-project-clearline-api
+- rubicon-project-openrtb-xapi
+standards:
+- id: openapi-3.1
+  name: OpenAPI Specification 3.1
+  conforms: true
+  evidence: >-
+    Both published documents declare `openapi: 3.1.2` and parse. v1 carries 295 paths / 379
+    operations / 139 component schemas; v0 carries 173 paths / 289 operations. Served
+    anonymously from console.springserve.com/api-docs/swagger/{v0,v1}/swagger.yaml.
+- id: openrtb-2.x
+  name: IAB OpenRTB 2.x
+  conforms: true
+  evidence: >-
+    github.com/MagniteEngineering/xapi-proto publishes protobuf extensions that explicitly
+    extend "the Interactive Advertising Bureau (IAB) OpenRTB protobuf definitions found in
+    openrtb-proto-v2", reserving Magnite extension IDs in the 5100-5299 range. Saved
+    verbatim to grpc/rubicon-project-openrtb-xapi.proto.
+- id: protobuf-proto2
+  name: Protocol Buffers (proto2)
+  conforms: true
+  evidence: 'grpc/rubicon-project-openrtb-xapi.proto declares `syntax = "proto2";` and package com.magnite.openrtb.v2.'
+- id: vast
+  name: IAB VAST / VMAP
+  conforms: true
+  evidence: >-
+    SpringServe is a video ad server; the public documentation space publishes VAST Error
+    Codes and VMAP pages, and the spec's own example server block references
+    staging-tv.springserve.com/vast.
+- id: ads-txt
+  name: IAB ads.txt / sellers.json
+  conforms: true
+  evidence: >-
+    Public documentation page "SpringServe in ads.txt"
+    (springserve.atlassian.net/wiki/spaces/SSD/pages/1720778754) instructs publishers on the
+    ads.txt lines to publish for SpringServe supply.
+- id: iab-tcf-2.0
+  name: IAB Transparency and Consent Framework 2.0
+  conforms: true
+  evidence: 'Registered vendor per the Magnite trust center; recorded in security/rubicon-project-trust-center.yml.'
+- id: soc2
+  name: SOC 2
+  conforms: partial
+  evidence: >-
+    Trust center reports SOC 2 Type I achieved and SOC 1 Type II achieved, with SOC 2 Type
+    II audit in progress and expected to complete by end of 2026. See
+    security/rubicon-project-trust-center.yml.
+- id: sox
+  name: Sarbanes-Oxley
+  conforms: true
+  evidence: Subject to SOX as a publicly traded company (Magnite, NASDAQ MGNI).
+- id: gdpr
+  name: GDPR
+  conforms: true
+  evidence: >-
+    Trust center states GDPR alignment; Magnite publishes a Data Protection Framework and an
+    advertising-platform privacy policy at magnite.com/legal/.
+- id: ccpa
+  name: CCPA / CPRA
+  conforms: true
+  evidence: Trust center states CCPA alignment; a User Choice Portal is published at magnite.com/legal/user-choice-portal/.
+- id: jicdaq
+  name: JICDAQ (Japan) brand safety and IVT certification
+  conforms: true
+  evidence: >-
+    Magnite press release 2026-07-14, "Magnite Achieves JICDAQ Certification for Brand
+    Safety and Invalid Traffic Prevention in Japan" (blogs/2026-07-14-magnite-achieves-jicdaq-certification-for-brand-safety-and.md).
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme in either specification and no OAuth documentation. Auth is an
+    email/password exchange for an opaque token or JWT bearer. No /.well-known/
+    oauth-authorization-server on any host (all probes 403/404/401).
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: No openIdConnect securityScheme; /.well-known/openid-configuration missing on every host.
+- id: rfc9457
+  name: RFC 9457 Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    Errors are an ad-hoc {"error": string, "errors": {field: [string]}} envelope served as
+    application/json. No application/problem+json anywhere. See
+    errors/rubicon-project-problem-types.yml.
+- id: rfc8594
+  name: RFC 8594 Sunset HTTP Header
+  conforms: false
+  evidence: >-
+    No Sunset or Deprecation header contract, no deprecation policy, and zero of 668
+    operations flagged `deprecated`. See lifecycle/rubicon-project-lifecycle.yml.
+- id: idempotency-key
+  name: Idempotency-Key (draft-ietf-httpapi-idempotency-key-header)
+  conforms: false
+  evidence: Zero matches for /idempoten/i across both specifications and the public docs.
+- id: ratelimit-headers
+  name: RateLimit header fields (draft-ietf-httpapi-ratelimit-headers)
+  conforms: false
+  evidence: >-
+    Three numeric caps are published in prose but no RateLimit-*/X-RateLimit-*/Retry-After
+    header is documented or declared, and no 429 response exists in either spec.
+- id: json-api
+  name: JSON:API
+  conforms: false
+  evidence: >-
+    Bespoke list envelope (count / total_count / current_page / total_pages /
+    includable_fields / additional_data_fields / results), not JSON:API.
+- id: pagination
+  name: Documented pagination
+  conforms: true
+  evidence: >-
+    page / per query params, 50 default and 1000 maximum, with count / total_count /
+    current_page / total_pages on every list response. Documented in the spec description
+    and on a dedicated Pagination API page in both public documentation spaces.
+- id: fhir
+  name: HL7 FHIR
+  conforms: false
+  evidence: Not applicable — advertising technology, no healthcare surface.
+- id: psd2
+  name: PSD2
+  conforms: false
+  evidence: Not applicable — no payments or open banking surface.
+- id: scim
+  name: SCIM
+  conforms: false
+  evidence: >-
+    User and account provisioning is exposed through bespoke /api/v1/users and
+    /api/v1/user_accounts endpoints, not SCIM.
+- id: odata
+  name: OData
+  conforms: false
+  evidence: >-
+    Filtering uses a bespoke `attribute::operator=value` syntax (::gt, ::gte, ::lt, ::lte,
+    ::in, ::null), not $filter.

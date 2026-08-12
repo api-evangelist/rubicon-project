@@ -1,0 +1,167 @@
+generated: '2026-08-12'
+method: probed
+source: live HTTPS probes of every apis.yml and OpenAPI host
+checked: '2026-08-12'
+result: none
+summary: >-
+  No /.well-known/ document is served on any Magnite / SpringServe / ClearLine host. Probes
+  across 7 hosts returned no 200 carrying a real document. www.magnite.com answers
+  404 (nginx for security.txt, the WordPress 404 template for the rest);
+  magnite.com, springserve.com and video.springserve.com 301 to their canonical hosts;
+  console.springserve.com and console.clearline.magnite.com return 403 on the whole
+  /.well-known/ prefix;
+  help.magnite.com returns its 404 template; api.magnite.com is an AWS API Gateway that
+  answers every path with 401 {"message":"Unauthorized"} and WWW-Authenticate: Bearer.
+  No WellKnown or SecurityTxt pointer is emitted in apis.yml — this file records a
+  measured absence, not a surface.
+hosts:
+- host: www.magnite.com
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 200
+    file: ../llms/rubicon-project-llms.txt
+    note: >-
+      The one hit anywhere on the estate. Not a /.well-known/ path — saved and wired as
+      type LLMsTxt, not as WellKnown.
+- host: magnite.com
+  probes:
+  - path: /.well-known/security.txt
+    status: 301
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 301
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 301
+    file: null
+  - path: /.well-known/agent.json
+    status: 301
+    file: null
+  note: Apex redirects to www.magnite.com; probed there instead.
+- host: console.springserve.com
+  probes:
+  - path: /.well-known/security.txt
+    status: 403
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 403
+    file: null
+  - path: /.well-known/agent.json
+    status: 403
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+  note: >-
+    Same edge rule as the ClearLine console — the whole /.well-known/ prefix is 403 before
+    any handler runs, while /api-docs on the same host serves the OpenAPI anonymously.
+- host: video.springserve.com
+  probes:
+  - path: /.well-known/security.txt
+    status: 301
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 301
+    file: null
+  - path: /llms.txt
+    status: 301
+    file: null
+- host: console.clearline.magnite.com
+  probes:
+  - path: /.well-known/security.txt
+    status: 403
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 403
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+    file: null
+  - path: /.well-known/api-catalog
+    status: 403
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 403
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 403
+    file: null
+  - path: /.well-known/agent.json
+    status: 403
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+  note: The edge blocks the entire /.well-known/ prefix with 403 before any handler runs.
+- host: help.magnite.com
+  probes:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /llms.txt
+    status: 404
+    file: null
+- host: api.magnite.com
+  probes:
+  - path: /.well-known/security.txt
+    status: 401
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 401
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+    file: null
+  - path: /.well-known/oauth-protected-resource
+    status: 401
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 401
+    file: null
+  - path: /.well-known/agent.json
+    status: 401
+    file: null
+  note: >-
+    AWS API Gateway behind CloudFront. Every path — including / , /health, /ping,
+    /sessions — returns 401 {"message":"Unauthorized"} with WWW-Authenticate: Bearer. No
+    anonymous discovery surface of any kind. Which Magnite product it fronts could not be
+    established from any public source, so it is not recorded as an API entry.

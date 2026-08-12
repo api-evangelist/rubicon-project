@@ -1,0 +1,1259 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/rubicon-project-springserve-v1-openapi.yml, openapi/rubicon-project-springserve-v0-openapi.yml
+docs:
+- https://console.springserve.com/api-docs
+applies_to:
+- rubicon-project-springserve-v1-api
+- rubicon-project-springserve-v0-api
+- rubicon-project-clearline-api
+note: 'Index of the request examples Magnite publishes INSIDE its own OpenAPI documents. Every example
+  named here is a components.examples entry in the spec Magnite serves anonymously at console.springserve.com/api-docs
+  -- nothing here is authored or invented by API Evangelist. The examples are almost entirely REQUEST
+  bodies in a paired Simple/Full form: a minimum viable payload and a fully-populated one. Response examples
+  are the gap -- see coverage.gaps below.'
+convention:
+  pattern: <resource>_<action>_simple and <resource>_<action>_full
+  meaning: Simple = the minimum required fields; Full = every settable field on the resource.
+  usage: Start from the Simple example, add only what you need. The Full example doubles as the field
+    reference.
+specs:
+- version: v1
+  spec: openapi/rubicon-project-springserve-v1-openapi.yml
+  api: rubicon-project-springserve-v1-api
+  component_examples: 325
+  operations: 379
+  operations_with_request_examples: 98
+  operations_with_response_examples: 1
+  coverage_pct: 25.9
+- version: v0
+  spec: openapi/rubicon-project-springserve-v0-openapi.yml
+  api: rubicon-project-springserve-v0-api
+  component_examples: 236
+  operations: 289
+  operations_with_request_examples: 107
+  operations_with_response_examples: 0
+  coverage_pct: 37.0
+coverage:
+  component_examples_total: 561
+  operations_total: 668
+  operations_with_request_examples: 205
+  operations_with_response_examples: 1
+  gaps:
+  - Request examples cover 205 of 668 operations (30.7%); the other 463 document only a schema.
+  - Response examples are effectively absent -- an agent can see what to send but not what comes back,
+    so success and error shapes must be learned by calling production.
+  - Example coverage is concentrated on targeting lists and tag CRUD; reporting has two examples for the
+    single most-used endpoint and none for the async/download flow.
+by_tag:
+- tag: Domain Lists
+  operations_with_examples: 13
+- tag: App Name Lists
+  operations_with_examples: 9
+- tag: Deal Lists
+  operations_with_examples: 9
+- tag: Demand Tags
+  operations_with_examples: 9
+- tag: App Bundle Lists
+  operations_with_examples: 8
+- tag: Accounts
+  operations_with_examples: 7
+- tag: Bills
+  operations_with_examples: 6
+- tag: Hb Bid Maps
+  operations_with_examples: 5
+- tag: Keys
+  operations_with_examples: 5
+- tag: City Lists
+  operations_with_examples: 4
+- tag: Country Lists
+  operations_with_examples: 4
+- tag: Demand Labels
+  operations_with_examples: 4
+- tag: Global Fcap Pixels
+  operations_with_examples: 4
+- tag: ISP Lists
+  operations_with_examples: 4
+- tag: Metro Area Lists
+  operations_with_examples: 4
+- tag: Postal Code Lists
+  operations_with_examples: 4
+- tag: Scanned Creative Lists
+  operations_with_examples: 4
+- tag: State Lists
+  operations_with_examples: 4
+- tag: Supply Labels
+  operations_with_examples: 4
+- tag: Supply Name Lists
+  operations_with_examples: 4
+- tag: Partner Segments
+  operations_with_examples: 4
+- tag: Advertiser Domain Lists
+  operations_with_examples: 4
+- tag: Deal Id Lists
+  operations_with_examples: 4
+- tag: Ip Lists
+  operations_with_examples: 4
+- tag: Parameter Lists
+  operations_with_examples: 4
+- tag: Publisher Id Lists
+  operations_with_examples: 4
+- tag: Segments
+  operations_with_examples: 4
+- tag: Account Partner Segments
+  operations_with_examples: 3
+- tag: Scheduled Reports
+  operations_with_examples: 3
+- tag: User Accounts
+  operations_with_examples: 3
+- tag: Bid Maps
+  operations_with_examples: 3
+- tag: Operative
+  operations_with_examples: 3
+- tag: Creatives Audio
+  operations_with_examples: 2
+- tag: Curated Marketplaces
+  operations_with_examples: 2
+- tag: Creatives Filepaths
+  operations_with_examples: 2
+- tag: Report
+  operations_with_examples: 2
+- tag: Reports
+  operations_with_examples: 2
+- tag: Creatives Tag
+  operations_with_examples: 2
+- tag: Creatives Tile
+  operations_with_examples: 2
+- tag: Creatives Video
+  operations_with_examples: 2
+- tag: Creatives
+  operations_with_examples: 2
+- tag: Report Templates
+  operations_with_examples: 2
+- tag: Audios
+  operations_with_examples: 2
+- tag: Campaigns
+  operations_with_examples: 2
+- tag: Connected Supply
+  operations_with_examples: 2
+- tag: Demand Partners
+  operations_with_examples: 2
+- tag: Supply Partners
+  operations_with_examples: 2
+- tag: Supply Routers
+  operations_with_examples: 2
+- tag: Supply Tags
+  operations_with_examples: 2
+- tag: Tag Creatives
+  operations_with_examples: 2
+- tag: Tiles
+  operations_with_examples: 2
+- tag: Value Lists
+  operations_with_examples: 2
+- tag: Videos
+  operations_with_examples: 2
+- tag: Geo Lists
+  operations_with_examples: 1
+- tag: Run As
+  operations_with_examples: 1
+- tag: Users
+  operations_with_examples: 1
+- tag: Connected Demand
+  operations_with_examples: 1
+- tag: First Party Partner Segments
+  operations_with_examples: 1
+operations:
+  v1:
+  - operationId: account_partner_segments_post
+    tag: Account Partner Segments
+    examples:
+    - account_partner_segment_create_full
+    - account_partner_segment_create_simple
+  - operationId: accounts_post
+    tag: Accounts
+    examples:
+    - account_clearline_sub_create_full
+    - account_clearline_sub_create_simple
+    - account_curator_main_create_full
+    - account_curator_main_create_simple
+    - account_curator_sub_create_full
+    - account_curator_sub_create_simple
+    - account_dsp_main_create_full
+    - account_dsp_main_create_simple
+    - account_dsp_sub_create_full
+    - account_dsp_sub_create_simple
+    - account_external_bidder_create_full
+    - account_external_bidder_create_simple
+    - account_publisher_create_full
+    - account_publisher_create_simple
+  - operationId: app_bundle_lists_post
+    tag: App Bundle Lists
+    examples:
+    - app_bundle_list_create_full
+    - app_bundle_list_create_simple
+  - operationId: app_name_lists_post
+    tag: App Name Lists
+    examples:
+    - app_name_list_create_full
+    - app_name_list_create_simple
+  - operationId: audio_creatives_post
+    tag: Creatives Audio
+    examples:
+    - audio_creative_create_full
+    - audio_creative_create_simple
+  - operationId: bills_post
+    tag: Bills
+    examples:
+    - bill_create_full
+    - bill_create_simple
+  - operationId: city_lists_post
+    tag: City Lists
+    examples:
+    - city_list_create_full
+    - city_list_create_simple
+  - operationId: country_lists_post
+    tag: Country Lists
+    examples:
+    - country_list_create_full
+    - country_list_create_simple
+  - operationId: curated_marketplaces_post
+    tag: Curated Marketplaces
+    examples:
+    - curated_marketplace_create_full
+    - curated_marketplace_create_simple
+  - operationId: deal_lists_post
+    tag: Deal Lists
+    examples:
+    - deal_list_create_full
+    - deal_list_create_simple
+  - operationId: demand_labels_post
+    tag: Demand Labels
+    examples:
+    - demand_label_create_full
+    - demand_label_create_simple
+  - operationId: demand_tags_post
+    tag: Demand Tags
+    examples:
+    - demand_tag_bidder_create_full
+    - demand_tag_bidder_create_simple
+    - demand_tag_direct_io_line_item_create_full
+    - demand_tag_direct_io_line_item_create_simple
+    - demand_tag_dsp_sub_line_item_create_full
+    - demand_tag_dsp_sub_line_item_create_simple
+    - demand_tag_house_ad_create_full
+    - demand_tag_house_ad_create_simple
+    - demand_tag_line_item_create_full
+    - demand_tag_line_item_create_simple
+    - demand_tag_marketplace_deal_create_full
+    - demand_tag_marketplace_deal_create_simple
+    - demand_tag_tag_create_full
+    - demand_tag_tag_create_simple
+  - operationId: domain_lists_post
+    tag: Domain Lists
+    examples:
+    - domain_list_create_another_account
+    - domain_list_create_enabled_demand_partners_expansion
+    - domain_list_create_full
+    - domain_list_create_simple
+  - operationId: filepath_creatives_post
+    tag: Creatives Filepaths
+    examples:
+    - filepath_creative_create_full
+    - filepath_creative_create_simple
+  - operationId: global_fcap_pixels_post
+    tag: Global Fcap Pixels
+    examples:
+    - global_fcap_pixel_create_full
+    - global_fcap_pixel_create_simple
+  - operationId: hb_bid_maps_post
+    tag: Hb Bid Maps
+    examples:
+    - hb_bid_map_create_full
+    - hb_bid_map_create_simple
+  - operationId: isp_lists_post
+    tag: ISP Lists
+    examples:
+    - isp_list_create_full
+    - isp_list_create_simple
+  - operationId: metro_area_lists_post
+    tag: Metro Area Lists
+    examples:
+    - metro_area_list_create_full
+    - metro_area_list_create_simple
+  - operationId: postal_code_lists_post
+    tag: Postal Code Lists
+    examples:
+    - postal_code_list_create_full
+    - postal_code_list_create_simple
+  - operationId: report_post
+    tag: Report
+    examples:
+    - report_create_full
+    - report_create_simple
+  - operationId: reports_post
+    tag: Reports
+    examples:
+    - report_create_full
+    - report_create_simple
+  - operationId: scanned_creative_lists_post
+    tag: Scanned Creative Lists
+    examples:
+    - scanned_creative_list_create_full
+    - scanned_creative_list_create_simple
+  - operationId: scheduled_reports_post
+    tag: Scheduled Reports
+    examples:
+    - scheduled_report_create_full
+    - scheduled_report_create_simple
+  - operationId: state_lists_post
+    tag: State Lists
+    examples:
+    - state_list_create_full
+    - state_list_create_simple
+  - operationId: supply_labels_post
+    tag: Supply Labels
+    examples:
+    - supply_label_create_full
+    - supply_label_create_simple
+  - operationId: supply_name_lists_post
+    tag: Supply Name Lists
+    examples:
+    - supply_name_list_create_full
+    - supply_name_list_create_simple
+  - operationId: tag_creatives_post
+    tag: Creatives Tag
+    examples:
+    - tag_creative_create_full
+    - tag_creative_create_simple
+  - operationId: tile_creatives_post
+    tag: Creatives Tile
+    examples:
+    - tile_creative_clickable_image_create_full
+    - tile_creative_clickable_image_create_simple
+    - tile_creative_clickable_video_create_full
+    - tile_creative_clickable_video_create_simple
+    - tile_creative_custom_create_full
+    - tile_creative_custom_create_simple
+    - tile_creative_multimedia_create_full
+    - tile_creative_multimedia_create_simple
+  - operationId: user_accounts_post
+    tag: User Accounts
+    examples:
+    - user_account_create_full
+    - user_account_create_simple
+  - operationId: video_creatives_post
+    tag: Creatives Video
+    examples:
+    - video_creative_create_full
+    - video_creative_create_simple
+  - operationId: account_partner_segments_id_patch
+    tag: Account Partner Segments
+    examples:
+    - account_partner_segment_update_full
+    - account_partner_segment_update_simple
+  - operationId: accounts_id_patch
+    tag: Accounts
+    examples:
+    - account_update_full
+    - account_update_simple
+  - operationId: app_bundle_lists_id_patch
+    tag: App Bundle Lists
+    examples:
+    - app_bundle_list_update_full
+    - app_bundle_list_update_simple
+  - operationId: app_name_lists_id_patch
+    tag: App Name Lists
+    examples:
+    - app_name_list_update_full
+    - app_name_list_update_simple
+  - operationId: audio_creatives_id_patch
+    tag: Creatives Audio
+    examples:
+    - audio_creative_update_full
+    - audio_creative_update_simple
+  - operationId: bills_id_patch
+    tag: Bills
+    examples:
+    - bill_update_full
+    - bill_update_simple
+  - operationId: city_lists_id_patch
+    tag: City Lists
+    examples:
+    - city_list_update_full
+    - city_list_update_simple
+  - operationId: country_lists_id_patch
+    tag: Country Lists
+    examples:
+    - country_list_update_full
+    - country_list_update_simple
+  - operationId: curated_marketplaces_id_patch
+    tag: Curated Marketplaces
+    examples:
+    - curated_marketplace_update_full
+    - curated_marketplace_update_simple
+  - operationId: deal_lists_deal_list_id_patch
+    tag: Deal Lists
+    examples:
+    - deal_list_update_full
+    - deal_list_update_simple
+  - operationId: demand_labels_id_patch
+    tag: Demand Labels
+    examples:
+    - demand_label_update_full
+    - demand_label_update_simple
+  - operationId: demand_tags_id_patch
+    tag: Demand Tags
+    examples:
+    - demand_tag_update_full
+    - demand_tag_update_simple
+  - operationId: domain_lists_id_patch
+    tag: Domain Lists
+    examples:
+    - domain_list_update_full
+    - domain_list_update_simple
+  - operationId: filepath_creatives_id_patch
+    tag: Creatives Filepaths
+    examples:
+    - filepath_creative_update_full
+    - filepath_creative_update_simple
+  - operationId: global_fcap_pixels_id_patch
+    tag: Global Fcap Pixels
+    examples:
+    - global_fcap_pixel_update_full
+    - global_fcap_pixel_update_simple
+  - operationId: hb_bid_maps_id_patch
+    tag: Hb Bid Maps
+    examples:
+    - hb_bid_map_update_full
+    - hb_bid_map_update_simple
+  - operationId: isp_lists_id_patch
+    tag: ISP Lists
+    examples:
+    - isp_list_update_full
+    - isp_list_update_simple
+  - operationId: metro_area_lists_id_patch
+    tag: Metro Area Lists
+    examples:
+    - metro_area_list_update_full
+    - metro_area_list_update_simple
+  - operationId: partner_segments_id_patch
+    tag: Partner Segments
+    examples:
+    - partner_segment_update_full
+    - partner_segment_update_simple
+  - operationId: postal_code_lists_id_patch
+    tag: Postal Code Lists
+    examples:
+    - postal_code_list_update_full
+    - postal_code_list_update_simple
+  - operationId: scanned_creative_lists_id_patch
+    tag: Scanned Creative Lists
+    examples:
+    - scanned_creative_list_update_full
+    - scanned_creative_list_update_simple
+  - operationId: scheduled_reports_id_patch
+    tag: Scheduled Reports
+    examples:
+    - scheduled_report_update_full
+    - scheduled_report_update_simple
+  - operationId: state_lists_id_patch
+    tag: State Lists
+    examples:
+    - state_list_update_full
+    - state_list_update_simple
+  - operationId: supply_labels_id_patch
+    tag: Supply Labels
+    examples:
+    - supply_label_update_full
+    - supply_label_update_simple
+  - operationId: supply_name_lists_id_patch
+    tag: Supply Name Lists
+    examples:
+    - supply_name_list_update_full
+    - supply_name_list_update_simple
+  - operationId: tag_creatives_id_patch
+    tag: Creatives Tag
+    examples:
+    - tag_creative_update_full
+    - tag_creative_update_simple
+  - operationId: tile_creatives_id_patch
+    tag: Creatives Tile
+    examples:
+    - tile_creative_update_full
+    - tile_creative_update_simple
+  - operationId: user_accounts_id_patch
+    tag: User Accounts
+    examples:
+    - user_account_update_full
+    - user_account_update_simple
+  - operationId: video_creatives_id_patch
+    tag: Creatives Video
+    examples:
+    - video_creative_update_full
+    - video_creative_update_simple
+  - operationId: account_partner_segments_bulk_update_same_attributes_post
+    tag: Account Partner Segments
+    examples:
+    - account_partner_segment_bulk_update_multiple
+    - account_partner_segment_bulk_update_single
+  - operationId: app_name_lists_bulk_update_same_attributes_post
+    tag: App Name Lists
+    examples:
+    - app_name_list_bulk_update_multiple
+    - app_name_list_bulk_update_single
+  - operationId: creatives_bulk_update_same_attributes_post
+    tag: Creatives
+    examples:
+    - Brand
+    - Browser
+    - City
+    - Country
+    - Device
+    - Metro Area
+    - OS
+    - PostalCode
+    - Region
+    - Status
+  - operationId: deal_lists_bulk_update_same_attributes_post
+    tag: Deal Lists
+    examples:
+    - deal_list_bulk_update_multiple
+    - deal_list_bulk_update_single
+  - operationId: demand_tags_bulk_update_same_attributes_post
+    tag: Demand Tags
+    examples:
+    - demand_tag_bulk_update_same_multiple
+    - demand_tag_bulk_update_same_single
+  - operationId: demand_tags_macro_suggester_post
+    tag: Demand Tags
+    examples:
+    - demand_tag_macro_suggester_full
+    - demand_tag_macro_suggester_simple
+  - operationId: domain_lists_bulk_update_same_attributes_post
+    tag: Domain Lists
+    examples:
+    - domain_list_bulk_update_full
+    - domain_list_bulk_update_simple
+  - operationId: geo_lists_bulk_update_same_attributes_post
+    tag: Geo Lists
+    examples:
+    - geo_list_bulk_update_multiple
+    - geo_list_bulk_update_single
+  - operationId: partner_segments_bulk_create_post
+    tag: Partner Segments
+    examples:
+    - partner_segment_bulk_create_multiple
+    - partner_segment_bulk_create_single
+  - operationId: reports_templates_post
+    tag: Report Templates
+    examples:
+    - report_template_create_full
+    - report_template_create_simple
+  - operationId: run_as_start_post
+    tag: Run As
+    examples:
+    - run_as_start_external_user
+    - run_as_start_internal_user
+  - operationId: scheduled_reports_bulk_update_same_attributes_put
+    tag: Scheduled Reports
+    examples:
+    - scheduled_report_bulk_update_multiple
+    - scheduled_report_bulk_update_single
+  - operationId: user_accounts_bulk_update_same_attributes_post
+    tag: User Accounts
+    examples:
+    - user_account_bulk_update_multiple
+    - user_account_bulk_update_single
+  - operationId: users_current_patch
+    tag: Users
+    examples:
+    - user_update_current_full
+    - user_update_current_simple
+  - operationId: accounts_id_bulk_connect_curators_post
+    tag: Accounts
+    examples:
+    - account_bulk_connect_curators_many
+    - account_bulk_connect_curators_one
+  - operationId: accounts_id_bulk_connect_dsps_post
+    tag: Accounts
+    examples:
+    - account_bulk_connect_dsps_many
+    - account_bulk_connect_dsps_one
+  - operationId: accounts_id_bulk_set_dc_visibility_post
+    tag: Accounts
+    examples:
+    - account_bulk_set_dc_visibility_many
+    - account_bulk_set_dc_visibility_one
+  - operationId: domain_lists_id_duplicate_post
+    tag: Domain Lists
+    examples:
+    - domain_list_duplicate_another_account
+    - domain_list_duplicate_disabled_demand_partners_expansion
+    - domain_list_duplicate_enabled_demand_partners_expansion
+  - operationId: domain_lists_id_resource_type_post
+    tag: Domain Lists
+    examples:
+    - domain_list_resource_add_multiple
+    - domain_list_resource_add_single
+  - operationId: accounts_bulk_update_many_post
+    tag: Accounts
+    examples:
+    - account_bulk_update_multiple
+    - account_bulk_update_single
+  - operationId: creatives_bulk_update_many_post
+    tag: Creatives
+    examples:
+    - creative_bulk_update_many_multiple
+    - creative_bulk_update_many_single
+  - operationId: demand_tags_bulk_update_many_post
+    tag: Demand Tags
+    examples:
+    - demand_tag_bulk_update_many_multiple
+    - demand_tag_bulk_update_many_single
+  - operationId: reports_templates_id_patch
+    tag: Report Templates
+    examples:
+    - report_template_update_full
+    - report_template_update_simple
+  - operationId: app_bundle_lists_id_app_bundles_bulk_create_post
+    tag: App Bundle Lists
+    examples:
+    - app_bundle_list_bundles_bulk_multiple
+    - app_bundle_list_bundles_bulk_single
+  - operationId: app_bundle_lists_id_app_bundles_bulk_replace_post
+    tag: App Bundle Lists
+    examples:
+    - app_bundle_list_bundles_bulk_multiple
+    - app_bundle_list_bundles_bulk_single
+  - operationId: app_name_lists_id_app_names_bulk_create_post
+    tag: App Name Lists
+    examples:
+    - app_name_list_names_bulk_multiple
+    - app_name_list_names_bulk_single
+  - operationId: app_name_lists_id_app_names_bulk_replace_post
+    tag: App Name Lists
+    examples:
+    - app_name_list_names_bulk_multiple
+    - app_name_list_names_bulk_single
+  - operationId: deal_lists_deal_list_id_deals_bulk_create_post
+    tag: Deal Lists
+    examples:
+    - deal_list_deals_bulk_create_multiple
+    - deal_list_deals_bulk_create_single
+  - operationId: deal_lists_deal_list_id_deals_bulk_replace_post
+    tag: Deal Lists
+    examples:
+    - deal_list_deals_bulk_replace_multiple
+    - deal_list_deals_bulk_replace_single
+  - operationId: domain_lists_id_domains_bulk_create_post
+    tag: Domain Lists
+    examples:
+    - domain_list_domains_bulk_create_multiple
+    - domain_list_domains_bulk_create_single
+  - operationId: domain_lists_id_domains_bulk_replace_post
+    tag: Domain Lists
+    examples:
+    - domain_list_domains_bulk_replace_multiple
+    - domain_list_domains_bulk_replace_single
+  - operationId: domain_lists_id_resource_type_bulk_delete_post
+    tag: Domain Lists
+    examples:
+    - domain_list_resource_bulk_delete_multiple
+    - domain_list_resource_bulk_delete_single
+  - operationId: domain_lists_id_resource_type_bulk_update_same_attributes_post
+    tag: Domain Lists
+    examples:
+    - domain_list_resource_bulk_update_multiple
+    - domain_list_resource_bulk_update_single
+  - operationId: isp_lists_id_isp_names_bulk_create_post
+    tag: ISP Lists
+    examples:
+    - isp_list_isp_names_bulk_create_multiple
+    - isp_list_isp_names_bulk_create_single
+  - operationId: isp_lists_id_isp_names_bulk_replace_post
+    tag: ISP Lists
+    examples:
+    - isp_list_isp_names_bulk_replace_multiple
+    - isp_list_isp_names_bulk_replace_single
+  - operationId: scanned_creative_lists_id_creatives_bulk_create_post
+    tag: Scanned Creative Lists
+    examples:
+    - scanned_creative_list_creatives_bulk_create_multiple
+    - scanned_creative_list_creatives_bulk_create_single
+  - operationId: scanned_creative_lists_id_creatives_bulk_replace_post
+    tag: Scanned Creative Lists
+    examples:
+    - scanned_creative_list_creatives_bulk_replace_multiple
+    - scanned_creative_list_creatives_bulk_replace_single
+  - operationId: supply_name_lists_id_supply_names_bulk_create_post
+    tag: Supply Name Lists
+    examples:
+    - supply_name_list_supply_names_bulk_create_multiple
+    - supply_name_list_supply_names_bulk_create_single
+  - operationId: supply_name_lists_id_supply_names_bulk_replace_post
+    tag: Supply Name Lists
+    examples:
+    - supply_name_list_supply_names_bulk_replace_multiple
+    - supply_name_list_supply_names_bulk_replace_single
+  v0:
+  - operationId: advertiser_domain_lists_post
+    tag: Advertiser Domain Lists
+    examples:
+    - advertiser_domain_list_create_full
+    - advertiser_domain_list_create_simple
+  - operationId: app_bundle_lists_post
+    tag: App Bundle Lists
+    examples:
+    - app_bundle_list_create_full
+    - app_bundle_list_create_simple
+  - operationId: app_name_lists_post
+    tag: App Name Lists
+    examples:
+    - app_name_list_create_full
+    - app_name_list_create_simple
+  - operationId: audios_post
+    tag: Audios
+    examples:
+    - audio_creative_create_full
+    - audio_creative_create_simple
+  - operationId: bid_maps_post
+    tag: Bid Maps
+    examples:
+    - bid_map_create_full
+    - bid_map_create_simple
+  - operationId: bills_post
+    tag: Bills
+    examples:
+    - bill_create_full
+    - bill_create_simple
+  - operationId: campaigns_post
+    tag: Campaigns
+    examples:
+    - campaign_direct_connect_create_full
+    - campaign_direct_connect_create_simple
+    - campaign_managed_create_full
+    - campaign_managed_create_simple
+    - campaign_tiles_dedup_create_full
+    - campaign_tiles_dedup_create_simple
+  - operationId: city_lists_post
+    tag: City Lists
+    examples:
+    - city_list_create_full
+    - city_list_create_simple
+  - operationId: connected_supply_post
+    tag: Connected Supply
+    examples:
+    - buying_strategy_create_full
+    - buying_strategy_create_simple
+  - operationId: country_lists_post
+    tag: Country Lists
+    examples:
+    - country_list_create_full
+    - country_list_create_simple
+  - operationId: deal_id_lists_post
+    tag: Deal Id Lists
+    examples:
+    - deal_id_list_create_full
+    - deal_id_list_create_simple
+  - operationId: deal_lists_post
+    tag: Deal Lists
+    examples:
+    - deal_list_create_full
+    - deal_list_create_simple
+  - operationId: demand_labels_post
+    tag: Demand Labels
+    examples:
+    - demand_label_create_full
+    - demand_label_create_simple
+  - operationId: demand_partners_post
+    tag: Demand Partners
+    examples:
+    - demand_partner_create_full
+    - demand_partner_create_simple
+  - operationId: demand_tags_post
+    tag: Demand Tags
+    examples:
+    - demand_tag_bidder_create_full
+    - demand_tag_bidder_create_simple
+    - demand_tag_dsp_sub_line_item_create_full
+    - demand_tag_dsp_sub_line_item_create_simple
+    - demand_tag_house_ad_create_full
+    - demand_tag_house_ad_create_simple
+    - demand_tag_line_item_create_full
+    - demand_tag_line_item_create_simple
+    - demand_tag_marketplace_deal_create_full
+    - demand_tag_marketplace_deal_create_simple
+    - demand_tag_tag_create_full
+    - demand_tag_tag_create_simple
+  - operationId: domain_lists_post
+    tag: Domain Lists
+    examples:
+    - domain_list_create_full
+    - domain_list_create_simple
+  - operationId: global_fcap_pixels_post
+    tag: Global Fcap Pixels
+    examples:
+    - global_fcap_pixel_create_full
+    - global_fcap_pixel_create_simple
+  - operationId: hb_bid_maps_post
+    tag: Hb Bid Maps
+    examples:
+    - hb_bid_map_create_full
+    - hb_bid_map_create_simple
+  - operationId: ip_lists_post
+    tag: Ip Lists
+    examples:
+    - ip_list_create_full
+    - ip_list_create_simple
+  - operationId: keys_post
+    tag: Keys
+    examples:
+    - key_create_full
+    - key_create_simple
+  - operationId: metro_area_lists_post
+    tag: Metro Area Lists
+    examples:
+    - metro_area_list_create_full
+    - metro_area_list_create_simple
+  - operationId: parameter_lists_post
+    tag: Parameter Lists
+    examples:
+    - parameter_list_create_full
+    - parameter_list_create_simple
+  - operationId: postal_code_lists_post
+    tag: Postal Code Lists
+    examples:
+    - postal_code_list_create_full
+    - postal_code_list_create_simple
+  - operationId: publisher_id_lists_post
+    tag: Publisher Id Lists
+    examples:
+    - publisher_id_list_create_full
+    - publisher_id_list_create_simple
+  - operationId: report_post
+    tag: Report
+    examples:
+    - report_create_full
+    - report_create_simple
+  - operationId: reports_post
+    tag: Reports
+    examples:
+    - report_create_full
+    - report_create_simple
+  - operationId: segments_post
+    tag: Segments
+    examples:
+    - segment_list_create_full
+    - segment_list_create_simple
+    - segment_pixel_create_full
+    - segment_pixel_create_simple
+  - operationId: state_lists_post
+    tag: State Lists
+    examples:
+    - state_list_create_full
+    - state_list_create_simple
+  - operationId: supply_labels_post
+    tag: Supply Labels
+    examples:
+    - supply_label_create_full
+    - supply_label_create_simple
+  - operationId: supply_partners_post
+    tag: Supply Partners
+    examples:
+    - supply_partner_create_full
+    - supply_partner_create_simple
+  - operationId: supply_routers_post
+    tag: Supply Routers
+    examples:
+    - supply_router_create_full
+    - supply_router_create_simple
+  - operationId: supply_tags_post
+    tag: Supply Tags
+    examples:
+    - supply_tag_audio_create_full
+    - supply_tag_audio_create_simple
+    - supply_tag_bid_link_create_full
+    - supply_tag_bid_link_create_simple
+    - supply_tag_pause_ad_create_full
+    - supply_tag_pause_ad_create_simple
+    - supply_tag_tag_create_full
+    - supply_tag_tag_create_simple
+    - supply_tag_tile_create_full
+    - supply_tag_tile_create_simple
+  - operationId: tag_creatives_post
+    tag: Tag Creatives
+    examples:
+    - tag_creative_create_full
+    - tag_creative_create_simple
+  - operationId: tiles_post
+    tag: Tiles
+    examples:
+    - tile_creative_clickable_image_create_full
+    - tile_creative_clickable_image_create_simple
+    - tile_creative_custom_create_full
+    - tile_creative_custom_create_simple
+  - operationId: value_lists_post
+    tag: Value Lists
+    examples:
+    - value_list_create_full
+    - value_list_create_simple
+  - operationId: videos_post
+    tag: Videos
+    examples:
+    - video_creative_create_full
+    - video_creative_create_simple
+  - operationId: accounts_id_put
+    tag: Accounts
+    examples:
+    - account_update_full
+    - account_update_simple
+  - operationId: advertiser_domain_lists_id_put
+    tag: Advertiser Domain Lists
+    examples:
+    - advertiser_domain_list_update_full
+    - advertiser_domain_list_update_simple
+  - operationId: app_bundle_lists_id_put
+    tag: App Bundle Lists
+    examples:
+    - app_bundle_list_update_full
+    - app_bundle_list_update_simple
+  - operationId: app_name_lists_id_put
+    tag: App Name Lists
+    examples:
+    - app_name_list_update_full
+    - app_name_list_update_simple
+  - operationId: audios_id_put
+    tag: Audios
+    examples:
+    - audio_creative_update_full
+    - audio_creative_update_simple
+  - operationId: bid_maps_id_put
+    tag: Bid Maps
+    examples:
+    - bid_map_update_full
+    - bid_map_update_simple
+  - operationId: bid_maps_id_patch
+    tag: Bid Maps
+    examples:
+    - bid_map_update_full
+    - bid_map_update_simple
+  - operationId: bills_id_put
+    tag: Bills
+    examples:
+    - bill_update_full
+    - bill_update_simple
+  - operationId: campaigns_id_put
+    tag: Campaigns
+    examples:
+    - campaign_update_full
+    - campaign_update_simple
+  - operationId: city_lists_id_put
+    tag: City Lists
+    examples:
+    - city_list_update_full
+    - city_list_update_simple
+  - operationId: connected_demand_id_put
+    tag: Connected Demand
+    examples:
+    - selling_strategy_update_full
+    - selling_strategy_update_simple
+  - operationId: connected_supply_id_put
+    tag: Connected Supply
+    examples:
+    - buying_strategy_update_full
+    - buying_strategy_update_simple
+  - operationId: country_lists_id_put
+    tag: Country Lists
+    examples:
+    - country_list_update_full
+    - country_list_update_simple
+  - operationId: deal_id_lists_id_put
+    tag: Deal Id Lists
+    examples:
+    - deal_id_list_update_full
+    - deal_id_list_update_simple
+  - operationId: deal_lists_id_put
+    tag: Deal Lists
+    examples:
+    - deal_list_update_full
+    - deal_list_update_simple
+  - operationId: demand_labels_id_put
+    tag: Demand Labels
+    examples:
+    - demand_label_update_full
+    - demand_label_update_simple
+  - operationId: demand_partners_id_put
+    tag: Demand Partners
+    examples:
+    - demand_partner_update_full
+    - demand_partner_update_simple
+  - operationId: demand_tags_id_put
+    tag: Demand Tags
+    examples:
+    - demand_tag_update_full
+    - demand_tag_update_simple
+  - operationId: domain_lists_id_put
+    tag: Domain Lists
+    examples:
+    - domain_list_update_full
+    - domain_list_update_simple
+  - operationId: global_fcap_pixels_id_put
+    tag: Global Fcap Pixels
+    examples:
+    - global_fcap_pixel_update_full
+    - global_fcap_pixel_update_simple
+  - operationId: hb_bid_maps_id_put
+    tag: Hb Bid Maps
+    examples:
+    - hb_bid_map_update_full
+    - hb_bid_map_update_simple
+  - operationId: hb_bid_maps_id_patch
+    tag: Hb Bid Maps
+    examples:
+    - hb_bid_map_update_full
+    - hb_bid_map_update_simple
+  - operationId: ip_lists_id_put
+    tag: Ip Lists
+    examples:
+    - ip_list_update_full
+    - ip_list_update_simple
+  - operationId: keys_id_put
+    tag: Keys
+    examples:
+    - key_update_full
+    - key_update_simple
+  - operationId: metro_area_lists_id_put
+    tag: Metro Area Lists
+    examples:
+    - metro_area_list_update_full
+    - metro_area_list_update_simple
+  - operationId: parameter_lists_id_put
+    tag: Parameter Lists
+    examples:
+    - parameter_list_update_full
+    - parameter_list_update_simple
+  - operationId: partner_segments_id_put
+    tag: Partner Segments
+    examples:
+    - partner_segment_update_full
+    - partner_segment_update_simple
+  - operationId: postal_code_lists_id_put
+    tag: Postal Code Lists
+    examples:
+    - postal_code_list_update_full
+    - postal_code_list_update_simple
+  - operationId: publisher_id_lists_id_put
+    tag: Publisher Id Lists
+    examples:
+    - publisher_id_list_update_full
+    - publisher_id_list_update_simple
+  - operationId: segments_id_put
+    tag: Segments
+    examples:
+    - segment_update_full
+    - segment_update_simple
+  - operationId: state_lists_id_put
+    tag: State Lists
+    examples:
+    - state_list_update_full
+    - state_list_update_simple
+  - operationId: supply_labels_id_put
+    tag: Supply Labels
+    examples:
+    - supply_label_update_full
+    - supply_label_update_simple
+  - operationId: supply_partners_id_put
+    tag: Supply Partners
+    examples:
+    - supply_partner_update_full
+    - supply_partner_update_simple
+  - operationId: supply_routers_id_put
+    tag: Supply Routers
+    examples:
+    - supply_router_update_full
+    - supply_router_update_simple
+  - operationId: supply_tags_id_put
+    tag: Supply Tags
+    examples:
+    - supply_tag_update_full
+    - supply_tag_update_simple
+  - operationId: tag_creatives_id_put
+    tag: Tag Creatives
+    examples:
+    - tag_creative_update_full
+    - tag_creative_update_simple
+  - operationId: tiles_id_put
+    tag: Tiles
+    examples:
+    - tile_creative_update_full
+    - tile_creative_update_simple
+  - operationId: value_lists_id_put
+    tag: Value Lists
+    examples:
+    - value_list_update_full
+    - value_list_update_simple
+  - operationId: videos_id_put
+    tag: Videos
+    examples:
+    - video_creative_update_full
+    - video_creative_update_simple
+  - operationId: first_party_partner_segments_bulk_create_post
+    tag: First Party Partner Segments
+    examples:
+    - first_party_partner_segment_bulk_create_multiple
+    - first_party_partner_segment_bulk_create_single
+  - operationId: operative_advertisers_post
+    tag: Operative
+    examples:
+    - operative_advertiser_create_full
+    - operative_advertiser_create_simple
+  - operationId: operative_orders_post
+    tag: Operative
+    examples:
+    - operative_order_create_full
+    - operative_order_create_simple
+  - operationId: operative_orders_put
+    tag: Operative
+    examples:
+    - operative_order_update_full
+    - operative_order_update_simple
+  - operationId: partner_segments_bulk_create_post
+    tag: Partner Segments
+    examples:
+    - partner_segment_bulk_create_multiple
+    - partner_segment_bulk_create_single
+  - operationId: bills_bill_id_bill_items_post
+    tag: Bills
+    examples:
+    - bill_item_create_full
+    - bill_item_create_simple
+  - operationId: demand_tags_demand_tag_id_demand_tag_keys_post
+    tag: Demand Tags
+    examples:
+    - demand_tag_key_create_full
+    - demand_tag_key_create_simple
+  - operationId: keys_key_id_values_post
+    tag: Keys
+    examples:
+    - key_value_create_full
+    - key_value_create_simple
+  - operationId: advertiser_domain_lists_advertiser_domain_list_id_advertiser_domains_bulk_create_post
+    tag: Advertiser Domain Lists
+    examples:
+    - advertiser_domain_list_domains_bulk_multiple
+    - advertiser_domain_list_domains_bulk_single
+  - operationId: advertiser_domain_lists_advertiser_domain_list_id_advertiser_domains_bulk_replace_post
+    tag: Advertiser Domain Lists
+    examples:
+    - advertiser_domain_list_domains_bulk_multiple
+    - advertiser_domain_list_domains_bulk_single
+  - operationId: app_bundle_lists_app_bundle_list_id_app_bundles_bulk_create_post
+    tag: App Bundle Lists
+    examples:
+    - app_bundle_list_bundles_bulk_multiple
+    - app_bundle_list_bundles_bulk_single
+  - operationId: app_bundle_lists_app_bundle_list_id_app_bundles_bulk_replace_post
+    tag: App Bundle Lists
+    examples:
+    - app_bundle_list_bundles_bulk_multiple
+    - app_bundle_list_bundles_bulk_single
+  - operationId: app_name_lists_app_name_list_id_app_names_bulk_create_post
+    tag: App Name Lists
+    examples:
+    - app_name_list_names_bulk_multiple
+    - app_name_list_names_bulk_single
+  - operationId: app_name_lists_app_name_list_id_app_names_bulk_replace_post
+    tag: App Name Lists
+    examples:
+    - app_name_list_names_bulk_multiple
+    - app_name_list_names_bulk_single
+  - operationId: bills_bill_id_bill_items_id_put
+    tag: Bills
+    examples:
+    - bill_item_update_full
+    - bill_item_update_simple
+  - operationId: deal_id_lists_deal_id_list_id_deal_ids_bulk_create_post
+    tag: Deal Id Lists
+    examples:
+    - deal_id_list_deal_ids_bulk_create_multiple
+    - deal_id_list_deal_ids_bulk_create_single
+  - operationId: deal_id_lists_deal_id_list_id_deal_ids_bulk_replace_post
+    tag: Deal Id Lists
+    examples:
+    - deal_id_list_deal_ids_bulk_replace_multiple
+    - deal_id_list_deal_ids_bulk_replace_single
+  - operationId: deal_lists_id_deals_bulk_create_post
+    tag: Deal Lists
+    examples:
+    - deal_list_deals_bulk_create_multiple
+    - deal_list_deals_bulk_create_single
+  - operationId: deal_lists_id_deals_bulk_replace_post
+    tag: Deal Lists
+    examples:
+    - deal_list_deals_bulk_replace_multiple
+    - deal_list_deals_bulk_replace_single
+  - operationId: demand_tags_demand_tag_id_demand_tag_keys_id_put
+    tag: Demand Tags
+    examples:
+    - demand_tag_key_update_full
+    - demand_tag_key_update_simple
+  - operationId: domain_lists_domain_list_id_domains_bulk_create_post
+    tag: Domain Lists
+    examples:
+    - domain_list_domains_bulk_create_multiple
+    - domain_list_domains_bulk_create_single
+  - operationId: domain_lists_domain_list_id_domains_bulk_replace_post
+    tag: Domain Lists
+    examples:
+    - domain_list_domains_bulk_replace_multiple
+    - domain_list_domains_bulk_replace_single
+  - operationId: ip_lists_ip_list_id_ips_bulk_create_post
+    tag: Ip Lists
+    examples:
+    - ip_list_ips_bulk_create_multiple
+    - ip_list_ips_bulk_create_single
+  - operationId: ip_lists_ip_list_id_ips_bulk_replace_post
+    tag: Ip Lists
+    examples:
+    - ip_list_ips_bulk_replace_multiple
+    - ip_list_ips_bulk_replace_single
+  - operationId: keys_key_id_values_value_id_put
+    tag: Keys
+    examples:
+    - key_value_update_full
+    - key_value_update_simple
+  - operationId: keys_key_id_values_value_id_patch
+    tag: Keys
+    examples:
+    - key_value_update_full
+    - key_value_update_simple
+  - operationId: parameter_lists_parameter_list_id_values_bulk_create_post
+    tag: Parameter Lists
+    examples:
+    - parameter_list_values_bulk_multiple
+    - parameter_list_values_bulk_single
+  - operationId: parameter_lists_parameter_list_id_values_bulk_replace_post
+    tag: Parameter Lists
+    examples:
+    - parameter_list_values_bulk_multiple
+    - parameter_list_values_bulk_single
+  - operationId: publisher_id_lists_publisher_id_list_id_publisher_ids_bulk_create_post
+    tag: Publisher Id Lists
+    examples:
+    - publisher_id_list_publisher_ids_bulk_create_multiple
+    - publisher_id_list_publisher_ids_bulk_create_single
+  - operationId: publisher_id_lists_publisher_id_list_id_publisher_ids_bulk_replace_post
+    tag: Publisher Id Lists
+    examples:
+    - publisher_id_list_publisher_ids_bulk_replace_multiple
+    - publisher_id_list_publisher_ids_bulk_replace_single
+  - operationId: segments_segment_id_items_bulk_create_post
+    tag: Segments
+    examples:
+    - segment_items_bulk_create_multiple
+    - segment_items_bulk_create_single
+  - operationId: segments_segment_id_items_bulk_replace_post
+    tag: Segments
+    examples:
+    - segment_items_bulk_replace_multiple
+    - segment_items_bulk_replace_single

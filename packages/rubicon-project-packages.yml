@@ -1,0 +1,121 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  PyPI, Maven Central, CocoaPods trunk and the Magnite/SpringServe GitHub organizations
+  (github.com/SpringServe, github.com/MagniteEngineering, github.com/rubicon-project)
+docs:
+- https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+- https://help.magnite.com/help/learn-about-the-in-app-sdk
+checked: '2026-08-12'
+package_count: 6
+official_count: 6
+packages:
+- name: springserve
+  registry: pypi
+  url: https://pypi.org/project/springserve/
+  language: python
+  official: true
+  version: 0.8.14
+  published: '2026-03-17'
+  releases: 49
+  license: Apache 2.0
+  repository: https://github.com/SpringServe/springserve-python
+  wraps:
+  - rubicon-project-springserve-v1-api
+  - rubicon-project-springserve-v0-api
+  - rubicon-project-clearline-api
+  note: >-
+    The only first-party client library for the REST API, and the one the docs actively
+    push ("we highly encourage you to use it for all your SpringServe API needs"). Handles
+    auth and applies pagination automatically. Config is delegated to the third-party
+    `link` library (~/.link/link.config). Still on a 0.x version line after 49 releases;
+    the ClearLine docs reuse the same SpringServe SDK page unchanged.
+- name: com.magnite.sdk:ads-sdk
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/magnite/sdk/ads-sdk/
+  language: java-kotlin
+  platform: android
+  official: true
+  version: 1.0.1
+  published: '2026-07-13'
+  releases: 16
+  repository: https://github.com/MagniteEngineering/android-sdk-sample
+  note: >-
+    Magnite In-App Ads SDK for Android. Interstitial, rewarded video, banner, MREC and
+    native formats. The sample apps pin a floating range (`com.magnite.sdk:ads-sdk:1.+`),
+    so an integrator does not control which build they get. Published date read from
+    maven-metadata.xml lastUpdated (20260713212718).
+- name: MagniteSDK
+  registry: cocoapods
+  url: https://cocoapods.org/pods/MagniteSDK
+  language: objective-c
+  platform: ios
+  official: true
+  version: 1.0.2
+  published: null
+  releases: 6
+  repository: https://github.com/MagniteEngineering/ios-sdk-pod
+  license: Commercial
+  author_email: sdk@magnite.com
+  note: >-
+    Magnite In-App Ads SDK for iOS, distributed as a vendored xcframework. The CocoaPods
+    trunk API lists 6 versions with 1.0.0 (2026-05-05) as the newest it knows about, while
+    the podspec in the GitHub repo is already at 1.0.2 — the trunk index is behind the
+    repo, so `published:` for 1.0.2 is recorded null rather than guessed. Licensed
+    Commercial, not open source.
+- name: com.magnite.sdk:admob-mediation
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/magnite/sdk/admob-mediation/
+  language: java
+  platform: android
+  official: true
+  version: 1.0.0
+  published: '2026-04-29'
+  repository: https://github.com/MagniteEngineering/android-admob-mediation
+  note: Google AdMob mediation adapter for the Magnite Android SDK.
+- name: com.magnite.sdk:applovin-mediation
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/magnite/sdk/applovin-mediation/
+  language: java
+  platform: android
+  official: true
+  version: 1.0.0
+  published: '2026-04-29'
+  repository: https://github.com/MagniteEngineering/android-applovinmax-mediation
+  note: AppLovin MAX mediation adapter for the Magnite Android SDK.
+- name: com.magnite.sdk:levelplay-mediation
+  registry: maven
+  url: https://repo1.maven.org/maven2/com/magnite/sdk/levelplay-mediation/
+  language: java
+  platform: android
+  official: true
+  version: 1.0.0
+  published: '2026-04-29'
+  repository: https://github.com/MagniteEngineering/android-unity-mediation
+  note: Unity LevelPlay mediation adapter for the Magnite Android SDK.
+not_published:
+- language: javascript
+  registries_checked:
+  - npm
+  result: >-
+    No first-party Magnite/SpringServe/ClearLine client library on npm. `springserve`,
+    `magnite` and `@magnite/sdk` all 404. The iOS mediation adapters
+    (MagniteAppLovinMaxAdapter, MagniteAdMobAdapter, MagniteUnityAdapter) are likewise
+    absent from CocoaPods trunk and ship only as GitHub source.
+- language: ruby
+  registries_checked:
+  - rubygems
+  result: 'rubygems.org/api/v1/gems/springserve.json -> "This rubygem could not be found."'
+- language: go
+  registries_checked:
+  - pkg.go.dev
+  result: No first-party API client module published.
+- language: dotnet
+  registries_checked:
+  - nuget
+  result: No first-party package published.
+gaps:
+- One REST client library for a 668-operation API, in one language, still on 0.x.
+- Android SDK samples pin a floating `1.+` version range.
+- iOS SDK is distributed under a Commercial licence with a binary xcframework; CocoaPods
+  trunk metadata lags the podspec in the repo.

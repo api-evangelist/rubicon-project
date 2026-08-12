@@ -1,0 +1,345 @@
+---
+openapi: 3.1.2
+components:
+  schemas:
+    dateRange:
+      type: string
+      enum:
+      - Today
+      - Yesterday
+      - Last 15 Minutes
+      - Last Hour
+      - Last 7 Days
+      - Last 24 Hours
+      - Last 72 Hours
+      - Last 30 Days
+    forecastDateRange:
+      type: string
+      enum:
+      - T
+      - 7
+      - W
+      - 30
+      - M
+    QuickstatsMetricValue:
+      type: object
+      properties:
+        current_value:
+          type: number
+          description: Value for the current time period
+        past_value:
+          type: number
+          description: Value for the past comparison time period
+    QuickstatsMetrics:
+      type: object
+      properties:
+        ad_requests:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Total ad requests
+        has_ads:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Number of ad requests that had ads available
+        opportunities:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Number of opportunities to serve ads
+        impressions:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Number of ad impressions served
+        clicks:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Number of clicks on ads
+        revenue:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Total revenue generated
+        cost:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Total cost incurred
+        profit:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Profit (revenue - cost)
+        ad_rate:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Percentage of ad requests that had ads available (has_ads /
+            ad_requests * 100)
+        use_rate:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Percentage of ads that resulted in opportunities (opportunities
+            / has_ads * 100)
+        opportunity_rate:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Percentage of ad requests that resulted in opportunities (opportunities
+            / ad_requests * 100)
+        efficiency_rate:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Percentage of ads that resulted in impressions (impressions
+            / has_ads * 100)
+        opportunity_fill_rate:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Percentage of opportunities that resulted in impressions (impressions
+            / opportunities * 100)
+        fill_rate:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Percentage of ad requests that resulted in impressions (impressions
+            / ad_requests * 100)
+        click_through_rate:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Percentage of impressions that resulted in clicks (clicks /
+            impressions * 100)
+        margin:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Profit margin as a percentage ((revenue - cost) / revenue *
+            100)
+        rpm:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Revenue per thousand ad requests (revenue / ad_requests * 1000)
+        cpm:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Cost per thousand impressions (cost / impressions * 1000)
+        rpmr:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Revenue per thousand ad requests (alias for rpm)
+        timeouts:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Total timeouts (opportunity_timeouts + vast_request_timeouts).
+            Only emitted by endpoints whose underlying quickstats cache exposes both
+            columns (e.g. /api/v1/demand_tags).
+        timeout_rate:
+          "$ref": "#/components/schemas/QuickstatsMetricValue"
+          description: Percentage of ad requests that timed out (timeouts / ad_requests
+            * 100). Paired with `timeouts`; same endpoint scoping applies.
+    MetricWithChange:
+      type: object
+      description: A metric value with percentage change from comparison period
+      properties:
+        value:
+          type: number
+          description: The raw numeric value of the metric
+        pct_change:
+          type: number
+          description: Percentage change compared to previous period (0.15 = 15% increase,
+            -0.05 = 5% decrease)
+    QuickstatsSummaryResponse:
+      type: object
+      properties:
+        summary:
+          type: object
+          properties:
+            ad_requests:
+              "$ref": "#/components/schemas/MetricWithChange"
+            usable_requests:
+              "$ref": "#/components/schemas/MetricWithChange"
+            has_ads:
+              "$ref": "#/components/schemas/MetricWithChange"
+            opportunities:
+              "$ref": "#/components/schemas/MetricWithChange"
+            missed_opportunities:
+              "$ref": "#/components/schemas/MetricWithChange"
+            impressions:
+              "$ref": "#/components/schemas/MetricWithChange"
+            clicks:
+              "$ref": "#/components/schemas/MetricWithChange"
+            fourth_quartile:
+              "$ref": "#/components/schemas/MetricWithChange"
+            ad_percentage:
+              "$ref": "#/components/schemas/MetricWithChange"
+            use_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            opportunity_percentage:
+              "$ref": "#/components/schemas/MetricWithChange"
+            fill_percentage:
+              "$ref": "#/components/schemas/MetricWithChange"
+            click_through_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            efficiency_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            opportunity_fill_percentage:
+              "$ref": "#/components/schemas/MetricWithChange"
+            score:
+              "$ref": "#/components/schemas/MetricWithChange"
+            timeouts:
+              "$ref": "#/components/schemas/MetricWithChange"
+            response_time:
+              "$ref": "#/components/schemas/MetricWithChange"
+            revenue:
+              "$ref": "#/components/schemas/MetricWithChange"
+            cost:
+              "$ref": "#/components/schemas/MetricWithChange"
+            player_starts:
+              "$ref": "#/components/schemas/MetricWithChange"
+            cpm:
+              "$ref": "#/components/schemas/MetricWithChange"
+            rpm:
+              "$ref": "#/components/schemas/MetricWithChange"
+            rpmr:
+              "$ref": "#/components/schemas/MetricWithChange"
+            ppm:
+              "$ref": "#/components/schemas/MetricWithChange"
+            profit:
+              "$ref": "#/components/schemas/MetricWithChange"
+            margin:
+              "$ref": "#/components/schemas/MetricWithChange"
+            player_fill_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            completion_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            timeout_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            first_quartile_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            second_quartile_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            third_quartile_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            openrtb_wins:
+              "$ref": "#/components/schemas/MetricWithChange"
+            openrtb_bids:
+              "$ref": "#/components/schemas/MetricWithChange"
+            openrtb_bid_requests:
+              "$ref": "#/components/schemas/MetricWithChange"
+            openrtb_bid_fill_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            openrtb_bid_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            openrtb_win_fill_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+            openrtb_win_rate:
+              "$ref": "#/components/schemas/MetricWithChange"
+  responses:
+    QuickstatsSummaryResponse:
+      description: Creative report with comparison metrics
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/QuickstatsSummaryResponse"
+          examples:
+            default:
+              "$ref": "#/components/examples/QuickstatsSummaryResponseExample"
+  examples:
+    QuickstatsSummaryResponseExample:
+      value:
+        summary:
+          ad_requests:
+            value: 2386
+            pct_change: 0.0061864017239271095
+          usable_requests:
+            value: 2386
+            pct_change: 0.0061864017239271095
+          has_ads:
+            value: 1090
+            pct_change: -0.030747533741545697
+          opportunities:
+            value: 1972
+            pct_change: -0.014946636282532498
+          missed_opportunities:
+            value: 0
+            pct_change: 0
+          impressions:
+            value: 2557
+            pct_change: -0.013727585156156467
+          clicks:
+            value: 0
+            pct_change: 0
+          fourth_quartile:
+            value: 96
+            pct_change: 0.09661648123186582
+          ad_percentage:
+            value: 0.45683151718357085
+            pct_change: -0.03670685213216243
+          use_rate:
+            value: 1.8091743119266055
+            pct_change: 0.016302148314368915
+          opportunity_percentage:
+            value: 0.826487845766974
+            pct_change: -0.02100310436540564
+          fill_percentage:
+            value: 1.0716680637049456
+            pct_change: -0.01979154841087543
+          click_through_rate:
+            value: 0
+            pct_change: 0
+          efficiency_rate:
+            value: 2.3458715596330277
+            pct_change: 0.01755987132133937
+          opportunity_fill_percentage:
+            value: 1.2966531440162272
+            pct_change: 0.0012375483108604782
+          score:
+            value: 107166.81
+            pct_change: -0.01979152594291286
+          timeouts:
+            value: 238
+            pct_change: -0.0259793409399708
+          response_time:
+            value: 45.53954634337114
+            pct_change: 0
+          revenue:
+            value: 255.7
+            pct_change: -0.013727585156156684
+          cost:
+            value: 0
+            pct_change: 0
+          player_starts:
+            value: 0
+            pct_change: 0
+          cpm:
+            value: 0
+            pct_change: 0
+          rpm:
+            value: 100
+            pct_change: 0
+          rpmr:
+            value: 107.16680637049456
+            pct_change: -0.019791548410875364
+          ppm:
+            value: 100
+            pct_change: 0
+          profit:
+            value: 255.7
+            pct_change: -0.013727585156156684
+          margin:
+            value: 1
+            pct_change: 0
+          player_fill_rate:
+            value: 0
+            pct_change: 0
+          completion_rate:
+            value: 0.03754399687133359
+            pct_change: 0.11187990734334108
+          timeout_rate:
+            value: 0.0997485331098072
+            pct_change: -0.0319679759225403
+          first_quartile_rate:
+            value: 0.2639812280015643
+            pct_change: 0.009119729736476328
+          second_quartile_rate:
+            value: 0.19632381697301526
+            pct_change: -0.0035919270390279835
+          third_quartile_rate:
+            value: 0.13375048885412594
+            pct_change: 0.018241715993981295
+          openrtb_wins:
+            value: 0
+            pct_change: 0
+          openrtb_bids:
+            value: 0
+            pct_change: 0
+          openrtb_bid_requests:
+            value: 0
+            pct_change: 0
+          openrtb_bid_fill_rate:
+            value: 0
+            pct_change: 0
+          openrtb_bid_rate:
+            value: 0
+            pct_change: 0
+          openrtb_win_fill_rate:
+            value: 0
+            pct_change: 0
+          openrtb_win_rate:
+            value: 0
+            pct_change: 0
+info:
+  title: SubDocIgnored
+  version: SubDocIgnored
+paths: {}
+tags: []

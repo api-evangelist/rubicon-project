@@ -1,0 +1,68 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enrichment overlay — SpringServe UI API
+  version: 1.0.0
+extends: rubicon-project-springserve-v1-openapi.yml
+x-generated: '2026-08-12'
+x-method: generated
+x-source: openapi/rubicon-project-springserve-v1-openapi.yml + https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+x-note: Captures API Evangelist enrichment of the Magnite-published contract. The upstream document declares
+  no servers[] block (the host is implied by whichever console serves the Swagger UI) and documents its
+  rate limits only in prose on the Confluence docs site. This overlay adds the documented hosts, the published
+  rate-limit caps as x-rateLimits, and cross-links to the derived artifacts in this repo. The original
+  specification in openapi/_original/ is never mutated.
+actions:
+- target: $.servers
+  description: Add the API hosts Magnite documents for this contract. The upstream document has no servers[]
+    block.
+  update:
+  - url: https://console.springserve.com/api/v1
+    description: SpringServe console (primary host documented at springserve.atlassian.net SSD space)
+  - url: https://console.clearline.magnite.com/api/v1
+    description: ClearLine console — same contract, documented at springserve.atlassian.net CLD space
+- target: $.info
+  description: Record the published rate limits, contact and documentation links that the upstream info
+    block omits.
+  update:
+    contact:
+      name: SpringServe Support
+      email: support@springserve.com
+      url: https://help.magnite.com/help
+    x-documentation: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+    x-apiReference: https://console.springserve.com/api-docs
+    x-rateLimits:
+    - scope: per-account
+      limit: 240
+      window: 1m
+      endpoints: all
+    - scope: per-account
+      limit: 10
+      window: 1m
+      endpoints: reporting
+    - scope: per-account-per-domain-or-app-bundle
+      limit: 3
+      window: 1m
+      endpoints: reporting
+    x-rateLimitHeaders: null
+    x-tokenLifetime: 2h
+    x-apiEvangelistArtifacts:
+      authentication: authentication/rubicon-project-authentication.yml
+      conventions: conventions/rubicon-project-conventions.yml
+      errors: errors/rubicon-project-problem-types.yml
+      lifecycle: lifecycle/rubicon-project-lifecycle.yml
+      rateLimits: rate-limits/rubicon-project-rate-limits.yml
+      conformance: conformance/rubicon-project-conformance.yml
+      dataModel: data-model/rubicon-project-data-model.yml
+- target: $.paths[*][*]
+  description: 'Note for consumers: no operation in this document declares a 429 response, although three
+    numeric rate-limit caps are published. Clients must self-throttle; the status returned on exhaustion
+    is undocumented.'
+  update:
+    x-rateLimitNote: No 429 declared upstream; self-throttle to the documented caps.
+- target: $.components.responses
+  description: Note that the notFoundError/validationError responses resolve through an external relative
+    $ref (ref/errors.yaml), archived alongside the spec at openapi/ref/errors.yaml.
+  update:
+    x-externalRefNote: ref/errors.yaml is served from https://console.springserve.com/api-docs/swagger/v1/ref/errors.yaml
+      and archived at openapi/ref/errors.yaml
+x-tagCount: 54

@@ -1,0 +1,37 @@
+---
+openapi: 3.1.2
+components:
+  responses:
+    notFoundError:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/notFoundError"
+    validationError:
+      description: Validation Error
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/validationError"
+  schemas:
+    notFoundError:
+      type: object
+      properties:
+        error:
+          type: string
+          examples:
+          - Object not found
+    validationError:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+info:
+  title: SubDocIgnored
+  version: SubDocIgnored
+tags: []
