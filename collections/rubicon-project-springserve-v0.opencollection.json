@@ -1,0 +1,5791 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SpringServe UI API (V0)",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/accounts"
+          },
+          "docs": "List all Accounts accessible to the current user"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a single account by id"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the account. Only tier flags are updatable via v0 (tier_a_active, tier_b_active, tier_c_active, tier_e_active, tier_f_active)."
+        },
+        {
+          "info": {
+            "name": "Get Current",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/accounts/current"
+          },
+          "docs": "Get the currently active account for the authenticated user"
+        },
+        {
+          "info": {
+            "name": "Set Current",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/accounts/:id/set_current",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Set the active account for the authenticated user to the specified account id"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Advertiser Domain Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists"
+          },
+          "docs": "List all advertiser domain lists. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating an advertiser domain list"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a domain list by ID"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an advertiser domain list"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an advertiser domain list"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:advertiser_domain_list_id/advertiser_domains",
+            "params": [
+              {
+                "name": "advertiser_domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get domains in advertiser domain list"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:advertiser_domain_list_id/advertiser_domains/bulk_create",
+            "params": [
+              {
+                "name": "advertiser_domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add advertiser domains"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:advertiser_domain_list_id/advertiser_domains/bulk_delete",
+            "params": [
+              {
+                "name": "advertiser_domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove domains"
+        },
+        {
+          "info": {
+            "name": "Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:advertiser_domain_list_id/advertiser_domains/bulk_replace",
+            "params": [
+              {
+                "name": "advertiser_domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace advertiser domains"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:advertiser_domain_list_id/advertiser_domains/file_bulk_create",
+            "params": [
+              {
+                "name": "advertiser_domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Append advertiser domains to an advertiser domain list from a file"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:advertiser_domain_list_id/advertiser_domains/file_bulk_delete",
+            "params": [
+              {
+                "name": "advertiser_domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove domains in a file from an advertiser domain list"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/advertiser_domain_lists/:advertiser_domain_list_id/advertiser_domains/file_bulk_replace",
+            "params": [
+              {
+                "name": "advertiser_domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace all domains with a file"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "App Bundle Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists"
+          },
+          "docs": "List all app bundle lists. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating an App Bundle List"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an App Bundle List"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an app bundle list"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an app bundle list"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:app_bundle_list_id/app_bundles",
+            "params": [
+              {
+                "name": "app_bundle_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get App Bundles in App Bundle List"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:app_bundle_list_id/app_bundles/bulk_create",
+            "params": [
+              {
+                "name": "app_bundle_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add App Bundles"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:app_bundle_list_id/app_bundles/bulk_delete",
+            "params": [
+              {
+                "name": "app_bundle_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove App Bundles"
+        },
+        {
+          "info": {
+            "name": "Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:app_bundle_list_id/app_bundles/bulk_replace",
+            "params": [
+              {
+                "name": "app_bundle_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace Entire App Bundle List"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:app_bundle_list_id/app_bundles/file_bulk_create",
+            "params": [
+              {
+                "name": "app_bundle_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add App Bundles from a File"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:app_bundle_list_id/app_bundles/file_bulk_delete",
+            "params": [
+              {
+                "name": "app_bundle_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove App Bundles Using a File"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_bundle_lists/:app_bundle_list_id/app_bundles/file_bulk_replace",
+            "params": [
+              {
+                "name": "app_bundle_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace Entire App Bundles with a File"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "App Name Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists"
+          },
+          "docs": "List all app name lists. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating an App Name List"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an App Name List"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an app name list"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an app name list"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:app_name_list_id/app_names",
+            "params": [
+              {
+                "name": "app_name_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get App Names in App Name List"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:app_name_list_id/app_names/bulk_create",
+            "params": [
+              {
+                "name": "app_name_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add App Names"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:app_name_list_id/app_names/bulk_delete",
+            "params": [
+              {
+                "name": "app_name_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove App Names"
+        },
+        {
+          "info": {
+            "name": "Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:app_name_list_id/app_names/bulk_replace",
+            "params": [
+              {
+                "name": "app_name_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace Entire App Name List"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:app_name_list_id/app_names/file_bulk_create",
+            "params": [
+              {
+                "name": "app_name_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add App Names from a File"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:app_name_list_id/app_names/file_bulk_delete",
+            "params": [
+              {
+                "name": "app_name_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove App Names using a file"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/app_name_lists/:app_name_list_id/app_names/file_bulk_replace",
+            "params": [
+              {
+                "name": "app_name_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace Entire App Name List with a File"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Audios",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/audios"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/audios",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/audios/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/audios/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/audios/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticate and get a SpringServe API token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/auth",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "The returned API token should be used as the contents of the HTTP `Authorization` header in other authenticated API requests."
+        },
+        {
+          "info": {
+            "name": "Authenticate and get user and account info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/auth0/login",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "email",
+                  "value": ""
+                },
+                {
+                  "name": "password",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Authenticate the user, and if valid, return basic info about the user, along with accounts they can access"
+        },
+        {
+          "info": {
+            "name": "Retrieve basic info about a user by email address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/auth0/users/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "If a user can be found with the provided email address, return the platform_type and role from their active user_account. Token based authentication (Authorization header) is required."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bid Maps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index (alias)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/bid_maps"
+          },
+          "docs": "Alias for /api/v0/hb_bid_maps"
+        },
+        {
+          "info": {
+            "name": "Create (alias)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/bid_maps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create (alias)"
+        },
+        {
+          "info": {
+            "name": "Show (alias)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/bid_maps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show (alias)"
+        },
+        {
+          "info": {
+            "name": "Update (alias)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/bid_maps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update (alias)"
+        },
+        {
+          "info": {
+            "name": "Update (alias)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://console.springserve.com/api/v0/api/v0/bid_maps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update (alias)"
+        },
+        {
+          "info": {
+            "name": "Destroy (alias)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/bid_maps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy (alias)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bills",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/bills"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/bills",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/bills/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/bills/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/bills/:bill_id/bill_items",
+            "params": [
+              {
+                "name": "bill_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List bill items for a bill"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/bills/:bill_id/bill_items",
+            "params": [
+              {
+                "name": "bill_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/bills/:bill_id/bill_items/:id",
+            "params": [
+              {
+                "name": "bill_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/bills/:bill_id/bill_items/:id",
+            "params": [
+              {
+                "name": "bill_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/campaigns"
+          },
+          "docs": "List all campaigns. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/campaigns",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a Campaign"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/campaigns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Campaign"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/campaigns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add Demand Tags to your Campaign or Edit a Campaign"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/campaigns/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a campaign"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "City Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/city_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/city_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/city_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/city_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/city_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connected Demand",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_demand"
+          },
+          "docs": "Selling strategies (path alias: connected_demand)"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_demand/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_demand/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_demand/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        },
+        {
+          "info": {
+            "name": "Duplicate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_demand/:id/duplicate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Duplicate the selling strategy (connected demand)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Connected Supply",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_supply"
+          },
+          "docs": "Buying strategies (path alias: connected_supply)"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_supply",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_supply/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_supply/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Duplicate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/connected_supply/:id/duplicate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Duplicate the buying strategy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Country Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/country_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/country_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/country_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/country_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/country_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Creatives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/creatives"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/creatives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deal Id Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:deal_id_list_id/deal_ids",
+            "params": [
+              {
+                "name": "deal_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:deal_id_list_id/deal_ids/bulk_create",
+            "params": [
+              {
+                "name": "deal_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Create"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:deal_id_list_id/deal_ids/bulk_delete",
+            "params": [
+              {
+                "name": "deal_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Delete"
+        },
+        {
+          "info": {
+            "name": "Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:deal_id_list_id/deal_ids/bulk_replace",
+            "params": [
+              {
+                "name": "deal_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Replace"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:deal_id_list_id/deal_ids/file_bulk_create",
+            "params": [
+              {
+                "name": "deal_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Append deal IDs to a list from a CSV file"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:deal_id_list_id/deal_ids/file_bulk_delete",
+            "params": [
+              {
+                "name": "deal_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove deal IDs specified in a CSV file from the list"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_id_lists/:deal_id_list_id/deal_ids/file_bulk_replace",
+            "params": [
+              {
+                "name": "deal_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace all deal IDs in a list with contents of a CSV file"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deal Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists"
+          },
+          "docs": "Retrieve a list of all deal lists. Available for ClearLine account types."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a deal list with optional deals. Available for ClearLine account types."
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show details for a specific deal list"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a deal list (name, description, status)"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently delete a deal list. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "List deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists/:id/deals",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve all deals in a deal list"
+        },
+        {
+          "info": {
+            "name": "Bulk create deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists/:id/deals/bulk_create",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add deals to a deal list"
+        },
+        {
+          "info": {
+            "name": "Bulk delete deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists/:id/deals/bulk_delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Remove deals from a deal list"
+        },
+        {
+          "info": {
+            "name": "Bulk replace deals",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/deal_lists/:id/deals/bulk_replace",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace all deals in a deal list"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Demand Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_labels"
+          },
+          "docs": "List all demand labels. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_labels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a Demand Label"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Demand Label"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a Demand Label"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a demand label"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Demand Partners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_partners"
+          },
+          "docs": "List all demand partners. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_partners",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a Demand Partner"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Demand Partner"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a Demand Partner"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a demand partner"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Demand Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags"
+          },
+          "docs": "Get demand tags based on multiple conditions"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a Demand Tag"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a demand tag by id"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a Demand Tag (e.g. name, or budgets). See Clearline Demand Tag Budgets API docs for budget fields."
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a demand tag"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:demand_tag_id/demand_tag_keys",
+            "params": [
+              {
+                "name": "demand_tag_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List demand tag keys for a demand tag"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:demand_tag_id/demand_tag_keys",
+            "params": [
+              {
+                "name": "demand_tag_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Duplicate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:id/duplicate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Duplicate a Demand Tag"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:demand_tag_id/demand_tag_keys/:id",
+            "params": [
+              {
+                "name": "demand_tag_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:demand_tag_id/demand_tag_keys/:id",
+            "params": [
+              {
+                "name": "demand_tag_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/demand_tags/:demand_tag_id/demand_tag_keys/:id",
+            "params": [
+              {
+                "name": "demand_tag_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Direct Connection Clearing Terms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/direct_connection_clearing_terms"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/direct_connection_clearing_terms/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Direct Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/direct_connections"
+          },
+          "docs": "List direct connections"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/direct_connections/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Domain Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists"
+          },
+          "docs": "List all domain lists. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a domain list"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a domain list by ID"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a domain list"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a domain list"
+        },
+        {
+          "info": {
+            "name": "Index domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:domain_list_id/domains",
+            "params": [
+              {
+                "name": "domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get domains in domain list"
+        },
+        {
+          "info": {
+            "name": "Bulk create domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:domain_list_id/domains/bulk_create",
+            "params": [
+              {
+                "name": "domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add domains"
+        },
+        {
+          "info": {
+            "name": "Bulk delete domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:domain_list_id/domains/bulk_delete",
+            "params": [
+              {
+                "name": "domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove domains"
+        },
+        {
+          "info": {
+            "name": "Bulk replace domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:domain_list_id/domains/bulk_replace",
+            "params": [
+              {
+                "name": "domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace domains in the list"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:domain_list_id/domains/file_bulk_create",
+            "params": [
+              {
+                "name": "domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Append domains to a domain list from a CSV file"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:domain_list_id/domains/file_bulk_delete",
+            "params": [
+              {
+                "name": "domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove domains in a file from a domain list"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/domain_lists/:domain_list_id/domains/file_bulk_replace",
+            "params": [
+              {
+                "name": "domain_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace all domains in a domain list with contents of a CSV file"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Forecast",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Forecast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/forecast"
+          },
+          "docs": "Create a forecast"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Global Fcap Pixels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/global_fcap_pixels"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/global_fcap_pixels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/global_fcap_pixels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/global_fcap_pixels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/global_fcap_pixels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Hb Bid Maps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/hb_bid_maps"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/hb_bid_maps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/hb_bid_maps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/hb_bid_maps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://console.springserve.com/api/v0/api/v0/hb_bid_maps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/hb_bid_maps/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ip Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists"
+          },
+          "docs": "List all IP address lists. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating an IP Address List"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an IP Address List"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an IP address list"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an IP address list"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:ip_list_id/ips",
+            "params": [
+              {
+                "name": "ip_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get IP Addresses in an IP Address List"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:ip_list_id/ips/bulk_create",
+            "params": [
+              {
+                "name": "ip_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add IPs to an Address list"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:ip_list_id/ips/bulk_delete",
+            "params": [
+              {
+                "name": "ip_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove specific IP Addresses"
+        },
+        {
+          "info": {
+            "name": "Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:ip_list_id/ips/bulk_replace",
+            "params": [
+              {
+                "name": "ip_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace Entire IP Address List"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:ip_list_id/ips/file_bulk_create",
+            "params": [
+              {
+                "name": "ip_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add IPs to an Address list from a File"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:ip_list_id/ips/file_bulk_delete",
+            "params": [
+              {
+                "name": "ip_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove IP Addresses using a File"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/ip_lists/:ip_list_id/ips/file_bulk_replace",
+            "params": [
+              {
+                "name": "ip_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace Entire IP List with File"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:key_id/values",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:key_id/values",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:key_id/values/:value_id",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "value_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:key_id/values/:value_id",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "value_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:key_id/values/:value_id",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "value_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/keys/:key_id/values/:value_id",
+            "params": [
+              {
+                "name": "key_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "value_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metro Area Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/metro_area_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/metro_area_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/metro_area_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/metro_area_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/metro_area_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Parameter Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:parameter_list_id/values",
+            "params": [
+              {
+                "name": "parameter_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:parameter_list_id/values/bulk_create",
+            "params": [
+              {
+                "name": "parameter_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Create"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:parameter_list_id/values/bulk_delete",
+            "params": [
+              {
+                "name": "parameter_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Bulk Delete"
+        },
+        {
+          "info": {
+            "name": "Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:parameter_list_id/values/bulk_replace",
+            "params": [
+              {
+                "name": "parameter_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Replace"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:parameter_list_id/values/file_bulk_create",
+            "params": [
+              {
+                "name": "parameter_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Append parameter list values from a CSV file"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:parameter_list_id/values/file_bulk_delete",
+            "params": [
+              {
+                "name": "parameter_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove parameter list values specified in a CSV file"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/parameter_lists/:parameter_list_id/values/file_bulk_replace",
+            "params": [
+              {
+                "name": "parameter_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace all parameter list values with contents of a CSV file"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Partner Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/partner_segments"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/partner_segments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/partner_segments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/partner_segments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/partner_segments/bulk_create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Create"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Postal Code Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/postal_code_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/postal_code_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/postal_code_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/postal_code_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/postal_code_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Publisher Id Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:publisher_id_list_id/publisher_ids",
+            "params": [
+              {
+                "name": "publisher_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:publisher_id_list_id/publisher_ids/bulk_create",
+            "params": [
+              {
+                "name": "publisher_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Create"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:publisher_id_list_id/publisher_ids/bulk_delete",
+            "params": [
+              {
+                "name": "publisher_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Bulk Delete"
+        },
+        {
+          "info": {
+            "name": "Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:publisher_id_list_id/publisher_ids/bulk_replace",
+            "params": [
+              {
+                "name": "publisher_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Replace"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:publisher_id_list_id/publisher_ids/file_bulk_create",
+            "params": [
+              {
+                "name": "publisher_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Append publisher IDs from a CSV file"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:publisher_id_list_id/publisher_ids/file_bulk_delete",
+            "params": [
+              {
+                "name": "publisher_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove publisher IDs listed in a CSV file"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/publisher_id_lists/:publisher_id_list_id/publisher_ids/file_bulk_replace",
+            "params": [
+              {
+                "name": "publisher_id_list_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace publisher IDs using a CSV file"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Report",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/report",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Delivery report. Available for ClearLine account types."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a report. For Reach & Frequency reports (ClearLine), include interval, timezone, cadences, and async\nexactly as shown. Reports may return QUEUED or BUILDING status; repeat the POST until status is COMPLETE.\nAvailable for ClearLine account types.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments"
+          },
+          "docs": "List all segments. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a Segment"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a segment"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a segment"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a segment"
+        },
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:segment_id/items",
+            "params": [
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Device IDs or Cookies in a Segment"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:segment_id/items/bulk_create",
+            "params": [
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add elements to a Segment"
+        },
+        {
+          "info": {
+            "name": "Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:segment_id/items/bulk_delete",
+            "params": [
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove specific Device Ids or Cookies"
+        },
+        {
+          "info": {
+            "name": "Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:segment_id/items/bulk_replace",
+            "params": [
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace Entire Segment"
+        },
+        {
+          "info": {
+            "name": "File Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:segment_id/items/file_bulk_create",
+            "params": [
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Add Items to a Segment using a File"
+        },
+        {
+          "info": {
+            "name": "File Bulk Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:segment_id/items/file_bulk_delete",
+            "params": [
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Remove specific items using a File"
+        },
+        {
+          "info": {
+            "name": "File Bulk Replace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/segments/:segment_id/items/file_bulk_replace",
+            "params": [
+              {
+                "name": "segment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "csv_file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Replace Entire Segment with a File"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "State Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/state_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/state_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/state_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/state_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/state_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Supply Labels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_labels"
+          },
+          "docs": "List all supply labels. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_labels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a Supply Label"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Supply Label"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a Supply Label"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_labels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a supply label"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Supply Partners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_partners"
+          },
+          "docs": "List all supply partners. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_partners",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a Supply Partner"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Supply Partner"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a Supply Partner"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_partners/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a supply partner"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Supply Routers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_routers"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_routers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_routers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_routers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_routers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Supply Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_tags"
+          },
+          "docs": "List all supply tags. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a supply tag"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a supply tag by id"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a supply tag (e.g. Adding Pods, Content Targeting)"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a supply tag"
+        },
+        {
+          "info": {
+            "name": "Duplicate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/supply_tags/:id/duplicate",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Duplicate a Supply Tag"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tag Creatives",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/tag_creatives"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/tag_creatives",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/tag_creatives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/tag_creatives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/tag_creatives/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/tiles"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/tiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/tiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/tiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/tiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/users"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Value Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/value_lists"
+          },
+          "docs": "Index"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/value_lists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/value_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Show"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/value_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/value_lists/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Videos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/videos"
+          },
+          "docs": "List video creatives. Supports pagination via page, per, and ids params."
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/videos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a video creative (from Clearline Demand Tag, Video Creative API docs)"
+        },
+        {
+          "info": {
+            "name": "Show",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://console.springserve.com/api/v0/api/v0/videos/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Video Creative"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/videos/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a video creative"
+        },
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/videos/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a video creative"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "First Party Partner Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Destroy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://console.springserve.com/api/v0/api/v0/first_party_partner_segments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Destroy"
+        },
+        {
+          "info": {
+            "name": "Bulk Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/first_party_partner_segments/bulk_create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk Create"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Operative",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Operative Advertiser",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/operative/advertisers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an advertiser in Operative integration"
+        },
+        {
+          "info": {
+            "name": "Create Operative Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://console.springserve.com/api/v0/api/v0/operative/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an order in Operative integration"
+        },
+        {
+          "info": {
+            "name": "Update Operative Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://console.springserve.com/api/v0/api/v0/operative/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an order in Operative integration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

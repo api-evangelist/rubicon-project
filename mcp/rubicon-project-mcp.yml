@@ -3,137 +3,205 @@ method: derived
 source: openapi/rubicon-project-springserve-v1-openapi.yml
 status: candidate
 official_server: none
-search_result: >-
-  No official or community MCP server for Magnite, SpringServe, ClearLine or Rubicon Project
-  was found. Probed for a hosted endpoint and for MCP discovery documents on every host in
-  this profile: /.well-known/oauth-authorization-server and /.well-known/oauth-protected-
-  resource return 403 (console.springserve.com, console.clearline.magnite.com), 404
-  (www.magnite.com, help.magnite.com) or 401 (api.magnite.com). No /mcp endpoint is
-  advertised in the OpenAPI, the Confluence documentation spaces, or www.magnite.com/llms.txt
-  (97 published URLs, none developer-facing). The Magnite/SpringServe GitHub organizations
-  publish no MCP server repository.
-note: >-
-  This is a DERIVED CANDIDATE tool surface, not a server Magnite operates. It maps what an
-  MCP server over the published SpringServe v1 OpenAPI would expose, so the shape of the
-  opportunity is legible. Every operationId below is real and was grepped out of
-  openapi/rubicon-project-springserve-v1-openapi.yml. No tool_crosswalk artifact is emitted
-  because there is no MCP server and no GraphQL surface to bind operations to.
+search_result: 'No official or community MCP server for Magnite, SpringServe, ClearLine or Rubicon Project
+  was found. Probed for a hosted endpoint and for MCP discovery documents on every host in this profile:
+  /.well-known/oauth-authorization-server and /.well-known/oauth-protected- resource return 403 (console.springserve.com,
+  console.clearline.magnite.com), 404 (www.magnite.com, help.magnite.com) or 401 (api.magnite.com). No
+  /mcp endpoint is advertised in the OpenAPI, the Confluence documentation spaces, or www.magnite.com/llms.txt
+  (97 published URLs, none developer-facing). The Magnite/SpringServe GitHub organizations publish no
+  MCP server repository.'
+note: This is a DERIVED CANDIDATE tool surface, not a server Magnite operates. It maps what an MCP server
+  over the published SpringServe v1 OpenAPI would expose, so the shape of the opportunity is legible.
+  Every operationId below is real and was grepped out of openapi/rubicon-project-springserve-v1-openapi.yml.
+  No tool_crosswalk artifact is emitted because there is no MCP server and no GraphQL surface to bind
+  operations to.
 backing_api: rubicon-project-springserve-v1-api
 backing_spec: openapi/rubicon-project-springserve-v1-openapi.yml
 surface_size:
   operations_v1: 379
   operations_v0: 289
-  note: >-
-    668 operations is far too many to expose one-to-one as MCP tools. The candidate set
-    below is a curated read-and-report surface plus the small number of write flows that
-    carry real operational value, which is how this API would sensibly be adapted.
+  note: 668 operations is far too many to expose one-to-one as MCP tools. The candidate set below is a
+    curated read-and-report surface plus the small number of write flows that carry real operational value,
+    which is how this API would sensibly be adapted.
 auth:
   scheme: bearer or opaque token in Authorization header
   obtain: POST /api/v1/auth with email + password (application/x-www-form-urlencoded)
   ttl: 2h
   account_context_header: x-auth-context
-  note: >-
-    An MCP server would have to re-authenticate every two hours and would hold a human
-    user's console password. There is no OAuth flow and no scoped credential, so an MCP
-    tool would run with the full rights of that user — a material design constraint for
-    anyone building this.
+  note: An MCP server would have to re-authenticate every two hours and would hold a human user's console
+    password. There is no OAuth flow and no scoped credential, so an MCP tool would run with the full
+    rights of that user — a material design constraint for anyone building this.
 candidate_tools:
 - name: springserve_authenticate
   category: auth
-  rest: [auth_post]
+  rest:
+  - auth_post
   description: Exchange console email and password for an API token and bearer token.
   note: Would normally be internal to the server rather than an exposed tool.
 - name: springserve_get_current_account
   category: account
-  rest: [accounts_current_get, accounts_displayable_get]
+  rest:
+  - accounts_current_get
+  - accounts_displayable_get
   description: Read the active account context and the accounts this user may switch to.
 - name: springserve_set_current_account
   category: account
-  rest: [accounts_id_set_current_post, accounts_dvplus_dvplus_id_set_current_post]
+  rest:
+  - accounts_id_set_current_post
+  - accounts_dvplus_dvplus_id_set_current_post
   description: Switch the active account context for subsequent calls.
 - name: springserve_list_supply_tags
   category: supply
-  rest: [supply_tags_get, supply_tags_id_get]
+  rest:
+  - supply_tags_get
+  - supply_tags_id_get
   description: List and read publisher supply tags, with filter/sort/includes support.
 - name: springserve_list_demand_tags
   category: demand
-  rest: [demand_tags_get, demand_tags_id_get]
+  rest:
+  - demand_tags_get
+  - demand_tags_id_get
   description: List and read demand tags, with filter/sort/includes support.
 - name: springserve_update_demand_tag
   category: demand
-  rest: [demand_tags_id_patch, demand_tags_bulk_update_same_attributes_post, demand_tags_bulk_update_many_post]
+  rest:
+  - demand_tags_id_patch
+  - demand_tags_bulk_update_same_attributes_post
+  - demand_tags_bulk_update_many_post
   description: Update one demand tag, or apply the same attributes across many.
   write: true
 - name: springserve_get_demand_tag_priorities
   category: supply
-  rest: [supply_tags_id_demand_tag_priorities_get]
+  rest:
+  - supply_tags_id_demand_tag_priorities_get
   description: Read the demand tag waterfall priority order on a supply tag.
 - name: springserve_run_report
   category: reporting
-  rest: [reports_post, report_post, reports_id_get, reports_download_id_get]
-  description: >-
-    Submit a report (dimensions, metrics, date_range, interval, currency), poll for it by
-    id, and download the result. Supports async and csv flags.
-  note: >-
-    The single highest-value tool on this surface, and the one most constrained by rate
-    limits — 10 requests/minute to reporting, 3/minute when broken out by domain or app
-    bundle.
+  rest:
+  - reports_post
+  - report_post
+  - reports_id_get
+  - reports_download_id_get
+  description: Submit a report (dimensions, metrics, date_range, interval, currency), poll for it by id,
+    and download the result. Supports async and csv flags.
+  note: The single highest-value tool on this surface, and the one most constrained by rate limits — 10
+    requests/minute to reporting, 3/minute when broken out by domain or app bundle.
 - name: springserve_manage_report_templates
   category: reporting
-  rest: [reports_templates_get, reports_templates_post, reports_templates_id_get, reports_templates_id_patch, reports_templates_id_delete, reports_templates_id_set_default_post]
+  rest:
+  - reports_templates_get
+  - reports_templates_post
+  - reports_templates_id_get
+  - reports_templates_id_patch
+  - reports_templates_id_delete
+  - reports_templates_id_set_default_post
   description: Create, read, update and delete saved report templates.
   write: true
 - name: springserve_manage_scheduled_reports
   category: reporting
-  rest: [scheduled_reports_get, scheduled_reports_post, scheduled_reports_id_get, scheduled_reports_id_patch, scheduled_reports_id_delete, scheduled_reports_bulk_update_same_attributes_put]
+  rest:
+  - scheduled_reports_get
+  - scheduled_reports_post
+  - scheduled_reports_id_get
+  - scheduled_reports_id_patch
+  - scheduled_reports_id_delete
+  - scheduled_reports_bulk_update_same_attributes_put
   description: Schedule recurring report delivery to internal and external recipients.
   write: true
 - name: springserve_read_dashboards
   category: reporting
-  rest: [dashboards_account_summary_get, dashboards_day_performance_get, dashboards_hour_performance_get, dashboards_supply_tags_get, dashboards_demand_tags_get, dashboards_supply_partners_get, dashboards_demand_partners_get, dashboards_deals_get, dashboards_publishers_get, dashboards_quality_report_get]
-  description: >-
-    Read the pre-computed dashboard aggregates (account summary, day/hour performance, top
-    10 supply tags, demand tags, partners, deals, publishers, quality report). 27 dashboard
-    operations exist in total.
+  rest:
+  - dashboards_account_summary_get
+  - dashboards_day_performance_get
+  - dashboards_hour_performance_get
+  - dashboards_supply_tags_get
+  - dashboards_demand_tags_get
+  - dashboards_supply_partners_get
+  - dashboards_demand_partners_get
+  - dashboards_deals_get
+  - dashboards_publishers_get
+  - dashboards_quality_report_get
+  description: Read the pre-computed dashboard aggregates (account summary, day/hour performance, top
+    10 supply tags, demand tags, partners, deals, publishers, quality report). 27 dashboard operations
+    exist in total.
   note: Cheaper than a report submission for common "how are we doing" questions.
 - name: springserve_manage_domain_lists
   category: targeting
-  rest: [domain_lists_get, domain_lists_post, domain_lists_id_get, domain_lists_id_patch, domain_lists_id_delete, domain_lists_id_domains_get, domain_lists_id_domains_bulk_create_post, domain_lists_id_domains_bulk_delete_delete, domain_lists_id_domains_bulk_replace_post]
+  rest:
+  - domain_lists_get
+  - domain_lists_post
+  - domain_lists_id_get
+  - domain_lists_id_patch
+  - domain_lists_id_delete
+  - domain_lists_id_domains_get
+  - domain_lists_id_domains_bulk_create_post
+  - domain_lists_id_domains_bulk_delete_delete
+  - domain_lists_id_domains_bulk_replace_post
   description: Manage domain block/allow lists and their members, including bulk create/replace/delete.
   write: true
 - name: springserve_manage_deal_lists
   category: targeting
-  rest: [deal_lists_get, deal_lists_post, deal_lists_deal_list_id_get, deal_lists_deal_list_id_deals_get, deal_lists_deal_list_id_deals_bulk_create_post, deal_lists_deal_list_id_deals_bulk_replace_post, deal_lists_deal_list_id_deals_bulk_delete_delete]
+  rest:
+  - deal_lists_get
+  - deal_lists_post
+  - deal_lists_deal_list_id_get
+  - deal_lists_deal_list_id_deals_get
+  - deal_lists_deal_list_id_deals_bulk_create_post
+  - deal_lists_deal_list_id_deals_bulk_replace_post
+  - deal_lists_deal_list_id_deals_bulk_delete_delete
   description: Manage deal lists and the deals inside them.
   write: true
 - name: springserve_manage_labels
   category: organization
-  rest: [supply_labels_get, supply_labels_post, supply_labels_id_patch, demand_labels_get, demand_labels_post, demand_labels_id_patch]
+  rest:
+  - supply_labels_get
+  - supply_labels_post
+  - supply_labels_id_patch
+  - demand_labels_get
+  - demand_labels_post
+  - demand_labels_id_patch
   description: Read and maintain the supply and demand label taxonomy.
   write: true
 - name: springserve_manage_video_creatives
   category: creative
-  rest: [video_creatives_get, video_creatives_post, video_creatives_id_get, video_creatives_id_patch, video_creatives_id_delete]
+  rest:
+  - video_creatives_get
+  - video_creatives_post
+  - video_creatives_id_get
+  - video_creatives_id_patch
+  - video_creatives_id_delete
   description: Manage video creatives.
   write: true
 - name: springserve_read_changelog
   category: audit
-  rest: [changelogs_get, changelogs_id_get, changelogs_versioned_type_versioned_type_get, changelogs_versioned_type_versioned_type_versioned_id_get, changelogs_user_emails_get]
-  description: >-
-    Read the account audit log — who changed which object, when, and what changed. Filterable
+  rest:
+  - changelogs_get
+  - changelogs_id_get
+  - changelogs_versioned_type_versioned_type_get
+  - changelogs_versioned_type_versioned_type_versioned_id_get
+  - changelogs_user_emails_get
+  description: Read the account audit log — who changed which object, when, and what changed. Filterable
     by time frame, user, object and change type.
 - name: springserve_check_permissions
   category: authorization
-  rest: [accounts_permissions_get, supply_tags_permissions_get, demand_tags_permissions_get, domain_lists_permissions_get, deal_lists_permissions_get]
-  description: >-
-    Ask the API what the current user is allowed to do with a collection or a specific
-    object before attempting a write. Useful as a pre-flight for any agent write.
+  rest:
+  - accounts_permissions_get
+  - supply_tags_permissions_get
+  - demand_tags_permissions_get
+  - domain_lists_permissions_get
+  - deal_lists_permissions_get
+  description: Ask the API what the current user is allowed to do with a collection or a specific object
+    before attempting a write. Useful as a pre-flight for any agent write.
 constraints:
-- Account-wide cap of 240 requests/minute; reporting capped at 10/minute and 3/minute by
-  domain or app bundle. No rate-limit response headers and no 429 declared, so a server must
-  budget requests itself rather than react to signals.
+- Account-wide cap of 240 requests/minute; reporting capped at 10/minute and 3/minute by domain or app
+  bundle. No rate-limit response headers and no 429 declared, so a server must budget requests itself
+  rather than react to signals.
 - No idempotency keys, so a write tool cannot safely retry a timed-out POST.
-- Errors carry no machine-readable code, only English strings, so tool error handling must
-  string-match.
-- Bulk endpoints report "All updates failed - no objects were updated successfully" on total
-  failure, but partial-success semantics for mixed batches are not documented.
+- Errors carry no machine-readable code, only English strings, so tool error handling must string-match.
+- Bulk endpoints report "All updates failed - no objects were updated successfully" on total failure,
+  but partial-success semantics for mixed batches are not documented.
+deployment:
+  mode: none
+  verified: derived
+  checked: '2026-08-12'
+  source: catalog MCP census
