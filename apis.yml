@@ -50,30 +50,35 @@ tags:
 - OpenRTB
 - Reporting
 apis:
-- aid: rubicon-project-springserve-v1-api
-  name: SpringServe UI API (v1)
+- aid: rubicon-project-openrtb-xapi
+  name: Magnite Exchange API (xAPI) OpenRTB Extensions
   description: >-
-    The v1 REST API for SpringServe, Magnite's ad-serving and CTV/streaming ad-server
-    platform. 379 operations across 295 paths and 53 tags, covering supply tags, demand
-    tags, supply routers, creatives (video, audio, tag, tile), deals and curated
-    marketplaces, audiences and partner segments, targeting lists (domain, app bundle, app
-    name, geo, ISP, postal code, city, state, country, metro area), header bidding
-    platforms and bid maps, dashboards, reporting, report templates and scheduled reports,
-    changelogs, notifications, permissions, users, accounts and billing. Published as
-    OpenAPI 3.1.2 and served anonymously from the SpringServe console's Swagger UI. Magnite
-    is still building v1 parity with v0, so both versions are live and documented side by
-    side.
+    Magnite's Exchange API (xAPI) protobuf extensions to the IAB OpenRTB 2.x protobuf definitions, published
+    in the open on GitHub. Defines Magnite-specific OpenRTB extension fields (extension IDs in the 5100-5299
+    range) for the AdEngine bidding endpoint, including window/iframe geometry, key-value pairs and supply-chain
+    signals used by demand partners bidding into the Magnite exchange.
+  humanURL: https://github.com/MagniteEngineering/xapi-proto
+  baseURL: https://github.com/MagniteEngineering/xapi-proto
+  tags:
+  - OpenRTB
+  - Real-Time Bidding
+  - Protobuf
+  properties:
+  - type: Protobuf
+    url: grpc/rubicon-project-openrtb-xapi.proto
+  - type: SourceCode
+    url: https://github.com/MagniteEngineering/xapi-proto
+- aid: rubicon-project:rubicon-project-account-partner-segments-api
+  name: Rubicon Project Account Partner Segments API
+  description: >-
+    The Account Partner Segments API from Rubicon Project — 3 operation(s) for account partner segments.
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
-  - Ad Serving
-  - Programmatic Advertising
-  - Connected TV
-  - Reporting
-  - Targeting
+  - Account Partner Segments
   properties:
   - type: OpenAPI
-    url: openapi/rubicon-project-springserve-v1-openapi.yml
+    url: openapi/rubicon-project-account-partner-segments-api-openapi.yml
   - type: Documentation
     url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   - type: APIReference
@@ -88,85 +93,2539 @@ apis:
     url: errors/rubicon-project-problem-types.yml
   - type: DataModel
     url: data-model/rubicon-project-data-model.yml
-  - type: Overlay
-    url: overlays/rubicon-project-springserve-v1-overlay.yaml
-  - type: MCPServer
-    url: mcp/rubicon-project-mcp.yml
   - type: Examples
     url: examples/rubicon-project-request-examples.yml
-  - type: AgentSkill
-    url: skills/_index.yml
-- aid: rubicon-project-springserve-v0-api
-  name: SpringServe UI API (v0)
-  description: >-
-    The original v0 REST API for SpringServe, still fully supported and documented alongside
-    v1 while Magnite builds v1 equivalents for every endpoint. 289 operations across 173
-    paths covering campaigns, supply and demand tags, connected supply and connected demand,
-    direct connections and clearing terms, segments and partner segments, creatives, bid
-    maps, key-values, forecasting and reporting. Published as OpenAPI 3.1.2 and served
-    anonymously from the SpringServe console's Swagger UI.
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-accounts-api
+  name: Rubicon Project Accounts API
+  description: The Accounts API from Rubicon Project — 23 operation(s) for accounts.
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
-  baseURL: https://console.springserve.com/api/v0
+  baseURL: https://console.springserve.com/api/v1
   tags:
-  - Ad Serving
-  - Programmatic Advertising
-  - Reporting
-  - Targeting
+  - Accounts
   properties:
   - type: OpenAPI
-    url: openapi/rubicon-project-springserve-v0-openapi.yml
+    url: openapi/rubicon-project-accounts-api-openapi.yml
   - type: Documentation
     url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   - type: APIReference
     url: https://console.springserve.com/api-docs
   - type: GettingStarted
     url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
-  - type: Overlay
-    url: overlays/rubicon-project-springserve-v0-overlay.yaml
-- aid: rubicon-project-clearline-api
-  name: ClearLine API
-  description: >-
-    ClearLine is Magnite's direct buy-side activation platform for advertisers and agencies,
-    running on the same SpringServe codebase and serving the identical OpenAPI 3.1.2 contract
-    from its own console host. The ClearLine documentation space documents the same v1/v0
-    endpoints under the ClearLine base URL, plus ClearLine-specific surfaces including
-    budgets, bid modifiers, delivery modifiers, segment targeting and deals.
-  humanURL: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
-  baseURL: https://console.clearline.magnite.com/api/v1
-  tags:
-  - Advertising
-  - Programmatic Advertising
-  - Buy-Side
-  - Reporting
-  properties:
-  - type: OpenAPI
-    url: openapi/rubicon-project-springserve-v1-openapi.yml
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
   - type: Documentation
     url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
   - type: APIReference
     url: https://console.clearline.magnite.com/api-docs
   - type: GettingStarted
-    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
-- aid: rubicon-project-openrtb-xapi
-  name: Magnite Exchange API (xAPI) OpenRTB Extensions
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-advertiser-domain-lists-api
+  name: Rubicon Project Advertiser Domain Lists API
   description: >-
-    Magnite's Exchange API (xAPI) protobuf extensions to the IAB OpenRTB 2.x protobuf
-    definitions, published in the open on GitHub. Defines Magnite-specific OpenRTB extension
-    fields (extension IDs in the 5100-5299 range) for the AdEngine bidding endpoint,
-    including window/iframe geometry, key-value pairs and supply-chain signals used by
-    demand partners bidding into the Magnite exchange.
-  humanURL: https://github.com/MagniteEngineering/xapi-proto
-  baseURL: https://github.com/MagniteEngineering/xapi-proto
+    The Advertiser Domain Lists API from Rubicon Project — 9 operation(s) for advertiser domain lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
   tags:
-  - OpenRTB
-  - Real-Time Bidding
-  - Protobuf
+  - Advertiser Domain Lists
   properties:
-  - type: Protobuf
-    url: grpc/rubicon-project-openrtb-xapi.proto
-  - type: SourceCode
-    url: https://github.com/MagniteEngineering/xapi-proto
+  - type: OpenAPI
+    url: openapi/rubicon-project-advertiser-domain-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-app-bundle-lists-api
+  name: Rubicon Project App Bundle Lists API
+  description: The App Bundle Lists API from Rubicon Project — 20 operation(s) for app bundle lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - App Bundle Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-app-bundle-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-app-name-lists-api
+  name: Rubicon Project App Name Lists API
+  description: The App Name Lists API from Rubicon Project — 21 operation(s) for app name lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - App Name Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-app-name-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-audiences-api
+  name: Rubicon Project Audiences API
+  description: The Audiences API from Rubicon Project — 1 operation(s) for audiences.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-audiences-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-audios-api
+  name: Rubicon Project Audios API
+  description: The Audios API from Rubicon Project — 2 operation(s) for audios.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Audios
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-audios-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-auth-api
+  name: Rubicon Project Auth API
+  description: Endpoints that provide authentication for the API
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Auth
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-auth-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-bid-maps-api
+  name: Rubicon Project Bid Maps API
+  description: The Bid Maps API from Rubicon Project — 2 operation(s) for bid maps.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Bid Maps
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-bid-maps-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-bills-api
+  name: Rubicon Project Bills API
+  description: The Bills API from Rubicon Project — 8 operation(s) for bills.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Bills
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-bills-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-campaigns-api
+  name: Rubicon Project Campaigns API
+  description: The Campaigns API from Rubicon Project — 2 operation(s) for campaigns.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-changelogs-api
+  name: Rubicon Project Changelogs API
+  description: The Changelogs API from Rubicon Project — 6 operation(s) for changelogs.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Changelogs
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-changelogs-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-city-lists-api
+  name: Rubicon Project City Lists API
+  description: The City Lists API from Rubicon Project — 6 operation(s) for city lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - City Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-city-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-connected-demand-api
+  name: Rubicon Project Connected Demand API
+  description: The Connected Demand API from Rubicon Project — 3 operation(s) for connected demand.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Connected Demand
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-connected-demand-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-connected-supply-api
+  name: Rubicon Project Connected Supply API
+  description: The Connected Supply API from Rubicon Project — 3 operation(s) for connected supply.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Connected Supply
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-connected-supply-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-content-categories-api
+  name: Rubicon Project Content Categories API
+  description: The Content Categories API from Rubicon Project — 1 operation(s) for content categories.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Content Categories
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-content-categories-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-country-lists-api
+  name: Rubicon Project Country Lists API
+  description: The Country Lists API from Rubicon Project — 6 operation(s) for country lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Country Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-country-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-creatives-api
+  name: Rubicon Project Creatives API
+  description: The Creatives API from Rubicon Project — 6 operation(s) for creatives.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Creatives
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-creatives-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-creatives-audio-api
+  name: Rubicon Project Creatives Audio API
+  description: The Creatives Audio API from Rubicon Project — 2 operation(s) for creatives audio.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Creatives Audio
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-creatives-audio-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-creatives-filepaths-api
+  name: Rubicon Project Creatives Filepaths API
+  description: >-
+    The Creatives Filepaths API from Rubicon Project — 2 operation(s) for creatives filepaths.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Creatives Filepaths
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-creatives-filepaths-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-creatives-tag-api
+  name: Rubicon Project Creatives Tag API
+  description: The Creatives Tag API from Rubicon Project — 2 operation(s) for creatives tag.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Creatives Tag
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-creatives-tag-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-creatives-tile-api
+  name: Rubicon Project Creatives Tile API
+  description: The Creatives Tile API from Rubicon Project — 2 operation(s) for creatives tile.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Creatives Tile
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-creatives-tile-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-creatives-video-api
+  name: Rubicon Project Creatives Video API
+  description: The Creatives Video API from Rubicon Project — 2 operation(s) for creatives video.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Creatives Video
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-creatives-video-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-curated-marketplaces-api
+  name: Rubicon Project Curated Marketplaces API
+  description: >-
+    The Curated Marketplaces API from Rubicon Project — 5 operation(s) for curated marketplaces.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Curated Marketplaces
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-curated-marketplaces-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-currencies-api
+  name: Rubicon Project Currencies API
+  description: The Currencies API from Rubicon Project — 1 operation(s) for currencies.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Currencies
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-currencies-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-dashboards-api
+  name: Rubicon Project Dashboards API
+  description: The Dashboards API from Rubicon Project — 27 operation(s) for dashboards.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Dashboards
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-dashboards-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-deal-id-lists-api
+  name: Rubicon Project Deal Id Lists API
+  description: The Deal Id Lists API from Rubicon Project — 9 operation(s) for deal id lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Deal Id Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-deal-id-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-deal-lists-api
+  name: Rubicon Project Deal Lists API
+  description: The Deal Lists API from Rubicon Project — 15 operation(s) for deal lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Deal Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-deal-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-demand-labels-api
+  name: Rubicon Project Demand Labels API
+  description: The Demand Labels API from Rubicon Project — 6 operation(s) for demand labels.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Demand Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-demand-labels-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-demand-partners-api
+  name: Rubicon Project Demand Partners API
+  description: The Demand Partners API from Rubicon Project — 2 operation(s) for demand partners.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Demand Partners
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-demand-partners-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-demand-tags-api
+  name: Rubicon Project Demand Tags API
+  description: The Demand Tags API from Rubicon Project — 17 operation(s) for demand tags.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Demand Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-demand-tags-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-direct-connection-clearing-terms-api
+  name: Rubicon Project Direct Connection Clearing Terms API
+  description: >-
+    The Direct Connection Clearing Terms API from Rubicon Project — 2 operation(s) for direct connection
+    clearing terms.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Direct Connection Clearing Terms
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-direct-connection-clearing-terms-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-direct-connections-api
+  name: Rubicon Project Direct Connections API
+  description: The Direct Connections API from Rubicon Project — 2 operation(s) for direct connections.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Direct Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-direct-connections-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-domain-lists-api
+  name: Rubicon Project Domain Lists API
+  description: The Domain Lists API from Rubicon Project — 26 operation(s) for domain lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Domain Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-domain-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-first-party-partner-segments-api
+  name: Rubicon Project First Party Partner Segments API
+  description: >-
+    The First Party Partner Segments API from Rubicon Project — 2 operation(s) for first party partner
+    segments.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - First Party Partner Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-first-party-partner-segments-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-forecast-api
+  name: Rubicon Project Forecast API
+  description: The Forecast API from Rubicon Project — 1 operation(s) for forecast.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Forecast
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-forecast-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-geo-lists-api
+  name: Rubicon Project Geo Lists API
+  description: The Geo Lists API from Rubicon Project — 4 operation(s) for geo lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Geo Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-geo-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-global-fcap-pixels-api
+  name: Rubicon Project Global Fcap Pixels API
+  description: The Global Fcap Pixels API from Rubicon Project — 6 operation(s) for global fcap pixels.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Global Fcap Pixels
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-global-fcap-pixels-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-hb-bid-maps-api
+  name: Rubicon Project Hb Bid Maps API
+  description: The Hb Bid Maps API from Rubicon Project — 6 operation(s) for hb bid maps.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Hb Bid Maps
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-hb-bid-maps-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-header-bidding-platforms-api
+  name: Rubicon Project Header Bidding Platforms API
+  description: >-
+    The Header Bidding Platforms API from Rubicon Project — 2 operation(s) for header bidding platforms.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Header Bidding Platforms
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-header-bidding-platforms-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-ip-lists-api
+  name: Rubicon Project Ip Lists API
+  description: The Ip Lists API from Rubicon Project — 9 operation(s) for ip lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Ip Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-ip-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-isp-lists-api
+  name: Rubicon Project ISP Lists API
+  description: The ISP Lists API from Rubicon Project — 11 operation(s) for isp lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - ISP Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-isp-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-keys-api
+  name: Rubicon Project Keys API
+  description: The Keys API from Rubicon Project — 4 operation(s) for keys.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-keys-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-magnite-programmatic-api
+  name: Rubicon Project Magnite Programmatic API
+  description: >-
+    The Magnite Programmatic API from Rubicon Project — 1 operation(s) for magnite programmatic.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Magnite Programmatic
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-magnite-programmatic-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-metro-area-lists-api
+  name: Rubicon Project Metro Area Lists API
+  description: The Metro Area Lists API from Rubicon Project — 6 operation(s) for metro area lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Metro Area Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-metro-area-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-notifications-api
+  name: Rubicon Project Notifications API
+  description: The Notifications API from Rubicon Project — 7 operation(s) for notifications.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-operative-api
+  name: Rubicon Project Operative API
+  description: The Operative API from Rubicon Project — 2 operation(s) for operative.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Operative
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-operative-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-parameter-lists-api
+  name: Rubicon Project Parameter Lists API
+  description: The Parameter Lists API from Rubicon Project — 9 operation(s) for parameter lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Parameter Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-parameter-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-partner-segments-api
+  name: Rubicon Project Partner Segments API
+  description: The Partner Segments API from Rubicon Project — 10 operation(s) for partner segments.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Partner Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-partner-segments-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-permissions-api
+  name: Rubicon Project Permissions API
+  description: The Permissions API from Rubicon Project — 2 operation(s) for permissions.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-permissions-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-postal-code-lists-api
+  name: Rubicon Project Postal Code Lists API
+  description: The Postal Code Lists API from Rubicon Project — 6 operation(s) for postal code lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Postal Code Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-postal-code-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-publisher-id-lists-api
+  name: Rubicon Project Publisher Id Lists API
+  description: The Publisher Id Lists API from Rubicon Project — 9 operation(s) for publisher id lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Publisher Id Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-publisher-id-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-report-api
+  name: Rubicon Project Report API
+  description: The Report API from Rubicon Project — 2 operation(s) for report.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Report
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-report-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-report-templates-api
+  name: Rubicon Project Report Templates API
+  description: The Report Templates API from Rubicon Project — 3 operation(s) for report templates.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Report Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-report-templates-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-reports-api
+  name: Rubicon Project Reports API
+  description: The Reports API from Rubicon Project — 4 operation(s) for reports.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-reports-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-run-as-api
+  name: Rubicon Project Run As API
+  description: The Run As API from Rubicon Project — 4 operation(s) for run as.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Run As
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-run-as-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-scanned-creative-lists-api
+  name: Rubicon Project Scanned Creative Lists API
+  description: >-
+    The Scanned Creative Lists API from Rubicon Project — 11 operation(s) for scanned creative lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Scanned Creative Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-scanned-creative-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-scheduled-reports-api
+  name: Rubicon Project Scheduled Reports API
+  description: The Scheduled Reports API from Rubicon Project — 3 operation(s) for scheduled reports.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Scheduled Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-scheduled-reports-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-search-api
+  name: Rubicon Project Search API
+  description: The Search API from Rubicon Project — 14 operation(s) for search.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-search-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-segments-api
+  name: Rubicon Project Segments API
+  description: The Segments API from Rubicon Project — 9 operation(s) for segments.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-segments-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-session-api
+  name: Rubicon Project Session API
+  description: The Session API from Rubicon Project — 1 operation(s) for session.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Session
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-session-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-state-lists-api
+  name: Rubicon Project State Lists API
+  description: The State Lists API from Rubicon Project — 6 operation(s) for state lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - State Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-state-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-supply-labels-api
+  name: Rubicon Project Supply Labels API
+  description: The Supply Labels API from Rubicon Project — 6 operation(s) for supply labels.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Supply Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-supply-labels-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-supply-name-lists-api
+  name: Rubicon Project Supply Name Lists API
+  description: The Supply Name Lists API from Rubicon Project — 11 operation(s) for supply name lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Supply Name Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-supply-name-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-supply-partners-api
+  name: Rubicon Project Supply Partners API
+  description: The Supply Partners API from Rubicon Project — 2 operation(s) for supply partners.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Supply Partners
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-supply-partners-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-supply-routers-api
+  name: Rubicon Project Supply Routers API
+  description: The Supply Routers API from Rubicon Project — 3 operation(s) for supply routers.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Supply Routers
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-supply-routers-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-supply-tags-api
+  name: Rubicon Project Supply Tags API
+  description: The Supply Tags API from Rubicon Project — 9 operation(s) for supply tags.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Supply Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-supply-tags-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-system-settings-api
+  name: Rubicon Project System Settings API
+  description: The System Settings API from Rubicon Project — 2 operation(s) for system settings.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - System Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-system-settings-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-tag-creatives-api
+  name: Rubicon Project Tag Creatives API
+  description: The Tag Creatives API from Rubicon Project — 2 operation(s) for tag creatives.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Tag Creatives
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-tag-creatives-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-tiles-api
+  name: Rubicon Project Tiles API
+  description: The Tiles API from Rubicon Project — 2 operation(s) for tiles.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Tiles
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-tiles-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-timezones-api
+  name: Rubicon Project Timezones API
+  description: The Timezones API from Rubicon Project — 1 operation(s) for timezones.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Timezones
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-timezones-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-user-accounts-api
+  name: Rubicon Project User Accounts API
+  description: >-
+    The entity that combines a User and an Account and defines the role the user plays on that account
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - User Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-user-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-users-api
+  name: Rubicon Project Users API
+  description: The Users API from Rubicon Project — 6 operation(s) for users.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-users-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-value-lists-api
+  name: Rubicon Project Value Lists API
+  description: The Value Lists API from Rubicon Project — 2 operation(s) for value lists.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Value Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-value-lists-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-vendors-api
+  name: Rubicon Project Vendors API
+  description: The Vendors API from Rubicon Project — 2 operation(s) for vendors.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-videos-api
+  name: Rubicon Project Videos API
+  description: The Videos API from Rubicon Project — 2 operation(s) for videos.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - Videos
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-videos-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
+- aid: rubicon-project:rubicon-project-white-labels-api
+  name: Rubicon Project White Labels API
+  description: The White Labels API from Rubicon Project — 1 operation(s) for white labels.
+  humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  baseURL: https://console.springserve.com/api/v1
+  tags:
+  - White Labels
+  properties:
+  - type: OpenAPI
+    url: openapi/rubicon-project-white-labels-api-openapi.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
+  - type: APIReference
+    url: https://console.springserve.com/api-docs
+  - type: GettingStarted
+    url: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started
+  - type: Authentication
+    url: authentication/rubicon-project-authentication.yml
+  - type: RateLimits
+    url: rate-limits/rubicon-project-rate-limits.yml
+  - type: ErrorCatalog
+    url: errors/rubicon-project-problem-types.yml
+  - type: DataModel
+    url: data-model/rubicon-project-data-model.yml
+  - type: Examples
+    url: examples/rubicon-project-request-examples.yml
+  - type: Documentation
+    url: https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK
+  - type: APIReference
+    url: https://console.clearline.magnite.com/api-docs
+  - type: GettingStarted
+    url: >-
+      https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
 common:
+- type: Overlay
+  url: overlays/rubicon-project-springserve-v1-overlay.yaml
+- type: Overlay
+  url: overlays/rubicon-project-springserve-v0-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/rubicon-project-agentic-access.yml
 - type: Website
