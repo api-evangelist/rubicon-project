@@ -1,0 +1,156 @@
+slug: rubicon-project
+provider: Rubicon Project
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 15
+edges:
+- tag: Creatives
+  spec_file: rubicon-project-creatives-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.85
+  evidence: 'GET /api/v1/creatives, POST /api/v1/creatives/bulk/update ''Update Multiple Creatives'';
+    schemas: Brand, MetroArea, Device, Browser, PostalCode'
+  reason: These operations manage advertising creatives and their targeting attributes on an ad server,
+    which is exactly ad trafficking and operations ('onboarding of creatives, ad decisioning and insertion').
+- tag: Creatives Audio
+  spec_file: rubicon-project-creatives-audio-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.85
+  evidence: POST /api/v1/audio_creatives Create; schemas AudioCreativeCreateData, AudioCreativeResponse
+  reason: Lifecycle management of audio ad creatives on the SpringServe ad server is creative onboarding
+    and trafficking, not media production or asset management.
+- tag: Creatives Video
+  spec_file: rubicon-project-creatives-video-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.85
+  evidence: POST /api/v1/video_creatives Create; schemas VideoCreativeCreateData, VideoCreativeIndexResponse
+  reason: Video ad creatives are created, updated and deleted in the ad server; this is creative onboarding
+    and ad insertion configuration, i.e. ad trafficking and operations.
+- tag: Creatives Filepaths
+  spec_file: rubicon-project-creatives-filepaths-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.8
+  evidence: POST /api/v1/filepath_creatives; schemas FilepathCreativeCreateData, FilepathCreativeBaseProperties
+  reason: Filepath creatives are a creative type registered for ad serving; the CRUD surface is creative
+    onboarding within ad trafficking and operations.
+- tag: Creatives Tag
+  spec_file: rubicon-project-creatives-tag-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.8
+  evidence: POST /api/v1/tag_creatives; schemas TagCreativeCreateData, TagCreativeResponse
+  reason: Third-party tag creatives are onboarded and maintained for ad insertion, which is ad trafficking
+    and operations rather than any content-production capability.
+- tag: Creatives Tile
+  spec_file: rubicon-project-creatives-tile-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.8
+  evidence: POST /api/v1/tile_creatives; schemas TileCreativeMultipartData, TileCreativeCreateData
+  reason: Tile creatives are an ad creative format uploaded and managed for serving, so the capability
+    is creative onboarding within advertising trafficking and operations.
+- tag: Dashboards
+  spec_file: rubicon-project-dashboards-api-openapi.yml
+  capability_id: BC-3760.60
+  capability_id_l1: BC-3760
+  capability_name: Advertising Revenue Reporting
+  confidence: 0.75
+  evidence: '"Campaign Performance", "Top 10 Deals", "Top 10 Demand Partners", "Creative Performance"'
+  reason: Reporting dashboards over advertising campaign, deal and demand-partner delivery within an ad-serving/SSP
+    platform, i.e. advertising delivery and revenue reporting. Some chance it is better read as generic
+    analytics, hence not maximal confidence.
+- tag: Curated Marketplaces
+  spec_file: rubicon-project-curated-marketplaces-api-openapi.yml
+  capability_id: BC-3760.30
+  capability_id_l1: BC-3760
+  capability_name: Programmatic Sales Management
+  confidence: 0.72
+  evidence: POST /api/v1/curated_marketplaces, GET /api/v1/curated_marketplaces/global 'Show curated_marketplaces
+    across all accounts' on a sell-side ad platform
+  reason: Curated marketplaces on an SSP are curated/private marketplace deal constructs offered to programmatic
+    buyers, matching programmatic sales management ('private marketplaces, supply-path integrations').
+    Schemas are not published, so confidence is held below the top band.
+- tag: Header Bidding Platforms
+  spec_file: rubicon-project-header-bidding-platforms-api-openapi.yml
+  capability_id: BC-3760.30
+  capability_id_l1: BC-3760
+  capability_name: Programmatic Sales Management
+  confidence: 0.72
+  evidence: GET /api/v1/header_bidding_platforms  List Header Bidding Platforms
+  reason: Listing header-bidding platforms is configuration of programmatic demand/supply-path integrations
+    for the sell-side ad platform, i.e. programmatic sales management.
+- tag: Advertiser Domain Lists
+  spec_file: rubicon-project-advertiser-domain-lists-api-openapi.yml
+  capability_id: BC-3760.50
+  capability_id_l1: BC-3760
+  capability_name: Brand Safety & Inventory Quality Management
+  confidence: 0.7
+  evidence: POST /api/v0/advertiser_domain_lists/{advertiser_domain_list_id}/advertiser_domains/bulk_create  Bulk
+    Create
+  reason: Advertiser domain block/allow lists in an SSP are inventory-quality and brand-safety controls
+    applied to ad demand; supported by the domain-list CRUD surface though schemas are absent.
+- tag: Campaigns
+  spec_file: rubicon-project-campaigns-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.7
+  evidence: POST /api/v0/campaigns  Create
+  reason: Campaign objects in the SpringServe ad server are the container for ad delivery and spot scheduling,
+    placing this in advertising ad operations/trafficking; only CRUD evidence available.
+- tag: Demand Partners
+  spec_file: rubicon-project-demand-partners-api-openapi.yml
+  capability_id: BC-3760
+  capability_id_l1: BC-3760
+  capability_name: Advertising Sales & Operations Management
+  confidence: 0.7
+  evidence: GET /api/v0/demand_partners — "Index"; POST /api/v0/demand_partners — "Create"
+  reason: Registration and maintenance of demand partners (buyers/DSPs) connected to the sell-side ad
+    platform — an advertising sales and operations construct. Which sub-capability (direct vs programmatic)
+    is not determinable from the CRUD summaries.
+- tag: Demand Tags
+  spec_file: rubicon-project-demand-tags-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.7
+  evidence: 'schemas: DemandTagResponse, DemandTagPriority, MacroSuggesterRequest; POST /api/v0/demand_tags/{demand_tag_id}/demand_tag_keys'
+  reason: Demand tags are the ad-request/VAST tag configurations that route impressions to buyers, with
+    priority and macro handling — core ad trafficking and decisioning setup in an ad server.
+- tag: Hb Bid Maps
+  spec_file: rubicon-project-hb-bid-maps-api-openapi.yml
+  capability_id: BC-3760.30
+  capability_id_l1: BC-3760
+  capability_name: Programmatic Sales Management
+  confidence: 0.7
+  evidence: 'schemas: HbBidMap, HbBidMapEntry; POST /api/v0/hb_bid_maps Create'
+  reason: '''Hb'' = header bidding; bid maps configure header-bidding bid values on the sell side, which
+    is programmatic auction/supply-path configuration rather than direct sales.'
+- tag: Tag Creatives
+  spec_file: rubicon-project-tag-creatives-api-openapi.yml
+  capability_id: BC-3760.40
+  capability_id_l1: BC-3760
+  capability_name: Ad Trafficking & Operations
+  confidence: 0.7
+  evidence: POST /api/v0/tag_creatives  tag_creatives_post  Create
+  reason: Management of creatives attached to ad tags corresponds directly to 'Onboarding of creatives,
+    ad decisioning and insertion' under ad trafficking and operations.

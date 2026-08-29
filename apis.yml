@@ -2635,6 +2635,9 @@ apis:
     url: >-
       https://springserve.atlassian.net/wiki/spaces/CLD/pages/3649929246/CL+-API+-+Getting+Started
 common:
+- type: CapabilityMap
+  url: capabilities/rubicon-project-capability-edges.yml
+  name: Rubicon Project Business Capability Map
 - type: Overlay
   url: overlays/rubicon-project-springserve-v1-overlay.yaml
 - type: Overlay
