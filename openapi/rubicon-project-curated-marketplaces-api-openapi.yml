@@ -1,0 +1,250 @@
+openapi: 3.2.0
+info:
+  title: SpringServe UI Curated Marketplaces API
+  version: 1.0.0
+  description: "> **_NOTE:_** This document covers the v1 API (`/api/v1`). You can find additional documentation on the v1 API (`/api/v1`) on the \n[Magnite Help Center](https://help.magnite.com/), which is broken into sections for endpoints relevant to \n[SpringServe](https://help.magnite.com/help/api-documentation) and [Clearline](https://help.magnite.com/help/api-documentation-06dd4d3). \nYou can also find V1 swagger documentation by selecting ‘SpringServe API V1’ from the dropdown at the top right corner \nof this page. Please note we are in the process of creating V1 endpoints for all existing V0 endpoints, but while that work \nis in progress not all endpoints will be supported on V1. We advise reviewing both swagger pages to determine what \nis supported in each version.\n\n# Authentication\nWhen using this API documentation server, by default it will authenticate API calls using cookie-based authentication against the selected server.  If you are properly logged into the SpringServe server and your session is still active, then the API calls should automatically authenticate.  \n\nOutside of this API documentation server you should use either Token Based or Bearer authentication.  You may also these authentication methods on this server as well,\n which will take precedence over any cookie/session based authentication.\n### Token Based Authentication\nUse the [POST /api/v1/auth](#/Auth/auth_post) endpoint to generate an API token that is then passed in the `Authorization: <token>` header\n\n### Bearer Authentication\nUse the [POST /api/v1/auth](#/Auth/auth_post) endpoint to authenticate and get a bearer token that is then passed in the `Authorization: Bearer <token>` header\n\n# Active Account Context\nA given request always runs in the context of currently active account for the authenticated user making the request.  The active account can be determined via\nthe [GET /api/v1/accounts/current](#/Accounts/accounts_current_get) endpoint and updated via [POST /api/v1/accounts/{id}/set_current](#/Accounts/accounts_id_set_current_post).\nThe active account can also be overridden for an authenticated request by passing the `x-auth-context` header.\n\n# Common List Resource Functionality\n\n## List Resource Requests\nVirtually all List endpoints (e.g. `GET /api/v1/demand_tags`) support the following via request query parameters:\n* Pagination via the `page` (first page is page `1`) and `per` (how many results per page, default is `50`, max is `1000`) query parameters.\n* Searching via the `search` query param\n* Sorting via the comma-delimited `sort` query param - e.g. `sort=name,-id` would sort by name ascending, then by id descending.  By default,\nonly first-level (directly on the entity, not on associations) attributes are sortable.  Some endpoints expose additional/custom orderable fields, \nwhich are documented with that endpoint.\n* Filtering via the query param `<attribute>=<value>` e.g. `id=3` for every first-level (not on associations) attribute on the entity.  Some\n  endpoints expose additional filters which are called out in the documentation for that endpoint.  You can also add an optional operator to the filter via the format `<attribute>::<operator>=<value>`, \n  e.g. `id::gt=3` to filter for ids greater than 3 or `updated_at::lte=2025-01-01` to filter for updated_at less than or equal to 2025-01-01.  \n  The following operators are supported:\n  * `::gt` - greater than\n  * `::gte` - greater than or equal to\n  * `::lt` - less than\n  * `::lte` - less than or equal to\n  * `::in` - in the comma-delimited list of values\n  * `::null` - attribute is null (`true` or `1`) or not null (`false` or `0`)\n* Inclusion of associated resources via the comma-delimited `includes` attribute. The common List Result body has `includable_fields` metadata\n  that tells you which associations are includable.  If not specified, a logical default set of associations are included.  You may pass\n  `includes=` as a blank entry to not include any associations, which can speed up API results if the associated data is not needed.\n* Inclusion of additional data (e.g. quickstats) via the `additional_data` query param.  Possible values come from the `additional_data_fields`\narray on a list response.\n\n## List Resource Responses\nVirtually all List endoints have the same result format:\n* `count` - how many results are in this response\n* `total_count` - how many results are their across all pages of results\n* `current_page` - the current page of results (first page is `1`)\n* `total_pages` - how many total pages of results there are\n* `includable_fields` - assocations of the current resource that `can` be included in the result via the `include` query param.  Note: this is not necessarily what is included\nin the current result, but rather what is possible to request.\n* `additional_data_fields` - additional data, beyond normal associations, that can be included on the result (e.g. quickstats) via the `additional_data` query param.\n* `results` - The array of resource results  \n\n# Common Show Resource Functionality\nMost endpoints to retrieve a single resource, e.g. `GET /api/v1/demand_tags` allow to include associated resources on the result via the same `includes` query\nparamater as the List requests.  See the List response the resource for which associations are includable.\n"
+servers:
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Curated Marketplaces
+paths:
+  /api/v1/curated_marketplaces:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Curated Marketplaces
+      operationId: curated_marketplaces_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/curated_marketplace_create_simple'
+              full:
+                $ref: '#/components/examples/curated_marketplace_create_full'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Curated Marketplaces
+      operationId: curated_marketplaces_post
+  /api/v1/curated_marketplaces/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Curated Marketplaces
+      operationId: curated_marketplaces_id_get
+    patch:
+      summary: Update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/curated_marketplace_update_simple'
+              full:
+                $ref: '#/components/examples/curated_marketplace_update_full'
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Curated Marketplaces
+      operationId: curated_marketplaces_id_patch
+    delete:
+      summary: Delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Curated Marketplaces
+      operationId: curated_marketplaces_id_delete
+  /api/v1/curated_marketplaces/global:
+    get:
+      summary: Show curated_marketplaces across all accounts
+      description: Show minimal information (id, name, is_active) about all curated_marketplaces across all accounts
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Curated Marketplaces
+      operationId: curated_marketplaces_global_get
+  /api/v1/curated_marketplaces/permissions:
+    get:
+      summary: Collection Permissions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Curated Marketplaces
+      operationId: curated_marketplaces_permissions_get
+  /api/v1/curated_marketplaces/{id}/permissions:
+    get:
+      summary: Permissions Member
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Curated Marketplaces
+      operationId: curated_marketplaces_id_permissions_get
+components:
+  examples:
+    curated_marketplace_update_simple:
+      summary: Simple
+      value:
+        name: Curated Marketplace Name
+        is_active: true
+    curated_marketplace_create_full:
+      summary: Full
+      value:
+        name: Curated Marketplace Name
+        supply_partner_id: 1
+        selling_strategy_name: Selling Strategy Name
+        revenue_model_type: 0
+        rate: 1.11
+        rate_currency: USD
+        supply_tag_type: 1
+        bulk_add_enabled: true
+        rpm_floor: 1.11
+        optimization_active: false
+        optimization_learn_pct: 1
+        optimization_version: 1
+        optimization_mode: black_box
+        optimization_settings:
+          metric: fill_rate
+          lookback_minutes: '60'
+        supply_allocation: 1
+        custom_supply_allocation: false
+        waterfall_management: demand_tag
+        is_country_white_list: true
+        country_codes:
+        - US
+        obfuscate_ip_address_enabled: false
+        obfuscate_latlon_enabled: false
+        tier_breakout_enabled: false
+        note: note
+        is_active: true
+    curated_marketplace_create_simple:
+      summary: Simple
+      value:
+        name: Curated Marketplace Name
+        supply_partner_id: 1
+        rate: 1.11
+    curated_marketplace_update_full:
+      summary: Full
+      value:
+        name: Curated Marketplace Name
+        selling_strategy_name: Selling Strategy Name
+        rate: 1.11
+        rate_currency: USD
+        bulk_add_enabled: true
+        rpm_floor: 1.11
+        optimization_active: false
+        optimization_learn_pct: 1
+        optimization_version: 1
+        optimization_mode: black_box
+        optimization_settings:
+          metric: fill_rate
+          lookback_minutes: '60'
+        supply_allocation: 1
+        custom_supply_allocation: false
+        waterfall_management: demand_tag
+        is_country_white_list: true
+        country_codes:
+        - US
+        obfuscate_ip_address_enabled: false
+        obfuscate_latlon_enabled: false
+        tier_breakout_enabled: false
+        note: note
+        is_active: true
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

@@ -1,0 +1,934 @@
+openapi: 3.2.0
+info:
+  title: SpringServe UI Dashboards API
+  version: 1.0.0
+  description: "> **_NOTE:_** This document covers the v1 API (`/api/v1`). You can find additional documentation on the v1 API (`/api/v1`) on the \n[Magnite Help Center](https://help.magnite.com/), which is broken into sections for endpoints relevant to \n[SpringServe](https://help.magnite.com/help/api-documentation) and [Clearline](https://help.magnite.com/help/api-documentation-06dd4d3). \nYou can also find V1 swagger documentation by selecting ‘SpringServe API V1’ from the dropdown at the top right corner \nof this page. Please note we are in the process of creating V1 endpoints for all existing V0 endpoints, but while that work \nis in progress not all endpoints will be supported on V1. We advise reviewing both swagger pages to determine what \nis supported in each version.\n\n# Authentication\nWhen using this API documentation server, by default it will authenticate API calls using cookie-based authentication against the selected server.  If you are properly logged into the SpringServe server and your session is still active, then the API calls should automatically authenticate.  \n\nOutside of this API documentation server you should use either Token Based or Bearer authentication.  You may also these authentication methods on this server as well,\n which will take precedence over any cookie/session based authentication.\n### Token Based Authentication\nUse the [POST /api/v1/auth](#/Auth/auth_post) endpoint to generate an API token that is then passed in the `Authorization: <token>` header\n\n### Bearer Authentication\nUse the [POST /api/v1/auth](#/Auth/auth_post) endpoint to authenticate and get a bearer token that is then passed in the `Authorization: Bearer <token>` header\n\n# Active Account Context\nA given request always runs in the context of currently active account for the authenticated user making the request.  The active account can be determined via\nthe [GET /api/v1/accounts/current](#/Accounts/accounts_current_get) endpoint and updated via [POST /api/v1/accounts/{id}/set_current](#/Accounts/accounts_id_set_current_post).\nThe active account can also be overridden for an authenticated request by passing the `x-auth-context` header.\n\n# Common List Resource Functionality\n\n## List Resource Requests\nVirtually all List endpoints (e.g. `GET /api/v1/demand_tags`) support the following via request query parameters:\n* Pagination via the `page` (first page is page `1`) and `per` (how many results per page, default is `50`, max is `1000`) query parameters.\n* Searching via the `search` query param\n* Sorting via the comma-delimited `sort` query param - e.g. `sort=name,-id` would sort by name ascending, then by id descending.  By default,\nonly first-level (directly on the entity, not on associations) attributes are sortable.  Some endpoints expose additional/custom orderable fields, \nwhich are documented with that endpoint.\n* Filtering via the query param `<attribute>=<value>` e.g. `id=3` for every first-level (not on associations) attribute on the entity.  Some\n  endpoints expose additional filters which are called out in the documentation for that endpoint.  You can also add an optional operator to the filter via the format `<attribute>::<operator>=<value>`, \n  e.g. `id::gt=3` to filter for ids greater than 3 or `updated_at::lte=2025-01-01` to filter for updated_at less than or equal to 2025-01-01.  \n  The following operators are supported:\n  * `::gt` - greater than\n  * `::gte` - greater than or equal to\n  * `::lt` - less than\n  * `::lte` - less than or equal to\n  * `::in` - in the comma-delimited list of values\n  * `::null` - attribute is null (`true` or `1`) or not null (`false` or `0`)\n* Inclusion of associated resources via the comma-delimited `includes` attribute. The common List Result body has `includable_fields` metadata\n  that tells you which associations are includable.  If not specified, a logical default set of associations are included.  You may pass\n  `includes=` as a blank entry to not include any associations, which can speed up API results if the associated data is not needed.\n* Inclusion of additional data (e.g. quickstats) via the `additional_data` query param.  Possible values come from the `additional_data_fields`\narray on a list response.\n\n## List Resource Responses\nVirtually all List endoints have the same result format:\n* `count` - how many results are in this response\n* `total_count` - how many results are their across all pages of results\n* `current_page` - the current page of results (first page is `1`)\n* `total_pages` - how many total pages of results there are\n* `includable_fields` - assocations of the current resource that `can` be included in the result via the `include` query param.  Note: this is not necessarily what is included\nin the current result, but rather what is possible to request.\n* `additional_data_fields` - additional data, beyond normal associations, that can be included on the result (e.g. quickstats) via the `additional_data` query param.\n* `results` - The array of resource results  \n\n# Common Show Resource Functionality\nMost endpoints to retrieve a single resource, e.g. `GET /api/v1/demand_tags` allow to include associated resources on the result via the same `includes` query\nparamater as the List requests.  See the List response the resource for which associations are includable.\n"
+servers:
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Dashboards
+paths:
+  /api/v1/dashboards/account_summary:
+    get:
+      summary: Account Summary
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_account_summary_get
+  /api/v1/dashboards/bidder_accounts:
+    get:
+      summary: Top 10 Bidder Accounts
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_bidder_accounts_get
+  /api/v1/dashboards/bidder_accounts_open_market:
+    get:
+      summary: Top 10 Bidder Accounts Open Market Copy
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_bidder_accounts_open_market_get
+  /api/v1/dashboards/campaign_performance:
+    get:
+      summary: Campaign Performance
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_campaign_performance_get
+  /api/v1/dashboards/campaigns:
+    get:
+      summary: Top 10 Campaigns
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_campaigns_get
+  /api/v1/dashboards/comparative_day_performance:
+    get:
+      summary: Comparative Day Performance
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_comparative_day_performance_get
+  /api/v1/dashboards/creative_performance:
+    get:
+      summary: Creative Performance
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: line_items
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_creative_performance_get
+  /api/v1/dashboards/day_performance:
+    get:
+      summary: Day Performance
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_day_performance_get
+  /api/v1/dashboards/deals:
+    get:
+      summary: Top 10 Deals
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_deals_get
+  /api/v1/dashboards/demand_deals:
+    get:
+      summary: Top 10 Demand Deals
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_demand_deals_get
+  /api/v1/dashboards/demand_partners:
+    get:
+      summary: Top 10 Demand Partners
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_demand_partners_get
+  /api/v1/dashboards/demand_tags:
+    get:
+      summary: Top 10 Demand Tags
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_demand_tags_get
+  /api/v1/dashboards/external_bidder_performance:
+    get:
+      summary: External Bidder Performance
+      parameters:
+      - name: bidder_account_id
+        in: query
+        schema:
+          type: string
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: ortb_report
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_external_bidder_performance_get
+  /api/v1/dashboards/five_minute_performance:
+    get:
+      summary: Five Minute Performance
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_five_minute_performance_get
+  /api/v1/dashboards/hour_performance:
+    get:
+      summary: Hour Performance
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_hour_performance_get
+  /api/v1/dashboards/label_performance:
+    get:
+      summary: Label Performance
+      parameters:
+      - name: label_type
+        in: query
+        schema:
+          type: string
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_label_performance_get
+  /api/v1/dashboards/magnite_streaming_performance:
+    get:
+      summary: Magnite SpringServe Performance
+      parameters:
+      - name: tag_type
+        in: query
+        schema:
+          type: string
+      - name: supply_tag_id
+        in: query
+        schema:
+          type: string
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: ortb_report
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_magnite_streaming_performance_get
+  /api/v1/dashboards/minute_performance:
+    get:
+      summary: Minute Performance
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_minute_performance_get
+  /api/v1/dashboards/open_market_supply_tags:
+    get:
+      summary: Top 10 Open Market Supply Tags
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_open_market_supply_tags_get
+  /api/v1/dashboards/partner_performance:
+    get:
+      summary: Partner Performance
+      parameters:
+      - name: partner_type
+        in: query
+        schema:
+          type: string
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_partner_performance_get
+  /api/v1/dashboards/publishers:
+    get:
+      summary: Top 10 Publishers
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_publishers_get
+  /api/v1/dashboards/quality_report:
+    get:
+      summary: Quality Report
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_quality_report_get
+  /api/v1/dashboards/router_performance:
+    get:
+      summary: Router Performance
+      parameters:
+      - name: pod
+        in: query
+        schema:
+          type: string
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_router_performance_get
+  /api/v1/dashboards/supply_partners:
+    get:
+      summary: Top 10 Supply Partners
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_supply_partners_get
+  /api/v1/dashboards/supply_routers:
+    get:
+      summary: Top 10 Supply Routers
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_supply_routers_get
+  /api/v1/dashboards/supply_tags:
+    get:
+      summary: Top 10 Supply Tags
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          type: string
+      - name: dashboard_type
+        in: query
+        schema:
+          type: string
+      - name: currency
+        in: query
+        schema:
+          type: string
+      - name: metric
+        in: query
+        schema:
+          type: string
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_supply_tags_get
+  /api/v1/dashboards/tag_performance:
+    get:
+      summary: Tag Performance
+      parameters:
+      - name: date_range
+        in: query
+        schema:
+          $ref: ./ref/reports.yaml#/components/schemas/dateRange
+      - name: forecast_date_range
+        in: query
+        schema:
+          type: string
+      - name: interval
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - all
+          - minute
+          - fiveMinute
+          - hour
+          - day
+          - comparison
+          default: all
+      - name: tag_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - demand
+          - supply
+          default: demand
+      - name: currency
+        in: query
+        schema:
+          $ref: ./ref/concerns/currency.yaml#/components/schemas/CurrencyList
+        required: false
+      - name: id
+        in: query
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Dashboards
+      operationId: dashboards_tag_performance_get
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

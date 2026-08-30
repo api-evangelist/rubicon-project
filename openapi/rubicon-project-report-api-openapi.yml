@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Report API
+  version: '1.0'
+  description: 'Operations tagged Report across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Report
+paths:
+  /api/v0/report:
+    post:
+      summary: Create Report
+      description: Create a Delivery report. Available for ClearLine account types.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/report_create_simple'
+              full:
+                $ref: '#/components/examples/report_create_full'
+      responses:
+        '200':
+          description: Report result or queued/building status
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Report
+      operationId: report_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/report:
+    post:
+      summary: Alias for POST /api/v1/reports
+      requestBody:
+        content:
+          application/json:
+            schema:
+              anyOf:
+              - $ref: ./ref/reports.yaml#/components/schemas/reportParameters
+              - type: object
+                properties:
+                  async:
+                    type: boolean
+                  csv:
+                    type: boolean
+                  sort:
+                    type: array
+                    items:
+                      type: string
+            examples:
+              simple:
+                $ref: '#/components/examples/report_create_simple'
+              full:
+                $ref: '#/components/examples/report_create_full_2'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Report
+      operationId: report_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    report_create_simple:
+      summary: Simple
+      value:
+        date_range: Yesterday
+        dimensions:
+        - supply_tag_id
+        metrics:
+        - impressions
+        - revenue
+    report_create_full:
+      summary: Full
+      value:
+        async: true
+        currency: USD
+        date_range: Yesterday
+        interval: cumulative
+        timezone: UTC
+        dimensions:
+        - supply_tag_id
+        - demand_tag_id
+        metrics:
+        - impressions
+        - revenue
+        - fill_rate
+        - cpm
+    report_create_full_2:
+      summary: Full
+      value:
+        async: false
+        csv: false
+        currency: USD
+        date_range: Yesterday
+        dimensions:
+        - supply_tag_id
+        - demand_tag_id
+        filters:
+        - dimension: supply_tag_id
+          type: values
+          values:
+          - 1
+          is_include: true
+          is_exact_match: false
+        - dimension: demand_tag_id
+          type: values
+          values:
+          - 1
+          is_include: false
+          is_exact_match: false
+        having:
+        - metric: impressions
+          max: false
+          value: 1
+        interval: day
+        metrics:
+        - impressions
+        - revenue
+        - fill_rate
+        - cpm
+        sort:
+        - impressions desc
+        timezone: Etc/UTC
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

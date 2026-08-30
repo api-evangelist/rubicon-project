@@ -1,0 +1,634 @@
+openapi: 3.2.0
+info:
+  title: SpringServe UI Search API
+  version: 1.0.0
+  description: "> **_NOTE:_** This document covers the v1 API (`/api/v1`). You can find additional documentation on the v1 API (`/api/v1`) on the \n[Magnite Help Center](https://help.magnite.com/), which is broken into sections for endpoints relevant to \n[SpringServe](https://help.magnite.com/help/api-documentation) and [Clearline](https://help.magnite.com/help/api-documentation-06dd4d3). \nYou can also find V1 swagger documentation by selecting ‘SpringServe API V1’ from the dropdown at the top right corner \nof this page. Please note we are in the process of creating V1 endpoints for all existing V0 endpoints, but while that work \nis in progress not all endpoints will be supported on V1. We advise reviewing both swagger pages to determine what \nis supported in each version.\n\n# Authentication\nWhen using this API documentation server, by default it will authenticate API calls using cookie-based authentication against the selected server.  If you are properly logged into the SpringServe server and your session is still active, then the API calls should automatically authenticate.  \n\nOutside of this API documentation server you should use either Token Based or Bearer authentication.  You may also these authentication methods on this server as well,\n which will take precedence over any cookie/session based authentication.\n### Token Based Authentication\nUse the [POST /api/v1/auth](#/Auth/auth_post) endpoint to generate an API token that is then passed in the `Authorization: <token>` header\n\n### Bearer Authentication\nUse the [POST /api/v1/auth](#/Auth/auth_post) endpoint to authenticate and get a bearer token that is then passed in the `Authorization: Bearer <token>` header\n\n# Active Account Context\nA given request always runs in the context of currently active account for the authenticated user making the request.  The active account can be determined via\nthe [GET /api/v1/accounts/current](#/Accounts/accounts_current_get) endpoint and updated via [POST /api/v1/accounts/{id}/set_current](#/Accounts/accounts_id_set_current_post).\nThe active account can also be overridden for an authenticated request by passing the `x-auth-context` header.\n\n# Common List Resource Functionality\n\n## List Resource Requests\nVirtually all List endpoints (e.g. `GET /api/v1/demand_tags`) support the following via request query parameters:\n* Pagination via the `page` (first page is page `1`) and `per` (how many results per page, default is `50`, max is `1000`) query parameters.\n* Searching via the `search` query param\n* Sorting via the comma-delimited `sort` query param - e.g. `sort=name,-id` would sort by name ascending, then by id descending.  By default,\nonly first-level (directly on the entity, not on associations) attributes are sortable.  Some endpoints expose additional/custom orderable fields, \nwhich are documented with that endpoint.\n* Filtering via the query param `<attribute>=<value>` e.g. `id=3` for every first-level (not on associations) attribute on the entity.  Some\n  endpoints expose additional filters which are called out in the documentation for that endpoint.  You can also add an optional operator to the filter via the format `<attribute>::<operator>=<value>`, \n  e.g. `id::gt=3` to filter for ids greater than 3 or `updated_at::lte=2025-01-01` to filter for updated_at less than or equal to 2025-01-01.  \n  The following operators are supported:\n  * `::gt` - greater than\n  * `::gte` - greater than or equal to\n  * `::lt` - less than\n  * `::lte` - less than or equal to\n  * `::in` - in the comma-delimited list of values\n  * `::null` - attribute is null (`true` or `1`) or not null (`false` or `0`)\n* Inclusion of associated resources via the comma-delimited `includes` attribute. The common List Result body has `includable_fields` metadata\n  that tells you which associations are includable.  If not specified, a logical default set of associations are included.  You may pass\n  `includes=` as a blank entry to not include any associations, which can speed up API results if the associated data is not needed.\n* Inclusion of additional data (e.g. quickstats) via the `additional_data` query param.  Possible values come from the `additional_data_fields`\narray on a list response.\n\n## List Resource Responses\nVirtually all List endoints have the same result format:\n* `count` - how many results are in this response\n* `total_count` - how many results are their across all pages of results\n* `current_page` - the current page of results (first page is `1`)\n* `total_pages` - how many total pages of results there are\n* `includable_fields` - assocations of the current resource that `can` be included in the result via the `include` query param.  Note: this is not necessarily what is included\nin the current result, but rather what is possible to request.\n* `additional_data_fields` - additional data, beyond normal associations, that can be included on the result (e.g. quickstats) via the `additional_data` query param.\n* `results` - The array of resource results  \n\n# Common Show Resource Functionality\nMost endpoints to retrieve a single resource, e.g. `GET /api/v1/demand_tags` allow to include associated resources on the result via the same `includes` query\nparamater as the List requests.  See the List response the resource for which associations are includable.\n"
+servers:
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Search
+paths:
+  /api/v1/search:
+    get:
+      summary: Universal
+      description: Universal Search across all entity types
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Search
+      operationId: search_get
+  /api/v1/search/{entity}:
+    get:
+      summary: Search within a given type of entity
+      parameters:
+      - name: entity
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - account_managers
+          - ad_servers
+          - advertiser_domain_lists
+          - app_bundle_lists
+          - app_name_lists
+          - audiences
+          - bid_modifiers
+          - bid_platforms
+          - campaign_codes
+          - campaign_secondary_codes
+          - cities
+          - city_lists
+          - city_names
+          - clearline_deals
+          - clearline_rtd_signals
+          - countries
+          - country_lists
+          - creative_codes
+          - creative_secondary_codes
+          - creative_languages
+          - creatives
+          - curator_fee_publishers
+          - deal_id_lists
+          - deal_ids
+          - deal_lists
+          - deals
+          - delivery_modifiers
+          - demand_codes
+          - demand_labels
+          - demand_partner_codes
+          - demand_partner_secondary_codes
+          - demand_tag_secondary_codes
+          - metro_areas
+          - metro_area_lists
+          - domain_lists
+          - established_direct_connect_accounts
+          - external_deal_ids
+          - foreign_deal_codes
+          - foreign_deal_ids
+          - foreign_deal_names
+          - global_fcap_pixels
+          - iab_category_tier1_lists
+          - iab_category_tier2_lists
+          - ip_lists
+          - isps
+          - isp_lists
+          - keys
+          - keyword_lists
+          - marketplace_buyer_buyer_seats
+          - marketplace_buyer_dsps
+          - parameter_lists
+          - partner_segment_codes
+          - partner_segments
+          - polygon_lists
+          - postal_code_lists
+          - predefined_key_values
+          - publisher_id_lists
+          - scanned_creative_lists
+          - segments
+          - state_lists
+          - states
+          - streaming_publishers
+          - streaming_seller_seat_lists
+          - streaming_seller_seats
+          - supply_tag_codes
+          - supply_partner_codes
+          - supply_router_codes
+          - supply_labels
+          - supply_partners
+          - supply_routers
+          - vendors
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - $ref: '#/components/parameters/is_active'
+      - $ref: '#/components/parameters/account_id'
+      - name: demand_partner_permission_ids
+        description: Filter based on the demand partner(s) selected for the given objects. Only supported for app_bundle_lists, app_name_lists, city_lists, country_lists, deal_lists, deals, metro_area_lists, global_fcap_pixels, ip_lists, postal_code_lists, publisher_id_lists, segments, state_lists, and streaming_seller_seat_lists.
+        in: query
+        schema:
+          oneOf:
+          - type: integer
+          - type: array
+            items:
+              type: integer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Search
+      operationId: search_entity_get
+  /api/v1/search/account_managers:
+    get:
+      summary: Search for account managers
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - name: partner_type
+        in: query
+        description: filter by supply or demand partner account managers
+        schema:
+          type: string
+          enum:
+          - supply
+          - demand
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1SearchResponse'
+      tags:
+      - Search
+      operationId: search_account_managers_get
+  /api/v1/search/ad_servers:
+    get:
+      summary: Search for ad servers
+      description: Typeahead for VAST ad servers. Database rows include id for macro suggester; SpringServe, Other, and header-bidding platforms return id null.
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Matching ad server options
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdServerSearchResult'
+      tags:
+      - Search
+      operationId: search_ad_servers_get
+  /api/v1/search/campaigns:
+    get:
+      summary: Search for demand tags
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - $ref: '#/components/parameters/is_active'
+      - name: demand_partner_id
+        in: query
+        schema:
+          type: number
+      - name: exclude_open_market
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                      is_active:
+                        type: boolean
+                      direct_connection:
+                        type: string
+      tags:
+      - Search
+      operationId: search_campaigns_get
+  /api/v1/search/deal_lists:
+    get:
+      summary: Search for supply partners
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - $ref: '#/components/parameters/is_active'
+      - name: exclude_empty_list
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                      is_active:
+                        type: boolean
+      tags:
+      - Search
+      operationId: search_deal_lists_get
+  /api/v1/search/demand_partners:
+    get:
+      summary: Search for demand partners
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - $ref: '#/components/parameters/is_active'
+      - name: supply_tag_id
+        in: query
+        description: filter by Demand Partners associated with Demand Tags that are in Demand Tag Priorities for the specified Supply Tag
+        schema:
+          type: number
+      - name: managed
+        in: query
+        description: filter by Managed (i.e. not Direct Connect) Demand Partners
+        schema:
+          type: boolean
+      - name: direct_connect
+        in: query
+        description: filter by Direct Connect Demand Partners
+        schema:
+          type: boolean
+      - name: exclude_open_market
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                      is_active:
+                        type: string
+      tags:
+      - Search
+      operationId: search_demand_partners_get
+  /api/v1/search/demand_tags:
+    get:
+      summary: Search for demand tags
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - $ref: '#/components/parameters/is_active'
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - audio
+          - tile
+          - video
+      - name: exclude_open_market
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                      is_active:
+                        type: boolean
+                      direct_connection:
+                        type: string
+      tags:
+      - Search
+      operationId: search_demand_tags_get
+  /api/v1/search/displayable_accounts:
+    get:
+      summary: Search for displayable accounts
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - $ref: '#/components/parameters/is_active'
+      - name: platform_type
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                      is_active:
+                        type: boolean
+      tags:
+      - Search
+      operationId: search_displayable_accounts_get
+  /api/v1/search/iab_category:
+    get:
+      summary: Search for iab categories
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - name: tier
+        in: query
+        schema:
+          type: number
+          enum:
+          - 1
+          - 2
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                      value:
+                        type: string
+      tags:
+      - Search
+      operationId: search_iab_category_get
+  /api/v1/search/key_keys:
+    get:
+      summary: Search for Keys
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - name: definition_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - free
+          - predefined
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                      value:
+                        type: string
+                      definition_type:
+                        type: string
+      tags:
+      - Search
+      operationId: search_key_keys_get
+  /api/v1/search/supply_partners:
+    get:
+      summary: Search for supply partners
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - $ref: '#/components/parameters/is_active'
+      - name: direct_io_publishers_only
+        in: query
+        schema:
+          type: boolean
+      - name: managed
+        in: query
+        description: filter by Managed (i.e. not Direct Connect) Supply Partners
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+      tags:
+      - Search
+      operationId: search_supply_partners_get
+  /api/v1/search/supply_tags:
+    get:
+      summary: Search for supply tags
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - $ref: '#/components/parameters/is_active'
+      - name: format
+        in: query
+        schema:
+          type: string
+          enum:
+          - audio
+          - tile
+          - video
+      - name: waterfall_management
+        in: query
+        schema:
+          type: string
+          enum:
+          - campaign
+          - campaign_side
+          - demand_tag
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                  - $ref: '#/components/schemas/V1SearchResponseItem'
+                  - type: object
+                    properties:
+                      type:
+                        type: string
+                      is_active:
+                        type: boolean
+                      custom_data:
+                        type: object
+                        properties:
+                          slot_orders:
+                            type: array
+                            items:
+                              type: string
+                          slot_numbers:
+                            type: array
+                            nullable: true
+      tags:
+      - Search
+      operationId: search_supply_tags_get
+  /api/v1/search/user_accounts:
+    get:
+      summary: Search for user accounts
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/with_deleted'
+      - name: is_demand_forecast_creator
+        in: query
+        description: filter by User Accounts that are associated with Demand Forecasts
+        schema:
+          type: boolean
+      - name: is_clearline_forecast_creator
+        in: query
+        description: filter by User Accounts that are associated with Clearline Forecasts
+        schema:
+          type: boolean
+      - name: is_csv_report_creator
+        in: query
+        description: filter by User Accounts that are associated with CSV Reports
+        schema:
+          type: boolean
+      - name: is_scheduled_report_creator
+        in: query
+        description: filter by User Accounts that are associated with Scheduled Reports
+        schema:
+          type: boolean
+      - name: is_report_template_creator
+        in: query
+        description: filter by User Accounts that are associated with Report Templates
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/V1SearchResponse'
+      tags:
+      - Search
+      operationId: search_user_accounts_get
+components:
+  schemas:
+    V1SearchResponseItem:
+      type: object
+      properties:
+        id:
+          type: number
+        label:
+          type: string
+    AdServerSearchResult:
+      type: object
+      required:
+      - name
+      - url_match
+      properties:
+        id:
+          type: integer
+          nullable: true
+          description: AdServer primary key; null for SpringServe, Other, and header-bidding platform options.
+        name:
+          type: string
+        url_match:
+          type: string
+    V1SearchResponse:
+      type: array
+      items:
+        allOf:
+        - $ref: '#/components/schemas/V1SearchResponseItem'
+  parameters:
+    is_active:
+      name: is_active
+      description: Filter results by active state. `true` returns only active records, `false` returns only inactive records. Omit to return both.
+      in: query
+      schema:
+        type: boolean
+    with_deleted:
+      name: with_deleted
+      in: query
+      schema:
+        type: boolean
+    account_id:
+      name: account_id
+      description: Scope the search to the given account instead of your currently active account. Only supported for `streaming_publishers` and `streaming_seller_seats`.
+      in: query
+      schema:
+        type: integer
+    limit:
+      name: limit
+      description: max number of results to return
+      in: query
+      schema:
+        type: string
+    q:
+      name: q
+      description: the string to search for
+      in: query
+      schema:
+        type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

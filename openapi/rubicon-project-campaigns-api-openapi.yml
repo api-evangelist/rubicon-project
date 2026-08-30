@@ -1,0 +1,352 @@
+openapi: 3.2.0
+info:
+  title: SpringServe UI API (V0) Campaigns API
+  version: 0.1.0
+  description: "> **_NOTE:_** This document covers the v0 API (`/api/v0`). You can find additional documentation on the v0 API (`/api/v0`) on the \n[Magnite Help Center](https://help.magnite.com/), which is broken into sections for endpoints relevant to \n[SpringServe](https://help.magnite.com/help/api-documentation) and [Clearline](https://help.magnite.com/help/api-documentation-06dd4d3). \nYou can also find V1 swagger documentation by selecting ‘SpringServe API V1’ from the dropdown at the top right corner \nof this page. Please note we are in the process of creating V1 endpoints for all existing V0 endpoints, but while that work \nis in progress not all endpoints will be supported on V1. We advise reviewing both swagger pages to determine what \nis supported in each version.\n\n# Authentication\nWhen using this API documentation server, by default it will authenticate API calls using cookie-based authentication agains the selected server.  If you are properly logged into the SpringServe server and your session is still active, then the API calls should automatically authenticate.  \n\nOutside of this API documentation server you should use either Token Based or Bearer authentication.  You may also these authentication methods on this server as well,\n which will take precedence over any cookie/session based authentication.\n### Token Based Authentication\nUse the [POST /api/v0/auth](#/Auth/auth_post) endpoint to generate an API token that is then passed in the `Authorization: <token>` header\n\n### Bearer Authentication\nUse the [POST /api/v0/auth](#/Auth/auth_post) endpoint to authenticate and get a bearer token that is then passed in the `Authorization: Bearer <token>` header\n\n# Active Account Context\nA given request always runs in the context of currently active account for the authenticated user making\nthe request. The active account can be determined via the [GET /api/v0/accounts/current](#/Accounts/accounts_current_get)\nendpoint and updated via [POST /api/v0/accounts/{id}/set_current](#/Accounts/accounts_id_set_current_post).\nThe active account can also be overridden for an authenticated request by passing the `x-auth-context` header.\n\n# V0 List Resource Functionality\nV0 list endpoints support pagination via the `page` (first page is page 1) and `per` (how many results\nper page) query parameters. Some endpoints also support filtering by `ids[]` (repeated query param, e.g. ids[]=1&ids[]=2).\n"
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Campaigns
+paths:
+  /api/v0/campaigns:
+    get:
+      summary: Index
+      description: List all campaigns. Supports pagination via page, per, and ids params.
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: List of campaigns
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Campaigns
+      operationId: campaigns_get
+    post:
+      summary: Create
+      description: Creating a Campaign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              managed_simple:
+                $ref: '#/components/examples/campaign_managed_create_simple'
+              managed_full:
+                $ref: '#/components/examples/campaign_managed_create_full'
+              direct_connect_simple:
+                $ref: '#/components/examples/campaign_direct_connect_create_simple'
+              direct_connect_full:
+                $ref: '#/components/examples/campaign_direct_connect_create_full'
+              tiles_dedup_simple:
+                $ref: '#/components/examples/campaign_tiles_dedup_create_simple'
+              tiles_dedup_full:
+                $ref: '#/components/examples/campaign_tiles_dedup_create_full'
+        required: true
+      responses:
+        '201':
+          description: Created campaign
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                name: My Campaign
+                has_rate: true
+                rate: 10.0
+                demand_partner_id: 52
+      tags:
+      - Campaigns
+      operationId: campaigns_post
+  /api/v0/campaigns/{id}:
+    get:
+      summary: Show
+      description: Get a Campaign
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Campaign details
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Campaigns
+      operationId: campaigns_id_get
+    put:
+      summary: Update
+      description: Add Demand Tags to your Campaign or Edit a Campaign
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/campaign_update_simple'
+              full:
+                $ref: '#/components/examples/campaign_update_full'
+      responses:
+        '200':
+          description: Updated campaign
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 39
+                account_id: 1
+                name: My Campaign
+                rate: null
+                has_rate: false
+                demand_partner_id: 52
+                demand_tag_ids:
+                - 22312
+                - 45923
+      tags:
+      - Campaigns
+      operationId: campaigns_id_put
+    delete:
+      summary: Destroy
+      description: Delete a campaign
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Campaigns
+      operationId: campaigns_id_delete
+components:
+  examples:
+    campaign_direct_connect_create_full:
+      summary: Direct Connect Full
+      value:
+        name: Campaign Name
+        demand_partner_id: 1
+        code: '1'
+        secondary_code: '1'
+        has_rate: false
+        partner_tier_override_enabled: true
+        partner_tier_override: '1'
+        guaranteed_delivery: false
+        guaranteed_tier: '1'
+        audited_creative_statuses:
+        - '1'
+        demand_tag_ids:
+        - 1
+        campaign_tiers:
+        - supply_tag_id: 1
+          tier: 1
+          slot_order: '1'
+          slot_number: 1
+        tiles_screen_deduplication: false
+        third_party_fee: 1.11
+        third_party_fee_currency: USD
+        third_party_fee_metric: 0
+        third_party_fee_net_revenue: false
+        non_billable_fees:
+        - cost_basis: impressions
+          value: 1.11
+          currency: USD
+        tag_pixels:
+        - pixel_type: AdImpression
+          pixel_format: image
+          pixel_url: https://ad.example.com/pixel
+        is_active: true
+        note: Campaign note
+    campaign_tiles_dedup_create_simple:
+      summary: Tiles Screen Deduplication Simple
+      value:
+        name: Campaign Name
+        demand_partner_id: 1
+        has_rate: true
+        rate: 1.11
+        tiles_screen_deduplication: true
+        max_bids_per_screen: 1
+    campaign_direct_connect_create_simple:
+      summary: Direct Connect Simple
+      value:
+        name: Campaign Name
+        demand_partner_id: 1
+        has_rate: false
+    campaign_update_full:
+      summary: Full
+      value:
+        name: Campaign Name
+        demand_partner_id: 1
+        code: '1'
+        secondary_code: '1'
+        has_rate: true
+        rate: 1.11
+        rate_currency: USD
+        booked_revenue: 1.11
+        cost_model_type: 0
+        partner_tier_override_enabled: true
+        partner_tier_override: '1'
+        guaranteed_delivery: false
+        guaranteed_tier: '1'
+        audited_creative_statuses:
+        - '1'
+        demand_tag_ids:
+        - 1
+        campaign_tiers:
+        - supply_tag_id: 1
+          tier: 1
+          slot_order: '1'
+          slot_number: 1
+        tiles_screen_deduplication: false
+        third_party_fee: 1.11
+        third_party_fee_currency: USD
+        third_party_fee_metric: 0
+        third_party_fee_net_revenue: false
+        non_billable_fees:
+        - cost_basis: impressions
+          value: 1.11
+          currency: USD
+        tag_pixels:
+        - pixel_type: AdImpression
+          pixel_format: image
+          pixel_url: https://ad.example.com/pixel
+        is_active: true
+        note: Campaign note
+    campaign_managed_create_full:
+      summary: Managed Full
+      value:
+        name: Campaign Name
+        demand_partner_id: 1
+        code: '1'
+        secondary_code: '1'
+        has_rate: true
+        rate: 1.11
+        rate_currency: USD
+        booked_revenue: 1.11
+        cost_model_type: 0
+        partner_tier_override_enabled: true
+        partner_tier_override: '1'
+        demand_tiering: false
+        guaranteed_delivery: false
+        guaranteed_tier: '1'
+        audited_creative_statuses:
+        - '1'
+        demand_tag_ids:
+        - 1
+        campaign_tiers:
+        - supply_tag_id: 1
+          tier: 1
+          slot_order: '1'
+          slot_number: 1
+        tiles_screen_deduplication: false
+        third_party_fee: 1.11
+        third_party_fee_currency: USD
+        third_party_fee_metric: 0
+        third_party_fee_net_revenue: false
+        non_billable_fees:
+        - cost_basis: impressions
+          value: 1.11
+          currency: USD
+        tag_pixels:
+        - pixel_type: AdImpression
+          pixel_format: image
+          pixel_url: https://ad.example.com/pixel
+        mediaocean_prisma_enabled: false
+        mediaocean_prisma_order_id: '1'
+        mediaocean_prisma_campaign_id: '1'
+        mediaocean_prisma_placement_id: '1'
+        mediaocean_prisma_campaign_link: https://prisma.example.com/campaign
+        is_active: true
+        note: Campaign note
+    campaign_managed_create_simple:
+      summary: Managed Simple
+      value:
+        name: Campaign Name
+        demand_partner_id: 1
+        has_rate: true
+        rate: 1.11
+    campaign_tiles_dedup_create_full:
+      summary: Tiles Screen Deduplication Full
+      value:
+        name: Campaign Name
+        demand_partner_id: 1
+        code: '1'
+        secondary_code: '1'
+        has_rate: true
+        rate: 1.11
+        rate_currency: USD
+        booked_revenue: 1.11
+        cost_model_type: 0
+        partner_tier_override_enabled: true
+        partner_tier_override: '1'
+        guaranteed_delivery: false
+        guaranteed_tier: '1'
+        audited_creative_statuses:
+        - '1'
+        demand_tag_ids:
+        - 1
+        campaign_tiers:
+        - supply_tag_id: 1
+          tier: 1
+          slot_order: '1'
+          slot_number: 1
+        tiles_screen_deduplication: true
+        max_bids_per_screen: 1
+        third_party_fee: 1.11
+        third_party_fee_currency: USD
+        third_party_fee_metric: 0
+        third_party_fee_net_revenue: false
+        non_billable_fees:
+        - cost_basis: impressions
+          value: 1.11
+          currency: USD
+        tag_pixels:
+        - pixel_type: AdImpression
+          pixel_format: image
+          pixel_url: https://ad.example.com/pixel
+        is_active: true
+        note: Campaign note
+    campaign_update_simple:
+      summary: Simple
+      value:
+        name: Campaign Name
+        rate: 1.11
+        demand_tag_ids:
+        - 1
+        is_active: true
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

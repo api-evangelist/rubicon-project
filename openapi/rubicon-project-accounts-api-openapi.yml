@@ -1,0 +1,1461 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Accounts API
+  version: '1.0'
+  description: 'Operations tagged Accounts across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Accounts
+paths:
+  /api/v0/accounts:
+    get:
+      summary: Index
+      description: List all Accounts accessible to the current user
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Accounts
+      operationId: accounts_get
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/accounts/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      description: Retrieve a single account by id
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_get
+    put:
+      summary: Update
+      description: Update the account. Only tier flags are updatable via v0 (tier_a_active, tier_b_active, tier_c_active, tier_e_active, tier_f_active).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tier_a_active:
+                  type: boolean
+                tier_b_active:
+                  type: boolean
+                tier_c_active:
+                  type: boolean
+                tier_e_active:
+                  type: boolean
+                tier_f_active:
+                  type: boolean
+            examples:
+              simple:
+                $ref: '#/components/examples/account_update_simple'
+              full:
+                $ref: '#/components/examples/account_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_put
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/accounts/current:
+    get:
+      summary: Get Current
+      description: Get the currently active account for the authenticated user
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_current_get
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/accounts/{id}/set_current:
+    post:
+      summary: Set Current
+      description: Set the active account for the authenticated user to the specified account id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_set_current_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts:
+    get:
+      summary: Index
+      description: List all Accounts
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            examples:
+              publisher_simple:
+                $ref: '#/components/examples/account_publisher_create_simple'
+              publisher_full:
+                $ref: '#/components/examples/account_publisher_create_full'
+              dsp_main_simple:
+                $ref: '#/components/examples/account_dsp_main_create_simple'
+              dsp_main_full:
+                $ref: '#/components/examples/account_dsp_main_create_full'
+              dsp_sub_simple:
+                $ref: '#/components/examples/account_dsp_sub_create_simple'
+              dsp_sub_full:
+                $ref: '#/components/examples/account_dsp_sub_create_full'
+              clearline_sub_simple:
+                $ref: '#/components/examples/account_clearline_sub_create_simple'
+              clearline_sub_full:
+                $ref: '#/components/examples/account_clearline_sub_create_full'
+              curator_main_simple:
+                $ref: '#/components/examples/account_curator_main_create_simple'
+              curator_main_full:
+                $ref: '#/components/examples/account_curator_main_create_full'
+              curator_sub_simple:
+                $ref: '#/components/examples/account_curator_sub_create_simple'
+              curator_sub_full:
+                $ref: '#/components/examples/account_curator_sub_create_full'
+              external_bidder_simple:
+                $ref: '#/components/examples/account_external_bidder_create_simple'
+              external_bidder_full:
+                $ref: '#/components/examples/account_external_bidder_create_full'
+            schema:
+              type: object
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_get
+    patch:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            examples:
+              simple:
+                $ref: '#/components/examples/account_update_simple_2'
+              full:
+                $ref: '#/components/examples/account_update_full_2'
+            schema:
+              type: object
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_patch
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/current:
+    get:
+      summary: Get the currently active account for the authenticated user
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_current_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/displayable:
+    get:
+      summary: Get the accounts that the current user can select as their current account context
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_displayable_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/meta:
+    get:
+      summary: Meta
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_meta_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/new:
+    get:
+      summary: Get the defaults for a new account given an optional preset
+      parameters:
+      - name: preset
+        in: query
+        schema:
+          type: string
+          examples:
+          - publisher
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_new_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/permissions:
+    get:
+      summary: Permissions Collection
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/bulk_connect_curators:
+    post:
+      summary: Bulk DC Accounts (Curator)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              connect_one:
+                $ref: '#/components/examples/account_bulk_connect_curators_one'
+              connect_many:
+                $ref: '#/components/examples/account_bulk_connect_curators_many'
+            schema:
+              type: object
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_bulk_connect_curators_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/bulk_connect_dsps:
+    post:
+      summary: Bulk DC Accounts (DSP)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              connect_one:
+                $ref: '#/components/examples/account_bulk_connect_dsps_one'
+              connect_many:
+                $ref: '#/components/examples/account_bulk_connect_dsps_many'
+            schema:
+              type: object
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_bulk_connect_dsps_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/bulk_set_dc_visibility:
+    post:
+      summary: Bulk DC Accounts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              single:
+                $ref: '#/components/examples/account_bulk_set_dc_visibility_one'
+              multiple:
+                $ref: '#/components/examples/account_bulk_set_dc_visibility_many'
+            schema:
+              type: object
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_bulk_set_dc_visibility_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/curator_dc_accounts:
+    get:
+      summary: DC Accounts (Curator)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_curator_dc_accounts_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/dc_accounts:
+    get:
+      summary: DC Accounts
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_dc_accounts_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/dsp_dc_accounts:
+    get:
+      summary: DC Accounts (DSP)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_dsp_dc_accounts_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/salesforce_sync:
+    get:
+      summary: Salesforce Sync
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_salesforce_sync_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/set_current:
+    post:
+      summary: Set Current
+      description: Set the active account for the authenticated user to the specified account id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_set_current_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/{id}/used_partner_segment_vendors:
+    get:
+      summary: Used Partner Segment Vendors
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_id_used_partner_segment_vendors_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/bulk/update:
+    post:
+      summary: Update Multiple Accounts
+      description: Update multiple accounts in a single request. Returns different status codes based on success/failure ratio.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                allOf:
+                - type: object
+                  required:
+                  - id
+            examples:
+              single:
+                $ref: '#/components/examples/account_bulk_update_single'
+              multiple:
+                $ref: '#/components/examples/account_bulk_update_multiple'
+      responses:
+        '204':
+          description: All updates successful
+        '200':
+          description: Partial success - some objects updated successfully, others failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                examples:
+                - errors:
+                    '1':
+                    - Name cannot be blank
+                    other:
+                    - Object at index 2 is missing an ID
+        '400':
+          description: Bad request - no objects provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                examples:
+                - error: No objects provided
+        '422':
+          description: All updates failed - no objects were updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                examples:
+                - errors:
+                    '1':
+                    - Name cannot be blank
+                    '2':
+                    - Rate must be greater than 0
+                    other:
+                    - Object at index 3 is missing an ID
+      tags:
+      - Accounts
+      operationId: accounts_bulk_update_many_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/dvplus/{dvplus_id}/set_current:
+    post:
+      summary: Set Current by Magnite DV+ ID
+      description: Set the active account for the authenticated user to the account with the configured Magnite DV+ ID
+      parameters:
+      - name: dvplus_id
+        in: path
+        required: true
+        schema:
+          type: string
+          nullable: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_dvplus_dvplus_id_set_current_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/accounts/foreign_seat/{foreign_platform_name}/{foreign_seat_id}/white_label:
+    get:
+      summary: Show for Account by Foreign Seat
+      parameters:
+      - name: foreign_platform_name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: foreign_seat_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: include
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Accounts
+      operationId: accounts_foreign_seat_foreign_platform_name_foreign_seat_id_white_label_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    account_update_full:
+      summary: Full
+      value:
+        tier_a_active: true
+        tier_b_active: false
+        tier_c_active: false
+        tier_e_active: false
+        tier_f_active: false
+    account_update_simple:
+      summary: Simple
+      value:
+        tier_a_active: true
+    account_dsp_sub_create_simple:
+      summary: DSP Sub Simple
+      value:
+        name: Account Name
+        platform_type: dsp_sub
+        account_type_id: 1
+        reporting_view: dsp_sub
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        minimum_commencement_date: '2026-01-01'
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        multicall_max: 2
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        cdn_fee: 1.11
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_bulk_connect_dsps_one:
+      summary: Connect One
+      value:
+        other_account_ids:
+        - 1
+    account_clearline_sub_create_simple:
+      summary: ClearLine Sub Simple
+      value:
+        name: Account Name
+        platform_type: dsp_sub
+        account_type_id: 1
+        reporting_view: dsp_sub
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        minimum_commencement_date: '2026-01-01'
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        multicall_max: 2
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        cl_direct_ios_enabled: true
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        cdn_fee: 1.11
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_curator_main_create_full:
+      summary: Curator Main Full
+      value:
+        name: Account Name
+        platform_type: curator_main
+        account_type_id: 1
+        reporting_view: curator_main
+        website_url: https://account.example.com
+        email: account@example.com
+        account_manager_id: 1
+        account_owner_id: 1
+        is_test: false
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        contract_term_months: 1
+        minimum_commencement_date: '2026-01-01'
+        monthly_minimum: 1
+        multicall_max: 2
+        cdn_fee: 1.11
+        cdn_fee_type: cpg
+        player_fee: 1.11
+        pmp_revshare_rate: 1
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        dsp_bidder_fee_type: cpm
+        dsp_bidder_fee_value: 1.11
+        ssp_bidder_fee_type: cpm
+        ssp_bidder_fee_value: 1.11
+        oem_bidder_fee_type: cpm
+        oem_bidder_fee_value: 1.11
+        management_fee_type: cpm
+        management_fee_value: 1.11
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        multi_currency_enabled: true
+        default_currency: USD
+        quickstats_currencies:
+        - EUR
+        dma_reporting_enabled: true
+        state_reporting_enabled: true
+        is_active: true
+        display_in_dropdown: true
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_curator_main_create_simple:
+      summary: Curator Main Simple
+      value:
+        name: Account Name
+        platform_type: curator_main
+        account_type_id: 1
+        reporting_view: curator_main
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        multicall_max: 2
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        cdn_fee: 1.11
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_update_simple_2:
+      summary: Simple
+      value:
+        name: Account Name
+        is_active: true
+    account_dsp_main_create_full:
+      summary: DSP Main Full
+      value:
+        name: Account Name
+        platform_type: dsp_main
+        account_type_id: 1
+        reporting_view: dsp_main
+        website_url: https://account.example.com
+        email: account@example.com
+        account_manager_id: 1
+        account_owner_id: 1
+        is_test: false
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        contract_term_months: 1
+        minimum_commencement_date: '2026-01-01'
+        monthly_minimum: 1
+        multicall_max: 2
+        direct_connect_enabled: true
+        cdn_fee: 1.11
+        cdn_fee_type: cpg
+        player_fee: 1.11
+        pmp_revshare_rate: 1
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        dsp_bidder_fee_type: cpm
+        dsp_bidder_fee_value: 1.11
+        ssp_bidder_fee_type: cpm
+        ssp_bidder_fee_value: 1.11
+        oem_bidder_fee_type: cpm
+        oem_bidder_fee_value: 1.11
+        management_fee_type: cpm
+        management_fee_value: 1.11
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        create_sub_accounts_enabled: true
+        demand_partner_expansion_enabled: true
+        advertiser_domain_required: true
+        mediaocean_prisma_enabled: true
+        cl_budget_allocations_enabled: true
+        creative_pre_approval_enabled: true
+        creative_pre_approval_publishers:
+        - 1
+        multi_currency_enabled: true
+        default_currency: USD
+        quickstats_currencies:
+        - EUR
+        dma_reporting_enabled: true
+        state_reporting_enabled: true
+        is_active: true
+        display_in_dropdown: true
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_bulk_connect_dsps_many:
+      summary: Connect Many
+      value:
+        other_account_ids:
+        - 1
+        - 2
+    account_bulk_update_single:
+      summary: Single
+      value:
+      - id: 1
+        name: Account Name
+        is_active: true
+    account_bulk_update_multiple:
+      summary: Multiple
+      value:
+      - id: 1
+        name: Account Name
+        is_active: true
+      - id: 2
+        name: Account Name
+        daily_impression_goal: 1
+    account_curator_sub_create_full:
+      summary: Curator Sub Full
+      value:
+        name: Account Name
+        platform_type: curator_sub
+        account_type_id: 1
+        reporting_view: curator_sub
+        website_url: https://account.example.com
+        email: account@example.com
+        account_manager_id: 1
+        account_owner_id: 1
+        is_test: false
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        contract_term_months: 1
+        minimum_commencement_date: '2026-01-01'
+        monthly_minimum: 1
+        multicall_max: 2
+        cdn_fee: 1.11
+        cdn_fee_type: cpg
+        player_fee: 1.11
+        pmp_revshare_rate: 1
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        dsp_bidder_fee_type: cpm
+        dsp_bidder_fee_value: 1.11
+        ssp_bidder_fee_type: cpm
+        ssp_bidder_fee_value: 1.11
+        oem_bidder_fee_type: cpm
+        oem_bidder_fee_value: 1.11
+        management_fee_type: cpm
+        management_fee_value: 1.11
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        multi_currency_enabled: true
+        default_currency: USD
+        quickstats_currencies:
+        - EUR
+        dma_reporting_enabled: true
+        state_reporting_enabled: true
+        is_active: true
+        display_in_dropdown: true
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_curator_sub_create_simple:
+      summary: Curator Sub Simple
+      value:
+        name: Account Name
+        platform_type: curator_sub
+        account_type_id: 1
+        reporting_view: curator_sub
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        minimum_commencement_date: '2026-01-01'
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        multicall_max: 2
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        cdn_fee: 1.11
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_bulk_connect_curators_many:
+      summary: Connect Many
+      value:
+        other_account_ids:
+        - 1
+        - 2
+    account_clearline_sub_create_full:
+      summary: ClearLine Sub Full
+      value:
+        name: Account Name
+        platform_type: dsp_sub
+        account_type_id: 1
+        reporting_view: dsp_sub
+        website_url: https://account.example.com
+        email: account@example.com
+        account_manager_id: 1
+        account_owner_id: 1
+        is_test: false
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        contract_term_months: 1
+        minimum_commencement_date: '2026-01-01'
+        monthly_minimum: 1
+        multicall_max: 2
+        cdn_fee: 1.11
+        cdn_fee_type: cpg
+        player_fee: 1.11
+        pmp_revshare_rate: 1
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        dsp_bidder_fee_type: cpm
+        dsp_bidder_fee_value: 1.11
+        ssp_bidder_fee_type: cpm
+        ssp_bidder_fee_value: 1.11
+        oem_bidder_fee_type: cpm
+        oem_bidder_fee_value: 1.11
+        management_fee_type: cpm
+        management_fee_value: 1.11
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        cl_direct_ios_enabled: true
+        cl_tiles_enabled: true
+        cl_open_auction_enabled: true
+        cl_budget_caps_enabled: true
+        cl_budget_allocations_enabled: true
+        cl_management_fee_enabled: true
+        cl_request_fcaps_enabled: true
+        netflix_pre_approval_enabled: true
+        support_long_names_enabled: true
+        multi_currency_enabled: true
+        default_currency: USD
+        quickstats_currencies:
+        - EUR
+        dma_reporting_enabled: true
+        state_reporting_enabled: true
+        unrestricted_external_reports: true
+        is_active: true
+        display_in_dropdown: true
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_external_bidder_create_simple:
+      summary: External Bidder Simple
+      value:
+        name: Account Name
+        platform_type: publisher
+        account_type_id: 1
+        reporting_view: network
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        multicall_max: 2
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        openrtb_enabled: true
+        openrtb_buyer_fee_type: revshare
+        openrtb_buyer_fee_value: 1.11
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_external_bidder_create_full:
+      summary: External Bidder Full
+      value:
+        name: Account Name
+        platform_type: publisher
+        account_type_id: 1
+        reporting_view: network
+        website_url: https://account.example.com
+        email: account@example.com
+        account_manager_id: 1
+        account_owner_id: 1
+        is_test: false
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        contract_term_months: 1
+        multicall_max: 2
+        cdn_fee: 1.11
+        cdn_fee_type: cpg
+        player_fee: 1.11
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        openrtb_enabled: true
+        openrtb_buyer_fee_type: revshare
+        openrtb_buyer_fee_value: 1.11
+        openrtb_buyer_requires_user_id: true
+        openrtb_buyer_timeout: 600
+        openrtb_hosting_user_mapping: true
+        openrtb_sync_url: https://account.example.com/sync
+        account_usersync_weights:
+        - sync_on_account_id: 1
+          weight: 1
+        is_active: true
+        display_in_dropdown: true
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_bulk_set_dc_visibility_one:
+      summary: Single
+      value:
+        other_account_ids:
+        - 1
+    account_bulk_connect_curators_one:
+      summary: Connect One
+      value:
+        other_account_ids:
+        - 1
+    account_bulk_set_dc_visibility_many:
+      summary: Multiple
+      value:
+        other_account_ids:
+        - 1
+        - 2
+    account_publisher_create_full:
+      summary: Publisher Full
+      value:
+        name: Account Name
+        platform_type: publisher
+        account_type_id: 1
+        reporting_view: publisher
+        website_url: https://account.example.com
+        email: account@example.com
+        phone: '1'
+        salesforce_id: '1'
+        salesforce_contract_terms_id: '1'
+        account_manager_id: 1
+        technical_account_manager_id: 1
+        account_owner_id: 1
+        daily_impression_goal: 1
+        is_test: false
+        spotx_joint_solution_enabled: false
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        contract_term_months: 1
+        minimum_commencement_date: '2026-01-01'
+        credit_limit: 1
+        digital_payment_customer: false
+        monthly_minimum: 1
+        multicall_max: 2
+        direct_connect_enabled: true
+        video_enabled: true
+        cdn_fee: 1.11
+        cdn_fee_type: cpg
+        player_fee: 1.11
+        pmp_revshare_rate: 1
+        house_ads_enabled: true
+        house_ads_cpm_fee: 1.11
+        tile_house_ads_cpm_fee: 1.11
+        creative_review: true
+        creative_audit_status_targeting: true
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        dsp_bidder_fee_type: cpm
+        dsp_bidder_fee_value: 1.11
+        ssp_bidder_fee_type: cpm
+        ssp_bidder_fee_value: 1.11
+        oem_bidder_fee_type: cpm
+        oem_bidder_fee_value: 1.11
+        management_fee_type: cpm
+        management_fee_value: 1.11
+        white_label_fee: 1.11
+        white_label_fee_commencement_date: '2026-01-01'
+        server_side_hb_enabled: false
+        fees_a_la_carte_enabled: false
+        infrastructure_fee_type: none
+        infrastructure_fill_cutoff: 1
+        infrastructure_cpm_fee: 1.11
+        partner_segments_enabled: true
+        partner_segment_markups:
+        - vendor_id: 1
+          markup_pct: 1.11
+        log_level_impressions: disabled
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        pods_enabled: true
+        campaign_waterfall_management_enabled: true
+        multi_currency_enabled: true
+        default_currency: USD
+        quickstats_currencies:
+        - EUR
+        vast_qps_enabled: false
+        guaranteed_delivery: true
+        tiles_response_type_enabled: true
+        support_clearcast_clock_id: true
+        deal_bypass_and_pass_through_enabled: true
+        beta_features: []
+        dma_reporting_enabled: true
+        state_reporting_enabled: true
+        key_value_keys_limit: 1
+        key_value_values_limit: 1
+        is_active: true
+        display_in_dropdown: true
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_publisher_create_simple:
+      summary: Publisher Simple
+      value:
+        name: Account Name
+        platform_type: publisher
+        account_type_id: 1
+        reporting_view: publisher
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        multicall_max: 2
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        cdn_fee: 1.11
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_dsp_main_create_simple:
+      summary: DSP Main Simple
+      value:
+        name: Account Name
+        platform_type: dsp_main
+        account_type_id: 1
+        reporting_view: dsp_main
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        multicall_max: 2
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        cdn_fee: 1.11
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+    account_update_full_2:
+      summary: Full
+      value:
+        name: Account Name
+        website_url: https://account.example.com
+        email: account@example.com
+        account_manager_id: 1
+        account_owner_id: 1
+        daily_impression_goal: 1
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        contract_term_months: 1
+        credit_limit: 1
+        multicall_max: 2
+        cdn_fee: 1.11
+        player_fee: 1.11
+        pmp_revshare_rate: 1
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        dsp_bidder_fee_type: cpm
+        ssp_bidder_fee_type: cpm
+        oem_bidder_fee_type: cpm
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        multi_currency_enabled: true
+        default_currency: USD
+        quickstats_currencies:
+        - EUR
+        is_active: true
+        display_in_dropdown: true
+    account_dsp_sub_create_full:
+      summary: DSP Sub Full
+      value:
+        name: Account Name
+        platform_type: dsp_sub
+        account_type_id: 1
+        reporting_view: dsp_sub
+        website_url: https://account.example.com
+        email: account@example.com
+        account_manager_id: 1
+        account_owner_id: 1
+        is_test: false
+        net_payable_term: 1
+        net_receivable_term: 1
+        contract_commencement_date: '2026-01-01'
+        contract_term_months: 1
+        minimum_commencement_date: '2026-01-01'
+        monthly_minimum: 1
+        multicall_max: 2
+        cdn_fee: 1.11
+        cdn_fee_type: cpg
+        player_fee: 1.11
+        pmp_revshare_rate: 1
+        support_level: level_1
+        support_fee: 1.11
+        support_commencement_date: '2026-01-01'
+        dsp_bidder_fee_type: cpm
+        dsp_bidder_fee_value: 1.11
+        ssp_bidder_fee_type: cpm
+        ssp_bidder_fee_value: 1.11
+        oem_bidder_fee_type: cpm
+        oem_bidder_fee_value: 1.11
+        management_fee_type: cpm
+        management_fee_value: 1.11
+        tier_a_active: true
+        tier_a_cutoff_type: impressions
+        tier_a_fees:
+        - tier_fee_type: platform
+          fee_type: cpm
+          fee_value: 1.11
+        demand_partner_expansion_enabled: true
+        advertiser_domain_required: true
+        mediaocean_prisma_enabled: true
+        cl_budget_allocations_enabled: true
+        creative_pre_approval_enabled: true
+        creative_pre_approval_publishers:
+        - 1
+        support_long_names_enabled: true
+        multi_currency_enabled: true
+        default_currency: USD
+        quickstats_currencies:
+        - EUR
+        dma_reporting_enabled: true
+        state_reporting_enabled: true
+        unrestricted_external_reports: true
+        is_active: true
+        display_in_dropdown: true
+        server_side_hb_fee: 1.11
+        server_side_hb_fee_commencement_date: '2026-01-01'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

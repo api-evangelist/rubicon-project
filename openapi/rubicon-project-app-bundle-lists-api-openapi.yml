@@ -1,0 +1,882 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project App Bundle Lists API
+  version: '1.0'
+  description: 'Operations tagged App Bundle Lists across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: App Bundle Lists
+paths:
+  /api/v0/app_bundle_lists:
+    get:
+      summary: Index
+      description: List all app bundle lists. Supports pagination via page, per, and ids params.
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: List of app bundle lists
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_get
+    post:
+      summary: Create
+      description: Creating an App Bundle List
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/app_bundle_list_create_simple'
+              full:
+                $ref: '#/components/examples/app_bundle_list_create_full'
+        required: true
+      responses:
+        '201':
+          description: Created app bundle list
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                account_id: 1
+                active: true
+                created_at: '2018-02-20T14:05:34.029Z'
+                description: My description
+                id: 9
+                name: My Test App Bundle List
+                partial_match: false
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/app_bundle_lists/{id}:
+    get:
+      summary: Show
+      description: Get an App Bundle List
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: App bundle list details
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                account_id: 1
+                active: true
+                created_at: '2018-02-20T14:05:34.029Z'
+                description: My description
+                id: 9
+                name: My Test App Bundle List
+                partial_match: false
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_get
+    put:
+      summary: Update
+      description: Update an app bundle list
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/app_bundle_list_update_simple'
+              full:
+                $ref: '#/components/examples/app_bundle_list_update_full'
+        required: true
+      responses:
+        '200':
+          description: Updated app bundle list
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                account_id: 1
+                active: true
+                created_at: '2018-02-20T14:05:34.029Z'
+                description: My description
+                id: 9
+                name: My Test App Bundle List
+                partial_match: false
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_put
+    delete:
+      summary: Destroy
+      description: Delete an app bundle list
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/app_bundle_lists/{app_bundle_list_id}/app_bundles:
+    get:
+      summary: Index
+      description: Get App Bundles in App Bundle List
+      parameters:
+      - name: app_bundle_list_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: List of app bundles
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+              example:
+              - app_bundle: app1
+              - app_bundle: app2
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_app_bundle_list_id_app_bundles_get
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/app_bundle_lists/{app_bundle_list_id}/app_bundles/bulk_create:
+    post:
+      summary: Bulk Create
+      description: Add App Bundles
+      parameters:
+      - name: app_bundle_list_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              single:
+                $ref: '#/components/examples/app_bundle_list_bundles_bulk_single'
+              multiple:
+                $ref: '#/components/examples/app_bundle_list_bundles_bulk_multiple'
+        required: true
+      responses:
+        '201':
+          description: Created app bundles
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                created: true
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_app_bundle_list_id_app_bundles_bulk_create_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/app_bundle_lists/{app_bundle_list_id}/app_bundles/bulk_delete:
+    delete:
+      summary: Bulk Delete
+      description: Remove App Bundles
+      parameters:
+      - name: app_bundle_list_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            example:
+              app_bundles:
+              - app2
+      responses:
+        '200':
+          description: Deleted app bundles
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                deleted: true
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_app_bundle_list_id_app_bundles_bulk_delete_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/app_bundle_lists/{app_bundle_list_id}/app_bundles/bulk_replace:
+    post:
+      summary: Bulk Replace
+      description: Replace Entire App Bundle List
+      parameters:
+      - name: app_bundle_list_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              single:
+                $ref: '#/components/examples/app_bundle_list_bundles_bulk_single'
+              multiple:
+                $ref: '#/components/examples/app_bundle_list_bundles_bulk_multiple'
+        required: true
+      responses:
+        '200':
+          description: Replaced app bundles
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                created: true
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_app_bundle_list_id_app_bundles_bulk_replace_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/app_bundle_lists/{app_bundle_list_id}/app_bundles/file_bulk_create:
+    post:
+      summary: File Bulk Create
+      description: Add App Bundles from a File
+      parameters:
+      - name: app_bundle_list_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - csv_file
+              properties:
+                csv_file:
+                  type: string
+                  format: binary
+                  description: CSV file containing app bundles to append
+        required: true
+      responses:
+        '201':
+          description: Append confirmation
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                created: true
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_app_bundle_list_id_app_bundles_file_bulk_create_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/app_bundle_lists/{app_bundle_list_id}/app_bundles/file_bulk_delete:
+    delete:
+      summary: File Bulk Delete
+      description: Remove App Bundles Using a File
+      parameters:
+      - name: app_bundle_list_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - csv_file
+              properties:
+                csv_file:
+                  type: string
+                  format: binary
+                  description: CSV file containing app bundles to remove
+      responses:
+        '200':
+          description: Deletion confirmation
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                deleted: true
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_app_bundle_list_id_app_bundles_file_bulk_delete_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/app_bundle_lists/{app_bundle_list_id}/app_bundles/file_bulk_replace:
+    post:
+      summary: File Bulk Replace
+      description: Replace Entire App Bundles with a File
+      parameters:
+      - name: app_bundle_list_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - csv_file
+              properties:
+                csv_file:
+                  type: string
+                  format: binary
+                  description: CSV file containing app bundles to replace existing list
+        required: true
+      responses:
+        '200':
+          description: Replacement confirmation
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                created: true
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_app_bundle_list_id_app_bundles_file_bulk_replace_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - name: app_bundle
+        in: query
+        description: Filter using big-list api
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            examples:
+              simple:
+                $ref: '#/components/examples/app_bundle_list_create_simple'
+              full:
+                $ref: '#/components/examples/app_bundle_list_create_full_2'
+            schema:
+              type: object
+        required: false
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_get
+    patch:
+      summary: Update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              simple:
+                $ref: '#/components/examples/app_bundle_list_update_simple_2'
+              full:
+                $ref: '#/components/examples/app_bundle_list_update_full_2'
+            schema:
+              type: object
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_patch
+    delete:
+      summary: Delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/permissions:
+    get:
+      summary: Collection Permissions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}/app_bundles:
+    get:
+      summary: Get the App Bundles in an App Bundle List
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_app_bundles_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}/permissions:
+    get:
+      summary: Permissions Member
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}/app_bundles/bulk_create:
+    post:
+      summary: Add App Bundles
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              single:
+                $ref: '#/components/examples/app_bundle_list_bundles_bulk_single'
+              multiple:
+                $ref: '#/components/examples/app_bundle_list_bundles_bulk_multiple'
+            schema:
+              type: object
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_app_bundles_bulk_create_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}/app_bundles/bulk_delete:
+    delete:
+      summary: Delete App Bundles
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              app_bundles:
+              - apple
+            schema:
+              type: object
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_app_bundles_bulk_delete_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}/app_bundles/bulk_replace:
+    post:
+      summary: Replace App Bundles
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              single:
+                $ref: '#/components/examples/app_bundle_list_bundles_bulk_single'
+              multiple:
+                $ref: '#/components/examples/app_bundle_list_bundles_bulk_multiple'
+            schema:
+              type: object
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_app_bundles_bulk_replace_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}/app_bundles/file_bulk_create:
+    post:
+      summary: Add App Bundles (CSV)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                csv_file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_app_bundles_file_bulk_create_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}/app_bundles/file_bulk_delete:
+    delete:
+      summary: Delete App Bundles (CSV)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                csv_file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_app_bundles_file_bulk_delete_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/app_bundle_lists/{id}/app_bundles/file_bulk_replace:
+    post:
+      summary: Replace App Bundles (CSV)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                csv_file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - App Bundle Lists
+      operationId: app_bundle_lists_id_app_bundles_file_bulk_replace_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    app_bundle_list_update_full:
+      summary: Full
+      value:
+        name: App Bundle List Name
+        description: App Bundle List Description
+        partial_match: false
+        active: true
+    app_bundle_list_bundles_bulk_single:
+      summary: Single
+      value:
+        app_bundles:
+        - com.example.app
+    app_bundle_list_bundles_bulk_multiple:
+      summary: Multiple
+      value:
+        app_bundles:
+        - com.example.app
+        - com.example.app2
+        - com.example.app3
+    app_bundle_list_create_simple:
+      summary: Simple
+      value:
+        name: App Bundle List Name
+    app_bundle_list_create_full:
+      summary: Full
+      value:
+        name: App Bundle List Name
+        description: App Bundle List Description
+        partial_match: false
+        active: true
+    app_bundle_list_update_simple:
+      summary: Simple
+      value:
+        name: App Bundle List Name
+        active: true
+    app_bundle_list_update_full_2:
+      summary: Full
+      value:
+        name: App Bundle List Name
+        description: App Bundle List Description
+        partial_match: false
+        is_active: true
+    app_bundle_list_create_full_2:
+      summary: Full
+      value:
+        name: App Bundle List Name
+        description: App Bundle List Description
+        partial_match: false
+        is_active: true
+    app_bundle_list_update_simple_2:
+      summary: Simple
+      value:
+        name: App Bundle List Name
+        is_active: true
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

@@ -1,0 +1,428 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Demand Labels API
+  version: '1.0'
+  description: 'Operations tagged Demand Labels across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Demand Labels
+paths:
+  /api/v0/demand_labels:
+    get:
+      summary: Index
+      description: List all demand labels. Supports pagination via page, per, and ids params.
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: List of demand labels
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Demand Labels
+      operationId: demand_labels_get
+    post:
+      summary: Create
+      description: Creating a Demand Label
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/demand_label_create_simple'
+              full:
+                $ref: '#/components/examples/demand_label_create_full'
+        required: true
+      responses:
+        '201':
+          description: Created demand label
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 353
+                name: API Docs label
+                account_id: 1
+      tags:
+      - Demand Labels
+      operationId: demand_labels_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/demand_labels/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      description: Get a Demand Label
+      responses:
+        '200':
+          description: Demand label details
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 1764
+                name: API Docs label
+                account_id: 1
+      tags:
+      - Demand Labels
+      operationId: demand_labels_id_get
+    put:
+      summary: Update
+      description: Edit a Demand Label
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/demand_label_update_simple'
+              full:
+                $ref: '#/components/examples/demand_label_update_full'
+      responses:
+        '200':
+          description: Updated demand label
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 353
+                name: I want to change the name
+                account_id: 1
+      tags:
+      - Demand Labels
+      operationId: demand_labels_id_put
+    delete:
+      summary: Destroy
+      description: Delete a demand label
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Demand Labels
+      operationId: demand_labels_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/demand_labels:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/additionalDataParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      - name: date_range
+        in: query
+        description: Quickstats interval label (applies when `additional_data` contains `quickstats`). Defaults to Today.
+        schema:
+          $ref: ./ref/quickstats.yaml#/components/schemas/dateRange
+      - name: currency
+        in: query
+        description: Quickstats currency (applies when `additional_data` contains `quickstats`). Defaults to USD.
+        schema:
+          $ref: ./ref/concerns/currency.yaml#/components/schemas/CurrencyList
+      responses:
+        '200':
+          description: Paginated list of demand labels
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: ref/params.yaml#/components/schemas/ParamsResponse
+                - type: object
+                  properties:
+                    results:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/DemandLabel'
+      tags:
+      - Demand Labels
+      operationId: demand_labels_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/demand_label_create_simple'
+              full:
+                $ref: '#/components/examples/demand_label_create_full'
+        required: true
+      responses:
+        '201':
+          description: Successfully created a new demand label
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandLabel'
+        '422':
+          description: Unprocessable request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                examples:
+                - error: Name can't be blank
+                  errors:
+                    name:
+                    - can't be blank
+      tags:
+      - Demand Labels
+      operationId: demand_labels_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/demand_labels/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/additionalDataParam
+      - name: date_range
+        in: query
+        description: Quickstats interval label (applies when `additional_data` contains `quickstats`). Defaults to Today.
+        schema:
+          $ref: ./ref/quickstats.yaml#/components/schemas/dateRange
+      - name: currency
+        in: query
+        description: Quickstats currency (applies when `additional_data` contains `quickstats`). Defaults to USD.
+        schema:
+          $ref: ./ref/concerns/currency.yaml#/components/schemas/CurrencyList
+      responses:
+        '200':
+          description: Demand label
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandLabel'
+      tags:
+      - Demand Labels
+      operationId: demand_labels_id_get
+    patch:
+      summary: Update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/demand_label_update_simple'
+              full:
+                $ref: '#/components/examples/demand_label_update_full'
+        required: true
+      responses:
+        '200':
+          description: Successfully updated a demand label
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DemandLabel'
+        '422':
+          description: Unprocessable request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                examples:
+                - error: Name can't be blank
+                  errors:
+                    name:
+                    - can't be blank
+      tags:
+      - Demand Labels
+      operationId: demand_labels_id_patch
+    delete:
+      summary: Delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Demand Labels
+      operationId: demand_labels_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/demand_labels/permissions:
+    get:
+      summary: Collection Permissions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Demand Labels
+      operationId: demand_labels_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/demand_labels/{id}/permissions:
+    get:
+      summary: Permissions Member
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Demand Labels
+      operationId: demand_labels_id_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    demand_label_create_simple:
+      summary: Simple
+      value:
+        name: Demand Label Name
+    demand_label_update_simple:
+      summary: Simple
+      value:
+        name: Demand Label Name
+    demand_label_create_full:
+      summary: Full
+      value:
+        name: Demand Label Name
+        demand_tag_ids:
+        - 1
+    demand_label_update_full:
+      summary: Full
+      value:
+        name: Demand Label Name
+        demand_tag_ids:
+        - 1
+  schemas:
+    DemandLabel:
+      type: object
+      properties:
+        id:
+          type: number
+        account_id:
+          type: number
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        demand_tag_ids:
+          type: array
+          items:
+            type: number
+        tags_count:
+          type: integer
+          description: Present when `additional_data` contains `quickstats` (active demand tags on the label).
+        users_count:
+          type: integer
+          description: Present when `additional_data` contains `quickstats` (demand-label client users).
+        quickstats:
+          description: Aggregated quickstats across linked demand tags; present when `additional_data` contains `quickstats`.
+          allOf:
+          - $ref: ./ref/quickstats.yaml#/components/schemas/QuickstatsMetrics
+        demand_tags:
+          type: array
+          description: Minimal demand tag objects; present when `include` contains `demand_tags` and tags are preloaded.
+          items:
+            type: object
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

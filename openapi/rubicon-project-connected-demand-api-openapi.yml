@@ -1,0 +1,203 @@
+openapi: 3.2.0
+info:
+  title: SpringServe UI API (V0) Connected Demand API
+  version: 0.1.0
+  description: "> **_NOTE:_** This document covers the v0 API (`/api/v0`). You can find additional documentation on the v0 API (`/api/v0`) on the \n[Magnite Help Center](https://help.magnite.com/), which is broken into sections for endpoints relevant to \n[SpringServe](https://help.magnite.com/help/api-documentation) and [Clearline](https://help.magnite.com/help/api-documentation-06dd4d3). \nYou can also find V1 swagger documentation by selecting ‘SpringServe API V1’ from the dropdown at the top right corner \nof this page. Please note we are in the process of creating V1 endpoints for all existing V0 endpoints, but while that work \nis in progress not all endpoints will be supported on V1. We advise reviewing both swagger pages to determine what \nis supported in each version.\n\n# Authentication\nWhen using this API documentation server, by default it will authenticate API calls using cookie-based authentication agains the selected server.  If you are properly logged into the SpringServe server and your session is still active, then the API calls should automatically authenticate.  \n\nOutside of this API documentation server you should use either Token Based or Bearer authentication.  You may also these authentication methods on this server as well,\n which will take precedence over any cookie/session based authentication.\n### Token Based Authentication\nUse the [POST /api/v0/auth](#/Auth/auth_post) endpoint to generate an API token that is then passed in the `Authorization: <token>` header\n\n### Bearer Authentication\nUse the [POST /api/v0/auth](#/Auth/auth_post) endpoint to authenticate and get a bearer token that is then passed in the `Authorization: Bearer <token>` header\n\n# Active Account Context\nA given request always runs in the context of currently active account for the authenticated user making\nthe request. The active account can be determined via the [GET /api/v0/accounts/current](#/Accounts/accounts_current_get)\nendpoint and updated via [POST /api/v0/accounts/{id}/set_current](#/Accounts/accounts_id_set_current_post).\nThe active account can also be overridden for an authenticated request by passing the `x-auth-context` header.\n\n# V0 List Resource Functionality\nV0 list endpoints support pagination via the `page` (first page is page 1) and `per` (how many results\nper page) query parameters. Some endpoints also support filtering by `ids[]` (repeated query param, e.g. ids[]=1&ids[]=2).\n"
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Connected Demand
+paths:
+  /api/v0/connected_demand:
+    get:
+      summary: Index
+      description: 'Selling strategies (path alias: connected_demand)'
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Connected Demand
+      operationId: connected_demand_get
+  /api/v0/connected_demand/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Connected Demand
+      operationId: connected_demand_id_get
+    put:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/selling_strategy_update_simple'
+              full:
+                $ref: '#/components/examples/selling_strategy_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Connected Demand
+      operationId: connected_demand_id_put
+    delete:
+      summary: Destroy
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Connected Demand
+      operationId: connected_demand_id_delete
+  /api/v0/connected_demand/{id}/duplicate:
+    get:
+      summary: Duplicate
+      description: Duplicate the selling strategy (connected demand)
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Connected Demand
+      operationId: connected_demand_id_duplicate_get
+components:
+  examples:
+    selling_strategy_update_simple:
+      summary: Simple
+      value:
+        name: Connected Demand Name
+        active: true
+    selling_strategy_update_full:
+      summary: Full
+      value:
+        name: Connected Demand Name
+        active: true
+        deal_id: DEAL_001
+        openrtb_auction_type: 3
+        vast_endpoint_url: https://ad.example.com/vast.xml
+        demand_code: '1'
+        secondary_code: '1'
+        domain_targeting: true
+        domain_list_ids:
+        - 1
+        app_name_targeting: true
+        app_name_list_ids:
+        - 1
+        app_bundle_targeting: true
+        app_bundle_list_ids:
+        - 1
+        ip_targeting: true
+        ip_list_ids:
+        - 1
+        country_targeting: true
+        country_source: list
+        country_list_ids:
+        - 1
+        state_targeting: true
+        state_source: list
+        state_list_ids:
+        - 1
+        city_targeting: true
+        city_source: list
+        city_list_ids:
+        - 1
+        metro_area_targeting: true
+        metro_area_source: list
+        metro_area_list_ids:
+        - 1
+        postal_code_targeting: true
+        postal_code_source: list
+        postal_code_list_ids:
+        - 1
+        allowed_player_sizes:
+        - s
+        - m
+        - l
+        key_value_targeting: false
+        segment_targeting_enabled: false
+        competitive_exclusions_enabled: false
+        competitive_exclusion_iab_source: list
+        competitive_exclusion_iab_category_list_ids:
+        - 1
+        targeted_macros_enabled: false
+        respect_pod_order: false
+        share_of_voice_goal_percent: 1
+        booked_revenue: 1.11
+        floor_rate: 1.11
+        floor_rate_currency: USD
+        budget_timezone: America/New_York
+        device_id_required: false
+        post_imp_detection_enabled: false
+        realtime_viewability: false
+        demand_label_ids:
+        - 1
+        supply_tag_assignments:
+        - supply_tag_id: 1
+          allocation: 1
+        demand_tag_priorities:
+        - supply_tag_id: 1
+          priority: 1
+          tier: 1
+          ratio: 1
+        start_date: '2026-01-01'
+        end_date: '2026-12-31'
+        flight_dates_timezone: America/New_York
+        forward_deal_ids_enabled: false
+        bypass_private_auction_flag_enabled: false
+        share_eids_enabled: false
+        isp_source: list
+        isp_list_ids:
+        - 1
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

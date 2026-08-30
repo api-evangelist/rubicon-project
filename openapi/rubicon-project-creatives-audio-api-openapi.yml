@@ -1,0 +1,416 @@
+openapi: 3.2.0
+info:
+  title: SpringServe UI Creatives Audio API
+  version: 1.0.0
+  description: "> **_NOTE:_** This document covers the v1 API (`/api/v1`). You can find additional documentation on the v1 API (`/api/v1`) on the \n[Magnite Help Center](https://help.magnite.com/), which is broken into sections for endpoints relevant to \n[SpringServe](https://help.magnite.com/help/api-documentation) and [Clearline](https://help.magnite.com/help/api-documentation-06dd4d3). \nYou can also find V1 swagger documentation by selecting ‘SpringServe API V1’ from the dropdown at the top right corner \nof this page. Please note we are in the process of creating V1 endpoints for all existing V0 endpoints, but while that work \nis in progress not all endpoints will be supported on V1. We advise reviewing both swagger pages to determine what \nis supported in each version.\n\n# Authentication\nWhen using this API documentation server, by default it will authenticate API calls using cookie-based authentication against the selected server.  If you are properly logged into the SpringServe server and your session is still active, then the API calls should automatically authenticate.  \n\nOutside of this API documentation server you should use either Token Based or Bearer authentication.  You may also these authentication methods on this server as well,\n which will take precedence over any cookie/session based authentication.\n### Token Based Authentication\nUse the [POST /api/v1/auth](#/Auth/auth_post) endpoint to generate an API token that is then passed in the `Authorization: <token>` header\n\n### Bearer Authentication\nUse the [POST /api/v1/auth](#/Auth/auth_post) endpoint to authenticate and get a bearer token that is then passed in the `Authorization: Bearer <token>` header\n\n# Active Account Context\nA given request always runs in the context of currently active account for the authenticated user making the request.  The active account can be determined via\nthe [GET /api/v1/accounts/current](#/Accounts/accounts_current_get) endpoint and updated via [POST /api/v1/accounts/{id}/set_current](#/Accounts/accounts_id_set_current_post).\nThe active account can also be overridden for an authenticated request by passing the `x-auth-context` header.\n\n# Common List Resource Functionality\n\n## List Resource Requests\nVirtually all List endpoints (e.g. `GET /api/v1/demand_tags`) support the following via request query parameters:\n* Pagination via the `page` (first page is page `1`) and `per` (how many results per page, default is `50`, max is `1000`) query parameters.\n* Searching via the `search` query param\n* Sorting via the comma-delimited `sort` query param - e.g. `sort=name,-id` would sort by name ascending, then by id descending.  By default,\nonly first-level (directly on the entity, not on associations) attributes are sortable.  Some endpoints expose additional/custom orderable fields, \nwhich are documented with that endpoint.\n* Filtering via the query param `<attribute>=<value>` e.g. `id=3` for every first-level (not on associations) attribute on the entity.  Some\n  endpoints expose additional filters which are called out in the documentation for that endpoint.  You can also add an optional operator to the filter via the format `<attribute>::<operator>=<value>`, \n  e.g. `id::gt=3` to filter for ids greater than 3 or `updated_at::lte=2025-01-01` to filter for updated_at less than or equal to 2025-01-01.  \n  The following operators are supported:\n  * `::gt` - greater than\n  * `::gte` - greater than or equal to\n  * `::lt` - less than\n  * `::lte` - less than or equal to\n  * `::in` - in the comma-delimited list of values\n  * `::null` - attribute is null (`true` or `1`) or not null (`false` or `0`)\n* Inclusion of associated resources via the comma-delimited `includes` attribute. The common List Result body has `includable_fields` metadata\n  that tells you which associations are includable.  If not specified, a logical default set of associations are included.  You may pass\n  `includes=` as a blank entry to not include any associations, which can speed up API results if the associated data is not needed.\n* Inclusion of additional data (e.g. quickstats) via the `additional_data` query param.  Possible values come from the `additional_data_fields`\narray on a list response.\n\n## List Resource Responses\nVirtually all List endoints have the same result format:\n* `count` - how many results are in this response\n* `total_count` - how many results are their across all pages of results\n* `current_page` - the current page of results (first page is `1`)\n* `total_pages` - how many total pages of results there are\n* `includable_fields` - assocations of the current resource that `can` be included in the result via the `include` query param.  Note: this is not necessarily what is included\nin the current result, but rather what is possible to request.\n* `additional_data_fields` - additional data, beyond normal associations, that can be included on the result (e.g. quickstats) via the `additional_data` query param.\n* `results` - The array of resource results  \n\n# Common Show Resource Functionality\nMost endpoints to retrieve a single resource, e.g. `GET /api/v1/demand_tags` allow to include associated resources on the result via the same `includes` query\nparamater as the List requests.  See the List response the resource for which associations are includable.\n"
+servers:
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Creatives Audio
+paths:
+  /api/v1/audio_creatives:
+    get:
+      tags:
+      - Creatives Audio
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioCreativeIndexResponse'
+      operationId: audio_creatives_get
+    post:
+      tags:
+      - Creatives Audio
+      summary: Create
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - creative
+              - demand_partner_id
+              properties:
+                creative:
+                  type: string
+                  format: binary
+                  description: Audio file to upload
+                demand_partner_id:
+                  type: number
+                  description: ID of the demand partner (required)
+                name:
+                  type: string
+                  description: Name of the creative (optional)
+                is_active:
+                  type: boolean
+                  default: true
+                  description: Whether the creative is active (optional, defaults to true)
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioCreativeCreateData'
+            examples:
+              simple:
+                $ref: '#/components/examples/audio_creative_create_simple'
+              full:
+                $ref: '#/components/examples/audio_creative_create_full'
+      responses:
+        '201':
+          description: Successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioCreativeResponse'
+      operationId: audio_creatives_post
+  /api/v1/audio_creatives/{id}:
+    get:
+      tags:
+      - Creatives Audio
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioCreativeResponse'
+      operationId: audio_creatives_id_get
+    patch:
+      tags:
+      - Creatives Audio
+      summary: Update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudioCreativeUpdateData'
+            examples:
+              simple:
+                $ref: '#/components/examples/audio_creative_update_simple'
+              full:
+                $ref: '#/components/examples/audio_creative_update_full'
+        required: false
+      responses:
+        '200':
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudioCreativeResponse'
+      operationId: audio_creatives_id_patch
+    delete:
+      tags:
+      - Creatives Audio
+      summary: Delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+        '422':
+          $ref: ref/errors.yaml#/components/responses/validationError
+      operationId: audio_creatives_id_delete
+components:
+  examples:
+    audio_creative_create_simple:
+      summary: Simple
+      value:
+        name: Audio Creative Name
+        demand_partner_id: 1
+        creative_remote_url: https://example.com/audio.mp3
+    audio_creative_update_simple:
+      summary: Simple
+      value:
+        name: Audio Creative Name
+        is_active: true
+    audio_creative_create_full:
+      summary: Full
+      value:
+        name: Audio Creative Name
+        demand_partner_id: 1
+        creative_remote_url: https://example.com/audio.mp3
+        code: audio-code
+        secondary_code: audio-secondary
+        advertiser_domain: example.com
+        iab_tier_1_category_codes:
+        - IAB1
+        iab_tier_2_category_codes:
+        - IAB1-1
+        line_item_demand_tag_ids:
+        - 1
+        country_source: list
+        country_list_ids:
+        - 1
+        state_source: list
+        state_list_ids:
+        - 1
+        city_source: list
+        city_list_ids:
+        - 1
+        metro_area_source: list
+        metro_area_list_ids:
+        - 1
+        postal_code_source: list
+        postal_code_list_ids:
+        - 1
+        key_value_targeting: true
+        targeted_macros_enabled: true
+        all_user_agent_devices: true
+        all_user_agent_operating_systems: true
+        all_user_agent_browsers: true
+        all_user_agent_brands: true
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: day
+          budget_metric: impressions
+          budget_value: 1
+          budget_pacing: smooth
+        start_date: '2026-01-01'
+        end_date: '2026-12-31'
+        flight_dates_timezone: America/New_York
+        day_parting_users_timezone: true
+        tag_pixels:
+        - pixel_type: AdImpression
+          pixel_url: https://pixel.example.com/imp
+          pixel_format: image
+        is_active: true
+    audio_creative_update_full:
+      summary: Full
+      value:
+        name: Audio Creative Name
+        code: audio-code
+        secondary_code: audio-secondary
+        advertiser_domain: example.com
+        iab_tier_1_category_codes:
+        - IAB1
+        iab_tier_2_category_codes:
+        - IAB1-1
+        line_item_demand_tag_ids:
+        - 1
+        country_source: list
+        country_list_ids:
+        - 1
+        state_source: list
+        state_list_ids:
+        - 1
+        city_source: list
+        city_list_ids:
+        - 1
+        metro_area_source: list
+        metro_area_list_ids:
+        - 1
+        postal_code_source: list
+        postal_code_list_ids:
+        - 1
+        key_value_targeting: true
+        targeted_macros_enabled: true
+        all_user_agent_devices: true
+        all_user_agent_operating_systems: true
+        all_user_agent_browsers: true
+        all_user_agent_brands: true
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: day
+          budget_metric: impressions
+          budget_value: 1
+          budget_pacing: smooth
+        start_date: '2026-01-01'
+        end_date: '2026-12-31'
+        flight_dates_timezone: America/New_York
+        day_parting_users_timezone: true
+        tag_pixels:
+        - pixel_type: AdImpression
+          pixel_url: https://pixel.example.com/imp
+          pixel_format: image
+        is_active: true
+  schemas:
+    AudioCreativeUpdateData:
+      $ref: '#/components/schemas/AudioCreativeBaseProperties'
+    AudioCreativeBaseProperties:
+      allOf:
+      - type: object
+        properties:
+          name:
+            type: string
+          is_active:
+            type: boolean
+            default: true
+          creative_remote_url:
+            type:
+            - string
+            - 'null'
+          code:
+            type:
+            - string
+            - 'null'
+          secondary_code:
+            type:
+            - string
+            - 'null'
+          line_item_demand_tag_ids:
+            type: array
+            items:
+              type: number
+          iab_tier_1_category_codes:
+            type: array
+            items:
+              type: string
+          iab_tier_2_category_codes:
+            type: array
+            items:
+              type: string
+          postal_codes:
+            type: array
+            items:
+              type: string
+          postal_code_list_ids:
+            type: array
+            items:
+              type: number
+          postal_code_source:
+            type: string
+          postal_code_white_list:
+            type: string
+          key_value_targeting:
+            type: boolean
+          targeted_macros_enabled:
+            type: boolean
+          all_user_agent_devices:
+            type: boolean
+          all_user_agent_operating_systems:
+            type: boolean
+          all_user_agent_browsers:
+            type: boolean
+          all_user_agent_brands:
+            type: boolean
+          budget_timezone:
+            type: string
+          budgets:
+            type: array
+            items:
+              type: object
+          day_parting:
+            type:
+            - array
+            - 'null'
+            items:
+              type: array
+              items:
+                type: boolean
+          day_parting_users_timezone:
+            type: boolean
+          advertiser_domain:
+            type:
+            - string
+            - 'null'
+      - $ref: ref/concerns/tag_pixels.yaml#/components/schemas/TagPixels
+      - $ref: ref/concerns/country_codes.yaml#/components/schemas/CountryCodes
+      - $ref: ref/concerns/state_codes.yaml#/components/schemas/StateCodes
+      - $ref: ref/concerns/metro_area_codes.yaml#/components/schemas/MetroAreaCodes
+      - $ref: ref/concerns/city_codes.yaml#/components/schemas/CityCodes
+      - $ref: ref/concerns/frequency_caps.yaml#/components/schemas/FrequencyCaps
+      - $ref: ref/concerns/demand_key_value.yaml#/components/schemas/DemandKeyValue
+      - $ref: ref/concerns/targeted_macro.yaml#/components/schemas/TargetedMacro
+      - $ref: ref/concerns/user_agent.yaml#/components/schemas/UserAgent
+      - $ref: ref/concerns/flight_dates.yaml#/components/schemas/FlightDates
+    AudioCreativeResponse:
+      allOf:
+      - $ref: '#/components/schemas/AudioCreativeBaseProperties'
+      - type: object
+        properties:
+          id:
+            type: integer
+          account_id:
+            type: integer
+          demand_partner_id:
+            type: integer
+          creative_format:
+            type: string
+          type:
+            type: string
+          duration_seconds:
+            type: number
+          creative_file_name:
+            type: string
+          creative_content_type:
+            type: string
+          creative_file_size:
+            type: integer
+          creative_updated_at:
+            type: string
+            format: date-time
+          netflix_pre_approval_enabled:
+            type: boolean
+          netflix_approval_status:
+            type:
+            - string
+            - 'null'
+          netflix_deal_ids:
+            type: array
+            items:
+              type: string
+      - $ref: ref/concerns/timestamps.yaml#/components/schemas/Timestamps
+    AudioCreativeIndexResponse:
+      allOf:
+      - $ref: ref/params.yaml#/components/schemas/ParamsResponse
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              $ref: '#/components/schemas/AudioCreativeResponse'
+    AudioCreativeCreateData:
+      allOf:
+      - $ref: '#/components/schemas/AudioCreativeBaseProperties'
+      - type: object
+        required:
+        - demand_partner_id
+        properties:
+          demand_partner_id:
+            type: number
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

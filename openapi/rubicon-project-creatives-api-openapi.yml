@@ -1,0 +1,479 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Creatives API
+  version: '1.0'
+  description: 'Operations tagged Creatives across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Creatives
+paths:
+  /api/v0/creatives:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Creatives
+      operationId: creatives_get
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/creatives/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Creatives
+      operationId: creatives_id_get
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/creatives:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      - $ref: '#/components/parameters/additionalDataParam'
+      - name: date_range
+        in: query
+        schema:
+          $ref: ./ref/quickstats.yaml#/components/schemas/dateRange
+      - name: currency
+        in: query
+        schema:
+          $ref: ./ref/concerns/currency.yaml#/components/schemas/CurrencyList
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: ref/params.yaml#/components/schemas/ParamsResponse
+                - type: object
+                  properties:
+                    results:
+                      type: array
+                      items:
+                        oneOf:
+                        - $ref: ref/concerns/audio_creative.yaml#/components/schemas/AudioCreative
+                        - $ref: ref/concerns/video_creative.yaml#/components/schemas/VideoCreative
+                        - $ref: ref/concerns/tag_creative.yaml#/components/schemas/TagCreative
+                        - $ref: ref/concerns/tile_creative.yaml#/components/schemas/TileCreative
+                        - $ref: ref/concerns/filepath_creative.yaml#/components/schemas/FilepathCreative
+      tags:
+      - Creatives
+      operationId: creatives_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/creatives/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: '#/components/parameters/additionalDataParam'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: ref/concerns/audio_creative.yaml#/components/schemas/AudioCreative
+                - $ref: ref/concerns/video_creative.yaml#/components/schemas/VideoCreative
+                - $ref: ref/concerns/tag_creative.yaml#/components/schemas/TagCreative
+                - $ref: ref/concerns/tile_creative.yaml#/components/schemas/TileCreative
+                - $ref: ref/concerns/filepath_creative.yaml#/components/schemas/FilepathCreative
+      tags:
+      - Creatives
+      operationId: creatives_id_get
+    delete:
+      summary: Delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Creatives
+      operationId: creatives_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/creatives/bulk_update:
+    post:
+      summary: Bulk Update
+      description: Update multiple creatives with the same attributes in a single request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/Status'
+              - $ref: '#/components/schemas/Country'
+              - $ref: '#/components/schemas/Region'
+              - $ref: '#/components/schemas/City'
+              - $ref: '#/components/schemas/PostalCode'
+              - $ref: '#/components/schemas/MetroArea'
+              - $ref: '#/components/schemas/Device'
+              - $ref: '#/components/schemas/OS'
+              - $ref: '#/components/schemas/Browser'
+              - $ref: '#/components/schemas/Brand'
+            examples:
+              Status:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  is_active: true
+              Country:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  country_source: values
+                  country_codes:
+                  - US
+                  - CA
+                  country_white_list: 'true'
+              Region:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  state_source: values
+                  state_codes:
+                  - US-AL
+                  state_white_list: 'false'
+              City:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  city_source: values
+                  city_codes:
+                  - 4314295
+                  - 2643743
+                  city_white_list: 'true'
+              PostalCode:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  postal_code_source: list
+                  postal_code_list_ids:
+                  - 4
+                  - 6
+                  postal_code_white_list: 'true'
+              Metro Area:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  metro_area_source: values
+                  metro_area_codes:
+                  - 2168
+                  - 2153
+                  metro_area_white_list: 'true'
+              Device:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  all_user_agent_devices: false
+                  user_agent_devices:
+                  - CTV
+              OS:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  all_user_agent_operating_systems: false
+                  user_agent_operating_systems:
+                  - iOS
+              Browser:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  all_user_agent_browsers: false
+                  user_agent_browsers:
+                  - Chrome
+                  - Firefox
+              Brand:
+                value:
+                  object_ids:
+                  - 1
+                  - 2
+                  all_user_agent_brand_names: true
+        required: true
+      responses:
+        '200':
+          description: Bulk update completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Status message describing the bulk update results
+                examples:
+                - message: 'Successfully updated 2 Creatives: 1, 2'
+        '404':
+          description: Not found. It indicates that the requested resource or required parameter was not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                examples:
+                - error: Object not found
+      tags:
+      - Creatives
+      operationId: creatives_bulk_update_same_attributes_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/creatives/bulk/update:
+    post:
+      summary: Update Multiple Creatives
+      description: Update multiple creatives independently in a single request. Returns different status codes based on success/failure ratio.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                allOf:
+                - type: object
+                  required:
+                  - id
+            examples:
+              single:
+                $ref: '#/components/examples/creative_bulk_update_many_single'
+              multiple:
+                $ref: '#/components/examples/creative_bulk_update_many_multiple'
+      responses:
+        '204':
+          description: All updates successful
+        '200':
+          description: Partial success - some objects updated successfully, others failed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                examples:
+                - errors:
+                    '1':
+                    - Name cannot be blank
+                    other:
+                    - Object at index 2 is missing an ID
+        '400':
+          description: Bad request - no objects provided
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                examples:
+                - error: No objects provided
+        '422':
+          description: All updates failed - no objects were updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+                examples:
+                - errors:
+                    '1':
+                    - Name cannot be blank
+                    '2':
+                    - Active must be true or false
+                    other:
+                    - Object at index 3 is missing an ID
+      tags:
+      - Creatives
+      operationId: creatives_bulk_update_many_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    creative_bulk_update_many_single:
+      summary: Single
+      value:
+      - id: 1
+        name: Creative Name
+        is_active: true
+    creative_bulk_update_many_multiple:
+      summary: Multiple
+      value:
+      - id: 1
+        name: Creative Name
+        is_active: true
+      - id: 2
+        name: Creative Name
+        is_active: false
+  schemas:
+    Country:
+      allOf:
+      - $ref: ref/geo_targeting.yaml#/components/schemas/Country
+      - $ref: '#/components/schemas/ObjectIds'
+    Brand:
+      allOf:
+      - $ref: ref/user_agent_targeting.yaml#/components/schemas/Brand
+      - $ref: '#/components/schemas/ObjectIds'
+    MetroArea:
+      allOf:
+      - $ref: ref/geo_targeting.yaml#/components/schemas/MetroArea
+      - $ref: '#/components/schemas/ObjectIds'
+    Status:
+      type: object
+      required:
+      - object_ids
+      properties:
+        is_active:
+          type: boolean
+          description: Indicates whether to activate (true) or deactivate (false) the creatives
+        object_ids:
+          type: array
+          items:
+            type: number
+          description: Array of creative IDs to update
+    Region:
+      allOf:
+      - $ref: ref/geo_targeting.yaml#/components/schemas/Region
+      - $ref: '#/components/schemas/ObjectIds'
+    City:
+      allOf:
+      - $ref: ref/geo_targeting.yaml#/components/schemas/City
+      - $ref: '#/components/schemas/ObjectIds'
+    ObjectIds:
+      type: object
+      properties:
+        object_ids:
+          type: array
+          items:
+            type: number
+          description: Array of creative IDs to update
+      required:
+      - object_ids
+    OS:
+      allOf:
+      - $ref: ref/user_agent_targeting.yaml#/components/schemas/OS
+      - $ref: '#/components/schemas/ObjectIds'
+    PostalCode:
+      allOf:
+      - $ref: ref/geo_targeting.yaml#/components/schemas/PostalCode
+      - $ref: '#/components/schemas/ObjectIds'
+    Device:
+      allOf:
+      - $ref: ref/user_agent_targeting.yaml#/components/schemas/Device
+      - $ref: '#/components/schemas/ObjectIds'
+    Browser:
+      allOf:
+      - $ref: ref/user_agent_targeting.yaml#/components/schemas/Browser
+      - $ref: '#/components/schemas/ObjectIds'
+  parameters:
+    additionalDataParam:
+      name: additional_data
+      description: "Include additional data from non-model sources in the response. \nSupported values: 'quickstats', 'budget_data'. \nMultiple values can be specified as comma-separated (e.g., 'quickstats,budget_data').\n"
+      in: query
+      schema:
+        type: string
+      example: quickstats
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

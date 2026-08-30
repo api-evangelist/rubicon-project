@@ -1,0 +1,554 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Bills API
+  version: '1.0'
+  description: 'Operations tagged Bills across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Bills
+paths:
+  /api/v0/bills:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Bills
+      operationId: bills_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              bill_create_simple:
+                $ref: '#/components/examples/bill_create_simple'
+              bill_create_full:
+                $ref: '#/components/examples/bill_create_full'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Bills
+      operationId: bills_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/bills/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Bills
+      operationId: bills_id_get
+    put:
+      summary: Update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              bill_update_simple:
+                $ref: '#/components/examples/bill_update_simple'
+              bill_update_full:
+                $ref: '#/components/examples/bill_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Bills
+      operationId: bills_id_put
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/bills/{bill_id}/bill_items:
+    get:
+      summary: Index
+      description: List bill items for a bill
+      parameters:
+      - name: bill_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Bills
+      operationId: bills_bill_id_bill_items_get
+    post:
+      summary: Create
+      parameters:
+      - name: bill_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              bill_item_create_simple:
+                $ref: '#/components/examples/bill_item_create_simple'
+              bill_item_create_full:
+                $ref: '#/components/examples/bill_item_create_full'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Bills
+      operationId: bills_bill_id_bill_items_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/bills/{bill_id}/bill_items/{id}:
+    parameters:
+    - name: bill_id
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Bills
+      operationId: bills_bill_id_bill_items_id_get
+    put:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              bill_item_update_simple:
+                $ref: '#/components/examples/bill_item_update_simple'
+              bill_item_update_full:
+                $ref: '#/components/examples/bill_item_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Bills
+      operationId: bills_bill_id_bill_items_id_put
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/bills:
+    get:
+      summary: Index
+      tags:
+      - Bills
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/Bill'
+      operationId: bills_get
+    post:
+      summary: Create
+      tags:
+      - Bills
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              bill_create_simple:
+                $ref: '#/components/examples/bill_create_simple'
+              bill_create_full:
+                $ref: '#/components/examples/bill_create_full_2'
+        required: true
+      responses:
+        '201':
+          description: Successfully created a new bill
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+        '422':
+          description: Unprocessable request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                examples:
+                - error: Name can't be blank
+                  errors:
+                    name:
+                    - can't be blank
+      operationId: bills_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/bills/{id}:
+    get:
+      summary: Show
+      tags:
+      - Bills
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+      operationId: bills_id_get
+    patch:
+      summary: Update
+      tags:
+      - Bills
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              bill_update_simple:
+                $ref: '#/components/examples/bill_update_simple'
+              bill_update_full:
+                $ref: '#/components/examples/bill_update_full_2'
+        required: true
+      responses:
+        '200':
+          description: Successfully updated a bill
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+        '422':
+          description: Unprocessable request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                examples:
+                - error: Name can't be blank
+                  errors:
+                    name:
+                    - can't be blank
+      operationId: bills_id_patch
+    delete:
+      summary: Delete
+      tags:
+      - Bills
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      operationId: bills_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/bills/permissions:
+    get:
+      summary: Collection Permissions
+      tags:
+      - Bills
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      operationId: bills_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/bills/{id}/permissions:
+    get:
+      summary: Permissions Member
+      tags:
+      - Bills
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      operationId: bills_id_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    bill_item_update_full:
+      summary: Full
+      value:
+        label: Bill Item Label
+        other_account_id: 1
+        unit_cost: 1.11
+        units: 1.11
+        total_cost: 1.11
+        xero_account_code: 401
+        is_unit_cost_cpm: true
+        is_synced: false
+    bill_item_create_full:
+      summary: Full
+      value:
+        label: Bill Item Label
+        other_account_id: 1
+        unit_cost: 1.11
+        units: 1.11
+        total_cost: 1.11
+        xero_account_code: 401
+        is_unit_cost_cpm: true
+        is_synced: false
+    bill_create_full:
+      summary: Full
+      value:
+        name: Bill Name
+        month: '2026-01-01'
+        currency: USD
+        is_invoice: false
+        is_direct_connect: false
+        is_openrtb: false
+    bill_item_create_simple:
+      summary: Simple
+      value:
+        label: Bill Item Label
+        unit_cost: 1.11
+        units: 1.11
+        total_cost: 1.11
+    bill_create_simple:
+      summary: Simple
+      value:
+        name: Bill Name
+        month: '2026-01-01'
+        currency: USD
+        is_invoice: false
+        is_direct_connect: false
+        is_openrtb: false
+    bill_update_full:
+      summary: Full
+      value:
+        name: Bill Name
+        month: '2026-01-01'
+        currency: USD
+        is_invoice: false
+        is_direct_connect: false
+        is_openrtb: false
+    bill_item_update_simple:
+      summary: Simple
+      value:
+        label: Bill Item Label
+        unit_cost: 1.11
+    bill_update_simple:
+      summary: Simple
+      value:
+        name: Bill Name
+    bill_create_full_2:
+      summary: Full
+      value:
+        name: Bill Name
+        month: '2026-01-01'
+        currency: USD
+        is_invoice: false
+        is_direct_connect: false
+        is_openrtb: false
+        is_finalized: false
+    bill_update_full_2:
+      summary: Full
+      value:
+        name: Bill Name
+        month: '2026-01-01'
+        currency: USD
+        is_invoice: false
+        is_direct_connect: false
+        is_openrtb: false
+        is_finalized: false
+  schemas:
+    Bill:
+      type: object
+      properties:
+        id:
+          type: number
+        account_id:
+          type: number
+        name:
+          type: string
+        month:
+          type: string
+        is_finalized:
+          type: boolean
+        is_invoice:
+          type: boolean
+        is_direct_connect:
+          type: boolean
+        is_openrtb:
+          type: boolean
+        currency:
+          type: string
+        total_bill_amount:
+          type: number
+        total_amount_collected:
+          type: number
+        bill_items_count:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

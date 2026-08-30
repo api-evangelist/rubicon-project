@@ -1,0 +1,296 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Auth API
+  version: '1.0'
+  description: 'Operations tagged Auth across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Auth
+  description: Endpoints that provide authentication for the API
+paths:
+  /api/v0/auth:
+    post:
+      summary: Authenticate and get a SpringServe API token
+      description: The returned API token should be used as the contents of the HTTP `Authorization` header in other authenticated API requests.
+      tags:
+      - Auth
+      security: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: The token to use in the Authorization header on future requests
+                  expiration:
+                    type: string
+                    description: The expiration timestamp of this token
+        '400':
+          description: bad request - invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  examples:
+                  - user@magnite.com
+                password:
+                  type: string
+                  format: password
+                  examples:
+                  - some_secret_password
+              required:
+              - email
+              - password
+      operationId: auth_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/auth0/login:
+    post:
+      summary: Authenticate and get user and account info
+      description: Authenticate the user, and if valid, return basic info about the user, along with accounts they can access
+      tags:
+      - Auth
+      security: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: bad request - invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  examples:
+                  - user@magnite.com
+                password:
+                  type: string
+                  format: password
+                  examples:
+                  - some_secret_password
+              required:
+              - email
+              - password
+      operationId: auth0_login_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/auth0/users/{email}:
+    get:
+      summary: Retrieve basic info about a user by email address
+      description: If a user can be found with the provided email address, return the platform_type and role from their active user_account. Token based authentication (Authorization header) is required.
+      tags:
+      - Auth
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+          examples:
+          - user@magnite.com
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: bad request - invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+      operationId: auth0_users_email_get
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/auth:
+    post:
+      summary: Authenticate and get a SpringServe API token
+      description: The returned API token should be used as the contents of the HTTP `Authorization` header in other authenticated API requests.
+      tags:
+      - Auth
+      security: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: The token to use in the Authorization header on future requests
+                  expiration:
+                    type: string
+                    description: The expiration timestamp of this token
+        '400':
+          description: bad request - invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@magnite.com
+                password:
+                  type: string
+                  format: password
+                  examples:
+                  - some_secret_password
+              required:
+              - email
+              - password
+      operationId: auth_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/auth0/login:
+    post:
+      summary: Authenticate and get user and account info
+      description: Authenticate the user, and if valid, return basic info about the user, along with accounts they can access
+      tags:
+      - Auth
+      security: []
+      parameters: []
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: bad request - invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  examples:
+                  - user@magnite.com
+                password:
+                  type: string
+                  format: password
+                  examples:
+                  - some_secret_password
+              required:
+              - email
+              - password
+      operationId: auth0_login_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/auth0/users/{email}:
+    get:
+      summary: Retrieve basic info about a user by email address
+      description: 'If a user can be found with the provided email address, return the platform_type and role from their active user_account.  Note: only SpringServe token based authentication works with this endpoint - you cannot use cookie based auth'
+      tags:
+      - Auth
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+          examples:
+          - user@magnite.com
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: bad request - invalid credentials
+          content:
+            application/json:
+              schema:
+                type: object
+      operationId: auth0_users_email_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

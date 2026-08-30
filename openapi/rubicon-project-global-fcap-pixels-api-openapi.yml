@@ -1,0 +1,436 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Global Fcap Pixels API
+  version: '1.0'
+  description: 'Operations tagged Global Fcap Pixels across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Global Fcap Pixels
+paths:
+  /api/v0/global_fcap_pixels:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/global_fcap_pixel_create_simple'
+              full:
+                $ref: '#/components/examples/global_fcap_pixel_create_full'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/global_fcap_pixels/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_id_get
+    put:
+      summary: Update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/global_fcap_pixel_update_simple'
+              full:
+                $ref: '#/components/examples/global_fcap_pixel_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_id_put
+    delete:
+      summary: Destroy
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/global_fcap_pixels:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_get
+    post:
+      summary: Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalFcapPixel'
+            examples:
+              simple:
+                $ref: '#/components/examples/global_fcap_pixel_create_simple'
+              full:
+                $ref: '#/components/examples/global_fcap_pixel_create_full'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/GlobalFcapPixelResponseFields'
+                - $ref: '#/components/schemas/GlobalFcapPixel'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedContentErrorResponse'
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/global_fcap_pixels/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_id_get
+    patch:
+      summary: Update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GlobalFcapPixelUpdateRequest'
+            examples:
+              simple:
+                $ref: '#/components/examples/global_fcap_pixel_update_simple'
+              full:
+                $ref: '#/components/examples/global_fcap_pixel_update_full'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/GlobalFcapPixelResponseFields'
+                - $ref: '#/components/schemas/GlobalFcapPixel'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedContentErrorResponse'
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_id_patch
+    delete:
+      summary: Delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/global_fcap_pixels/permissions:
+    get:
+      summary: Collection Permissions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/global_fcap_pixels/{id}/permissions:
+    get:
+      summary: Permissions Member
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Global Fcap Pixels
+      operationId: global_fcap_pixels_id_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    global_fcap_pixel_create_full:
+      summary: Full
+      value:
+        name: Global Fcap Pixel Name
+        description: Global Fcap Pixel Description
+        active: true
+        list_type: ip_address
+        frequency_cap_period_amount: 1
+        frequency_cap_period: hour
+    global_fcap_pixel_create_simple:
+      summary: Simple
+      value:
+        name: Global Fcap Pixel Name
+        frequency_cap_period_amount: 1
+        frequency_cap_period: hour
+        list_type: ip_address
+    global_fcap_pixel_update_full:
+      summary: Full
+      value:
+        name: Global Fcap Pixel Name
+        description: Global Fcap Pixel Description
+        active: true
+    global_fcap_pixel_update_simple:
+      summary: Simple
+      value:
+        name: Global Fcap Pixel Name
+        active: true
+  schemas:
+    GlobalFcapPixel:
+      type: object
+      properties:
+        name:
+          type: string
+          examples:
+          - Create Global FCap Pixel
+        description:
+          type: string
+          examples:
+          - Description Global FCap Pixel
+        active:
+          type: boolean
+          default: true
+          examples:
+          - true
+        list_type:
+          type: string
+          enum:
+          - ip_address
+          - device_id
+          default: ip_address
+          examples:
+          - ip_address
+        frequency_cap_period_amount:
+          type: integer
+          examples:
+          - 3
+        frequency_cap_period:
+          type: string
+          enum:
+          - minute
+          - hour
+          - day
+          default: minute
+          examples:
+          - hour
+      required:
+      - name
+      - frequency_cap_period_amount
+    GlobalFcapPixelResponseFields:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        hash_check:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    GlobalFcapPixelUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          examples:
+          - Test Update
+        description:
+          type: string
+          examples:
+          - Description Update
+        active:
+          type: boolean
+          examples:
+          - true
+    UnsupportedContentErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          examples:
+          - Name can't be blank
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          examples:
+          - name:
+            - can't be blank
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

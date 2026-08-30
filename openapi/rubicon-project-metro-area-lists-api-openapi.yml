@@ -1,0 +1,468 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Metro Area Lists API
+  version: '1.0'
+  description: 'Operations tagged Metro Area Lists across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Metro Area Lists
+paths:
+  /api/v0/metro_area_lists:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/metro_area_list_create_simple'
+              full:
+                $ref: '#/components/examples/metro_area_list_create_full'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/metro_area_lists/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_id_get
+    put:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/metro_area_list_update_simple'
+              full:
+                $ref: '#/components/examples/metro_area_list_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_id_put
+    delete:
+      summary: Destroy
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/metro_area_lists:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_get
+    post:
+      summary: Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/MetroAreaListCreateRequest'
+              - type: object
+                properties:
+                  metro_area_codes:
+                    type: array
+                    items:
+                      type: number
+                    examples:
+                    - - 2008
+                      - 2028
+                      - 2038
+                required:
+                - metro_area_codes
+            examples:
+              simple:
+                $ref: '#/components/examples/metro_area_list_create_simple'
+              full:
+                $ref: '#/components/examples/metro_area_list_create_full'
+          multipart/form-data:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/MetroAreaListCreateRequest'
+              - type: object
+                properties:
+                  csv_file:
+                    type: string
+                    format: binary
+                required:
+                - csv_file
+      responses:
+        '201':
+          description: Successfully created Metro Area List
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroAreaListResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroAreaListErrorResponse'
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/metro_area_lists/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_id_get
+    patch:
+      summary: Update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/MetroAreaListUpdateRequest'
+              - type: object
+                properties:
+                  metro_area_codes:
+                    type: array
+                    items:
+                      type: number
+                    description: List of metro area (Comscore Market) IDs. Can be used only when the list_action parameter is provided.
+                    examples:
+                    - - 2008
+                      - 2028
+                      - 2038
+            examples:
+              simple:
+                $ref: '#/components/examples/metro_area_list_update_simple'
+              full:
+                $ref: '#/components/examples/metro_area_list_update_full_2'
+          multipart/form-data:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/MetroAreaListUpdateRequest'
+              - type: object
+                properties:
+                  csv_file:
+                    type: string
+                    format: binary
+                    description: CSV file with metro area IDs. Can be used only when the list_action parameter is provided.
+      responses:
+        '200':
+          description: Updated Metro Area List successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroAreaListResponse'
+        '422':
+          description: Unprocessable Content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetroAreaListErrorResponse'
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_id_patch
+    delete:
+      summary: Delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/metro_area_lists/permissions:
+    get:
+      summary: Collection Permissions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/metro_area_lists/{id}/permissions:
+    get:
+      summary: Permissions Member
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Metro Area Lists
+      operationId: metro_area_lists_id_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    metro_area_list_create_simple:
+      summary: Simple
+      value:
+        name: Metro Area List Name
+        metro_area_codes:
+        - 2001
+    metro_area_list_update_full:
+      summary: Full
+      value:
+        name: Metro Area List Name
+        description: Metro Area List Description
+        active: true
+        metro_area_codes:
+        - 2001
+    metro_area_list_update_simple:
+      summary: Simple
+      value:
+        name: Metro Area List Name
+    metro_area_list_create_full:
+      summary: Full
+      value:
+        name: Metro Area List Name
+        description: Metro Area List Description
+        metro_area_codes:
+        - 2001
+        active: true
+    metro_area_list_update_full_2:
+      summary: Full
+      value:
+        name: Metro Area List Name
+        description: Metro Area List Description
+        active: true
+        list_action: append
+        metro_area_codes:
+        - 2001
+  schemas:
+    MetroAreaListUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          examples:
+          - Update Metro Area List Name
+        description:
+          type: string
+          examples:
+          - Update Metro Area List Description
+        active:
+          type: boolean
+          examples:
+          - true
+        list_action:
+          type: string
+          enum:
+          - append
+          - replace
+          - remove
+          examples:
+          - append
+    MetroAreaListCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          examples:
+          - Metro Area List Name
+        description:
+          type: string
+          examples:
+          - Metro Area List Description
+        active:
+          type: boolean
+          examples:
+          - true
+      required:
+      - name
+    MetroAreaListResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        metro_area_codes:
+          type: array
+          items:
+            type: number
+    MetroAreaListErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: General error message
+          examples:
+          - Metro Area codes can't be blank
+        errors:
+          type: object
+          description: Detailed validation errors by field
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          examples:
+          - metro_area_codes:
+            - can't be blank
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

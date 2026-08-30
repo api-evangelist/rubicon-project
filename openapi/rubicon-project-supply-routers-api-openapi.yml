@@ -1,0 +1,362 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Supply Routers API
+  version: '1.0'
+  description: 'Operations tagged Supply Routers across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Supply Routers
+paths:
+  /api/v0/supply_routers:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Supply Routers
+      operationId: supply_routers_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/supply_router_create_simple'
+              full:
+                $ref: '#/components/examples/supply_router_create_full'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Routers
+      operationId: supply_routers_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/supply_routers/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Routers
+      operationId: supply_routers_id_get
+    put:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/supply_router_update_simple'
+              full:
+                $ref: '#/components/examples/supply_router_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Routers
+      operationId: supply_routers_id_put
+    delete:
+      summary: Destroy
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Supply Routers
+      operationId: supply_routers_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/supply_routers/download:
+    get:
+      summary: Download CSV
+      description: Download a CSV file with supply router information for the specified router IDs
+      parameters:
+      - name: ids
+        in: query
+        description: Comma-separated list of router IDs, or array of router IDs
+        required: true
+        schema:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: integer
+      - name: filename
+        in: query
+        description: Optional custom filename for the CSV download
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request - No router IDs provided
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Routers
+      operationId: supply_routers_download_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    supply_router_create_full:
+      summary: Full
+      value:
+        name: Supply Router Name
+        supply_partner_id: 1
+        code: '1'
+        environment: desktop
+        format: video
+        supply_router_ratios:
+        - supply_tag_id: 1
+          fallback_supply_tag_id: 1
+          ratio: 1
+        key_ids:
+        - 1
+        all_player_sizes: false
+        player_sizes:
+        - s
+        - m
+        - l
+        min_aspect_ratio: 1.11
+        max_aspect_ratio: 1.11
+        domain_white_list: true
+        domain_list_ids:
+        - 1
+        advertiser_domain_white_list: true
+        advertiser_domain_list_ids:
+        - 1
+        blocking_unknown_advertiser_domains: true
+        targeted_iab_category_white_list: true
+        targeted_iab_tier2_category_white_list: true
+        targeted_iab_category_source: list
+        targeted_iab_tier2_category_source: list
+        targeted_iab_category_codes:
+        - IAB1
+        targeted_iab_tier2_category_codes:
+        - IAB1-1
+        iab_category_tier1_list_ids:
+        - 1
+        iab_category_tier2_list_ids:
+        - 1
+        app_name_white_list: true
+        app_name_list_ids:
+        - 1
+        app_bundle_white_list: true
+        app_bundle_list_ids:
+        - 1
+        ip_white_list: true
+        ip_list_ids:
+        - 1
+        country_source: list
+        country_white_list: true
+        country_codes:
+        - US
+        country_list_ids:
+        - 1
+        metro_area_source: list
+        metro_area_white_list: true
+        metro_area_codes:
+        - 2001
+        metro_area_list_ids:
+        - 1
+        user_agent_devices:
+        - '1'
+        user_agent_brands:
+        - '1'
+        user_agent_operating_systems:
+        - '1'
+        user_agent_browsers:
+        - '1'
+        segment_targeting_enabled: true
+        segment_groups:
+        - group: 1
+          white_list: true
+          segment_ids:
+          - 1
+        coppa_values:
+        - '1'
+        coppa_param_required: true
+        dnt_values:
+        - '1'
+        dnt_param_required: true
+        lmt_values:
+        - '1'
+        lmt_param_required: true
+        us_privacy_values:
+        - '1'
+        us_privacy_param_required: true
+        us_privacy_supply_white_list: true
+        gdpr_supply_values:
+        - '1'
+        gdpr_supply_param_required: true
+        gdpr_consent_string_values:
+        - '1'
+        gdpr_consent_param_required: true
+        start_date: '2026-01-01'
+        end_date: '2026-12-31'
+        flight_dates_timezone: America/New_York
+        frequency_caps:
+        - frequency_cap_period: day
+          frequency_cap_period_amount: 1
+          frequency_cap_metric: impressions
+          frequency_cap_value: 1
+          frequency_cap_type: household
+        audited_creative_statuses:
+        - '1'
+        scanned_creative_white_list: true
+        scanned_creative_list_ids:
+        - 1
+        third_party_override: true
+        post_imp_detection_enabled: true
+        post_imp_percentage_whiteops: 1
+        post_imp_percentage_ias: 1
+        post_imp_percentage_moat: 1
+        post_imp_percentage_protected: 1
+        post_imp_percentage_forensiq: 1
+        pre_bid_blocking_enabled: true
+        pre_bid_blocking_components:
+        - '1'
+        tag_pixels:
+        - pixel_type: AdImpression
+          pixel_format: image
+          pixel_url: https://ad.example.com/pixel
+        custom_response: '1'
+        active: true
+        note: Supply Router note
+    supply_router_create_simple:
+      summary: Simple
+      value:
+        name: Supply Router Name
+        supply_partner_id: 1
+    supply_router_update_simple:
+      summary: Simple
+      value:
+        name: Supply Router Name
+        active: true
+    supply_router_update_full:
+      summary: Full
+      value:
+        name: Supply Router Name
+        supply_partner_id: 1
+        code: '1'
+        environment: desktop
+        format: video
+        supply_router_ratios:
+        - supply_tag_id: 1
+          fallback_supply_tag_id: 1
+          ratio: 1
+        player_sizes:
+        - s
+        - m
+        - l
+        domain_white_list: true
+        domain_list_ids:
+        - 1
+        country_source: list
+        country_white_list: true
+        country_codes:
+        - US
+        country_list_ids:
+        - 1
+        segment_targeting_enabled: true
+        segment_groups:
+        - group: 1
+          white_list: true
+          segment_ids:
+          - 1
+        start_date: '2026-01-01'
+        end_date: '2026-12-31'
+        flight_dates_timezone: America/New_York
+        third_party_override: true
+        post_imp_detection_enabled: true
+        custom_response: '1'
+        active: true
+        note: Supply Router note
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

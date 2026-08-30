@@ -1,0 +1,825 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Supply Tags API
+  version: '1.0'
+  description: 'Operations tagged Supply Tags across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Supply Tags
+paths:
+  /api/v0/supply_tags:
+    get:
+      summary: Index
+      description: List all supply tags. Supports pagination via page, per, and ids params.
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: List of supply tags
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Supply Tags
+      operationId: supply_tags_get
+    post:
+      summary: Create
+      description: Create a supply tag
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              tag_simple:
+                $ref: '#/components/examples/supply_tag_tag_create_simple'
+              tag_full:
+                $ref: '#/components/examples/supply_tag_tag_create_full'
+              bid_link_simple:
+                $ref: '#/components/examples/supply_tag_bid_link_create_simple'
+              bid_link_full:
+                $ref: '#/components/examples/supply_tag_bid_link_create_full'
+              tile_simple:
+                $ref: '#/components/examples/supply_tag_tile_create_simple'
+              tile_full:
+                $ref: '#/components/examples/supply_tag_tile_create_full'
+              audio_simple:
+                $ref: '#/components/examples/supply_tag_audio_create_simple'
+              audio_full:
+                $ref: '#/components/examples/supply_tag_audio_create_full'
+              pause_ad_simple:
+                $ref: '#/components/examples/supply_tag_pause_ad_create_simple'
+              pause_ad_full:
+                $ref: '#/components/examples/supply_tag_pause_ad_create_full'
+        required: true
+      responses:
+        '201':
+          description: Created supply tag
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/supply_tags/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      description: Get a supply tag by id
+      responses:
+        '200':
+          description: Supply tag details
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_id_get
+    put:
+      summary: Update
+      description: Update a supply tag (e.g. Adding Pods, Content Targeting)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                advanced_floor_rules:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      dimension:
+                        type: string
+                        enum:
+                        - adomain
+                        - duration
+                        - country
+                        - iab_tier_1
+                        - iab_tier_2
+                      values:
+                        type: array
+                        items:
+                          type: string
+                      floor_price:
+                        type: number
+            examples:
+              simple:
+                $ref: '#/components/examples/supply_tag_update_simple'
+              full:
+                $ref: '#/components/examples/supply_tag_update_full'
+      responses:
+        '200':
+          description: Updated supply tag
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_id_put
+    delete:
+      summary: Destroy
+      description: Delete a supply tag
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Supply Tags
+      operationId: supply_tags_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/supply_tags/{id}/duplicate:
+    get:
+      summary: Duplicate
+      description: Duplicate a Supply Tag
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Duplicated supply tag
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                id: 65034
+                name: I want to change the name
+                rate: '0.02'
+      tags:
+      - Supply Tags
+      operationId: supply_tags_id_duplicate_get
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/supply_tags:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - name: curator_fees.curator_fee_publishers.publisher
+        in: query
+        schema:
+          type: string
+      - name: curator_fees.curator_fee_publishers.inventory_source
+        in: query
+        schema:
+          type: string
+      - name: curator_fees.curator_fee_publishers.ad_source_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: number
+      - name: marketplace_buyers.inventory_source
+        in: query
+        schema:
+          type: string
+      - name: marketplace_buyers.dsp_id
+        in: query
+        schema:
+          type: string
+      - name: optimization_is_active
+        in: query
+        schema:
+          type: string
+      - name: optimization_version
+        in: query
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/supply_tags/{id}:
+    get:
+      summary: Show
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_id_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/supply_tags/download:
+    get:
+      summary: Download CSV
+      description: Download a CSV file with supply tag information for the specified supply tag IDs
+      parameters:
+      - name: ids
+        in: query
+        description: Comma-separated list of supply tag IDs, or array of supply tag IDs
+        required: true
+        schema:
+          oneOf:
+          - type: string
+          - type: array
+            items:
+              type: integer
+      - name: filename
+        in: query
+        description: Optional custom filename for the CSV download
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: CSV file download
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Bad Request - No supply tag IDs provided
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_download_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/supply_tags/permissions:
+    get:
+      summary: Collection Permissions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/supply_tags/{id}/demand_tag_priorities:
+    get:
+      summary: Demand Tag Priorities
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - name: curator_fees.curator_fee_publishers.inventory_source
+        in: query
+        description: Filter for records that have the specified inventory_source on a curator_fees.curator_fee_publishers association
+        schema:
+          type: string
+      - name: curator_fees.curator_fee_publishers.publisher
+        in: query
+        description: Filter for records that have the specified publisher on a curator_fees.curator_fee_publishers association
+        schema:
+          type: string
+      - name: curator_fees.curator_fee_publishers.ad_source_ids
+        in: query
+        schema:
+          type: array
+          items:
+            type: number
+      - name: marketplace_buyers.inventory_source
+        in: query
+        description: Filter for records that have the specified inventory_source on a marketplace_buyers association
+        schema:
+          type: string
+      - name: marketplace_buyers.dsp_id
+        in: query
+        description: Filter for records that have the specified dsp_id on a marketplace_buyers association
+        schema:
+          type: string
+      - name: marketplace_buyers.buyer_id
+        in: query
+        description: Filter for records that have the specified buyer_id on a marketplace_buyers association
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/additionalDataQuickStatsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_id_demand_tag_priorities_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/supply_tags/{id}/permissions:
+    get:
+      summary: Permissions Member
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Supply Tags
+      operationId: supply_tags_id_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    supply_tag_bid_link_create_full:
+      summary: BidLink Full
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 3
+        format: video
+        environment: desktop
+        allowed_player_sizes:
+        - s
+        - m
+        - l
+        player_size_targeting: Custom
+        domain_targeting: Allowlist
+        domain_list_ids:
+        - 1
+        country_targeting: Include
+        country_source: list
+        country_list_ids:
+        - 1
+        key_value_targeting: true
+        segment_targeting_enabled: true
+        rate: 1.11
+        rate_currency: USD
+        payment_terms: CPM
+        rpm_floor: 1.11
+        openrtb_floor: 1.11
+        open_market_enabled: false
+        waterfall_management: demand_tag
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: daily
+          budget_metric: spend
+          budget_value: 1.11
+          budget_pacing: smooth
+        rtb_version_targeting_enabled: true
+        rtb_version: '2.5'
+        ignore_max_sequence: true
+        max_sequence_override: 1
+        bid_return_net_price: false
+        vast_ext_return_net_price: false
+        code: supply-tag-code
+        active: true
+    supply_tag_pause_ad_create_full:
+      summary: Pause Ad Full
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        format: pause_ad
+        environment: desktop
+        screen_setting: in_content
+        domain_targeting: Allowlist
+        domain_list_ids:
+        - 1
+        country_targeting: Include
+        country_source: list
+        country_list_ids:
+        - 1
+        key_value_targeting: true
+        segment_targeting_enabled: true
+        rate: 1.11
+        rate_currency: USD
+        payment_terms: CPM
+        rpm_floor: 1.11
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: daily
+          budget_metric: spend
+          budget_value: 1.11
+          budget_pacing: smooth
+        supply_label_ids:
+        - 1
+        code: supply-tag-code
+        active: true
+    supply_tag_tag_create_full:
+      summary: Tag Full
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        supply_type: Instream
+        format: video
+        environment: desktop
+        js_vpaid_enabled: false
+        vpaid_none_allow_vpaid_demand: true
+        allowed_player_sizes:
+        - s
+        - m
+        - l
+        player_size_targeting: Custom
+        min_aspect_ratio: '16:9'
+        max_aspect_ratio: '16:9'
+        domain_targeting: Allowlist
+        domain_list_ids:
+        - 1
+        app_name_targeting: Allowlist
+        app_name_list_ids:
+        - 1
+        app_bundle_targeting: Allowlist
+        app_bundle_list_ids:
+        - 1
+        ip_targeting: Allowlist
+        ip_list_ids:
+        - 1
+        country_targeting: Include
+        country_source: list
+        country_list_ids:
+        - 1
+        state_targeting: Include
+        state_source: list
+        state_list_ids:
+        - 1
+        city_targeting: Include
+        city_source: list
+        city_list_ids:
+        - 1
+        metro_area_targeting: Include
+        metro_area_source: list
+        metro_area_list_ids:
+        - 1
+        postal_code_targeting: Include
+        postal_code_source: list
+        postal_code_list_ids:
+        - 1
+        advertiser_domain_targeting: Allowlist
+        advertiser_domain_list_ids:
+        - 1
+        blocking_unknown_advertiser_domains: true
+        ignore_advertiser_domain_targeting: false
+        ignore_iab_targeting: false
+        targeted_iab_category_white_list: true
+        targeted_iab_category_source: list
+        iab_category_tier1_list_ids:
+        - 1
+        targeted_iab_tier2_category_white_list: true
+        targeted_iab_tier2_category_source: list
+        iab_category_tier2_list_ids:
+        - 1
+        key_value_targeting: true
+        segment_targeting_enabled: true
+        targeted_macros_enabled: true
+        creative_political_ads:
+        - '1'
+        audited_creative_statuses:
+        - approved
+        scanned_creative_white_list: true
+        scanned_creative_list_ids:
+        - 1
+        obfuscate_ip_address_enabled: false
+        obfuscate_latlon_enabled: false
+        obf_ip_flags:
+        - dnt
+        pre_bid_blocking_enabled: false
+        post_imp_detection_enabled: false
+        post_imp_percentage_whiteops: 1
+        post_imp_percentage_ias: 1
+        post_imp_percentage_moat: 1
+        omsdk_enabled: false
+        rate: 1.11
+        rate_currency: USD
+        payment_terms: CPM
+        rpm_floor: 1.11
+        rpm_floor_openrtb: false
+        rpm_floor_hb: false
+        openrtb_floor: 1.11
+        open_market_enabled: false
+        auto_add_external_bidders: false
+        waterfall_management: demand_tag
+        supply_allocation: false
+        allow_traffic_exclusions: false
+        allow_duplicate_creatives: true
+        allow_duplicate_adomains: true
+        tier_breakout_enabled: false
+        timeout: 1
+        override_inbound_tmax: false
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: daily
+          budget_metric: spend
+          budget_value: 1.11
+          budget_pacing: smooth
+        frequency_caps:
+        - imps: 1
+          duration: 1
+          duration_unit: days
+        demand_tag_priorities:
+        - demand_tag_id: 1
+          priority: 1
+          tier: 1
+          ratio: 1
+        give_up_percents:
+        - ss_object_id: 1
+          ss_object_type: DemandTag
+          percent: 1
+        macro_overrides:
+        - override_type: static
+          macro_param: '{{IP}}'
+          override_value: '1'
+        advanced_floor_rules:
+        - dimension: adomain
+          values:
+          - example.com
+          floor_price: 1.11
+        supply_label_ids:
+        - 1
+        key_ids:
+        - 1
+        creative_allow_objectionable: false
+        creative_brandsafe_override: false
+        vast_version: 3.0
+        bulk_add_enabled: true
+        evaluation_learn_pct: 1.11
+        player_fee: false
+        skip_enabled: false
+        code: supply-tag-code
+        active: true
+    supply_tag_pause_ad_create_simple:
+      summary: Pause Ad Simple
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        format: pause_ad
+        rate: 1.11
+    supply_tag_audio_create_simple:
+      summary: Audio Simple
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        format: audio
+        rate: 1.11
+    supply_tag_tag_create_simple:
+      summary: Tag Simple
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        rate: 1.11
+    supply_tag_tile_create_full:
+      summary: Tile Full
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        format: tile
+        environment: desktop
+        dynamic_tile: false
+        width: 1
+        height: 1
+        screen_setting: in_content
+        domain_targeting: Allowlist
+        domain_list_ids:
+        - 1
+        country_targeting: Include
+        country_source: list
+        country_list_ids:
+        - 1
+        key_value_targeting: true
+        segment_targeting_enabled: true
+        rate: 1.11
+        rate_currency: USD
+        payment_terms: CPM
+        rpm_floor: 1.11
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: daily
+          budget_metric: spend
+          budget_value: 1.11
+          budget_pacing: smooth
+        supply_label_ids:
+        - 1
+        code: supply-tag-code
+        active: true
+    supply_tag_audio_create_full:
+      summary: Audio Full
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        format: audio
+        environment: desktop
+        domain_targeting: Allowlist
+        domain_list_ids:
+        - 1
+        country_targeting: Include
+        country_source: list
+        country_list_ids:
+        - 1
+        key_value_targeting: true
+        segment_targeting_enabled: true
+        rate: 1.11
+        rate_currency: USD
+        payment_terms: CPM
+        rpm_floor: 1.11
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: daily
+          budget_metric: spend
+          budget_value: 1.11
+          budget_pacing: smooth
+        supply_label_ids:
+        - 1
+        code: supply-tag-code
+        active: true
+    supply_tag_update_simple:
+      summary: Simple
+      value:
+        rate: 1.11
+        active: true
+    supply_tag_bid_link_create_simple:
+      summary: BidLink Simple
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 3
+        rate: 1.11
+    supply_tag_update_full:
+      summary: Full
+      value:
+        name: Supply Tag Name
+        rate: 1.11
+        rate_currency: USD
+        payment_terms: CPM
+        rpm_floor: 1.11
+        rpm_floor_hb: false
+        open_market_enabled: false
+        format: video
+        environment: desktop
+        domain_targeting: Allowlist
+        domain_list_ids:
+        - 1
+        country_targeting: Include
+        country_source: list
+        country_list_ids:
+        - 1
+        key_value_targeting: true
+        segment_targeting_enabled: true
+        timeout: 1
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: daily
+          budget_metric: spend
+          budget_value: 1.11
+          budget_pacing: smooth
+        frequency_caps:
+        - imps: 1
+          duration: 1
+          duration_unit: days
+        demand_tag_priorities:
+        - demand_tag_id: 1
+          priority: 1
+          tier: 1
+          ratio: 1
+        macro_overrides:
+        - override_type: static
+          macro_param: '{{IP}}'
+          override_value: '1'
+        advanced_floor_rules:
+        - dimension: adomain
+          values:
+          - example.com
+          floor_price: 1.11
+        supply_label_ids:
+        - 1
+        key_ids:
+        - 1
+        code: supply-tag-code
+        active: true
+    supply_tag_tile_create_simple:
+      summary: Tile Simple
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        format: tile
+        dynamic_tile: false
+        width: 1
+        height: 1
+        rate: 1.11
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

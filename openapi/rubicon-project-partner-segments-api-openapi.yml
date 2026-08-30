@@ -1,0 +1,544 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Partner Segments API
+  version: '1.0'
+  description: 'Operations tagged Partner Segments across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Partner Segments
+paths:
+  /api/v0/partner_segments:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Partner Segments
+      operationId: partner_segments_get
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/partner_segments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Partner Segments
+      operationId: partner_segments_id_get
+    put:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              simple:
+                $ref: '#/components/examples/partner_segment_update_simple'
+              full:
+                $ref: '#/components/examples/partner_segment_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Partner Segments
+      operationId: partner_segments_id_put
+    delete:
+      summary: Destroy
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Partner Segments
+      operationId: partner_segments_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/partner_segments/bulk_create:
+    post:
+      summary: Bulk Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              single:
+                $ref: '#/components/examples/partner_segment_bulk_create_single'
+              multiple:
+                $ref: '#/components/examples/partner_segment_bulk_create_multiple'
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Partner Segments
+      operationId: partner_segments_bulk_create_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/partner_segments:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - name: account_partner_segment_is_active
+        in: query
+        schema:
+          type: string
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: '#/components/parameters/additionalDataPartnerSegmentParam'
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerSegmentIndexResponse'
+      tags:
+      - Partner Segments
+      operationId: partner_segments_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/partner_segments/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      parameters:
+      - $ref: '#/components/parameters/additionalDataPartnerSegmentParam'
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerSegment'
+      tags:
+      - Partner Segments
+      operationId: partner_segments_id_get
+    patch:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                is_active:
+                  type: boolean
+            examples:
+              partner_segment_update_simple:
+                $ref: '#/components/examples/partner_segment_update_simple_2'
+              partner_segment_update_full:
+                $ref: '#/components/examples/partner_segment_update_full_2'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartnerSegment'
+      tags:
+      - Partner Segments
+      operationId: partner_segments_id_patch
+    delete:
+      summary: Delete
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Partner Segments
+      operationId: partner_segments_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/partner_segments/bulk_create:
+    post:
+      summary: Bulk Create
+      requestBody:
+        content:
+          application/json:
+            examples:
+              partner_segment_bulk_create_single:
+                $ref: '#/components/examples/partner_segment_bulk_create_single_2'
+              partner_segment_bulk_create_multiple:
+                $ref: '#/components/examples/partner_segment_bulk_create_multiple_2'
+            schema:
+              type: object
+        required: true
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              example:
+                created: 1
+                updated: 0
+                errors: 0
+                error_messages: []
+                already_created: 0
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/PartnerSegment'
+      tags:
+      - Partner Segments
+      operationId: partner_segments_bulk_create_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/partner_segments/bulk_delete:
+    delete:
+      summary: Bulk Delete
+      requestBody:
+        content:
+          application/json:
+            example:
+              partner_segment_ids:
+              - 1
+              - 7
+            schema:
+              type: object
+        required: false
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Partner Segments
+      operationId: partner_segments_bulk_delete_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/partner_segments/permissions:
+    get:
+      summary: Collection Permissions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Partner Segments
+      operationId: partner_segments_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/partner_segments/targeted:
+    get:
+      summary: Get paginated list of active targeted partner segments for the active account
+      description: Returns partner segments targeted by any of the listed object types
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - name: targeter_type
+        in: query
+        description: Type of targeting object. Must be provided together with `targeter_id`.
+        required: false
+        schema:
+          type: string
+          enum:
+          - DemandTag
+          - SupplyTag
+          - Campaign
+          - DemandPartner
+      - name: targeter_id
+        in: query
+        description: ID of the targeting object. Must be provided together with `targeter_type`.
+        required: false
+        schema:
+          type: integer
+      - name: id
+        in: query
+        description: Equality filter on partner segment id.
+        required: false
+        schema:
+          type: integer
+      - name: code
+        in: query
+        description: Equality filter on partner segment code
+        required: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: Equality filter on partner segment description
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Partner Segments
+      operationId: partner_segments_targeted_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/partner_segments/{id}/permissions:
+    get:
+      summary: Permissions Member
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Partner Segments
+      operationId: partner_segments_id_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    partner_segment_update_simple:
+      summary: Simple
+      value:
+        active: true
+    partner_segment_update_full:
+      summary: Full
+      value:
+        active: false
+    partner_segment_bulk_create_multiple:
+      summary: Multiple
+      value:
+        partner_segments:
+        - code: EXAMPLE_PARTNER_SEGMENT_1
+          vendor_id: 1
+          description: Example Partner Segment
+          cpm: 1.11
+          external_code: ''
+          dmp_segment_id: 1
+          category: EXAMPLE_CATEGORY
+          political: false
+          adv_id: 1
+          enabled: true
+        - code: EXAMPLE_PARTNER_SEGMENT_2
+          vendor_id: 1
+          description: Another Partner Segment
+          cpm: 1.11
+          external_code: ''
+          dmp_segment_id: 1
+          category: EXAMPLE_CATEGORY
+          political: false
+          adv_id: 1
+          enabled: false
+    partner_segment_bulk_create_single:
+      summary: Single
+      value:
+        partner_segments:
+        - code: EXAMPLE_PARTNER_SEGMENT_1
+          vendor_id: 1
+          description: Example Partner Segment
+          cpm: 1.11
+    partner_segment_update_simple_2:
+      summary: Activate a Partner Segment
+      value:
+        is_active: true
+    partner_segment_update_full_2:
+      summary: Deactivate a Partner Segment
+      value:
+        is_active: false
+    partner_segment_bulk_create_single_2:
+      summary: Create a single Partner Segment
+      value:
+        partner_segments:
+        - code: EXAMPLE_PARTNER_SEGMENT_1
+          vendor_id: 1
+          description: Example Partner Segment
+          cpm: 1.11
+    partner_segment_bulk_create_multiple_2:
+      summary: Create multiple Partner Segments
+      value:
+        partner_segments:
+        - code: EXAMPLE_PARTNER_SEGMENT_1
+          vendor_id: 1
+          description: Example Partner Segment
+          cpm: 1.11
+          external_code: ''
+          dmp_segment_id: 1
+          category: EXAMPLE_CATEGORY
+          political: false
+          adv_id: 1
+          enabled: true
+        - code: EXAMPLE_PARTNER_SEGMENT_2
+          vendor_id: 1
+          description: Another Partner Segment
+          cpm: 1.11
+          external_code: ''
+          dmp_segment_id: 1
+          category: EXAMPLE_CATEGORY
+          political: false
+          adv_id: 1
+          enabled: false
+  schemas:
+    PartnerSegment:
+      type: object
+      properties:
+        id:
+          type: number
+        code:
+          type: string
+        description:
+          type: string
+        cpm:
+          type: number
+        vendor_id:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        size:
+          type: number
+        is_active:
+          type: boolean
+        vendor:
+          type: object
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+        account_partner_segment:
+          type: object
+          properties:
+            id:
+              type: number
+            account_id:
+              type: number
+            partner_segment_id:
+              type: number
+            is_active:
+              type: boolean
+    PartnerSegmentIndexResponse:
+      allOf:
+      - $ref: ref/params.yaml#/components/schemas/ParamsResponse
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/components/schemas/PartnerSegment'
+  parameters:
+    additionalDataPartnerSegmentParam:
+      name: additional_data
+      description: Include additional data from non-model sources on the result. Comma-delimited.
+      in: query
+      schema:
+        type: string
+        enum:
+        - size
+        - account_partner_segment
+        - size,account_partner_segment
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

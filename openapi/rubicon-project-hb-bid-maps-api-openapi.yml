@@ -1,0 +1,492 @@
+openapi: 3.2.0
+info:
+  title: Rubicon Project Hb Bid Maps API
+  version: '1.0'
+  description: 'Operations tagged Hb Bid Maps across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://console.springserve.com/api/v0
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v0
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+- url: https://console.springserve.com/api/v1
+  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+- url: https://console.clearline.magnite.com/api/v1
+  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+security:
+- api_key: []
+- bearer_token: []
+tags:
+- name: Hb Bid Maps
+paths:
+  /api/v0/hb_bid_maps:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/schemas.yaml#/components/schemas/ListResponse
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_get
+    post:
+      summary: Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              hb_bid_map_create_simple:
+                $ref: '#/components/examples/hb_bid_map_create_simple'
+              hb_bid_map_create_full:
+                $ref: '#/components/examples/hb_bid_map_create_full'
+        required: true
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_post
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v0/hb_bid_maps/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Show
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_id_get
+    put:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              hb_bid_map_update_simple:
+                $ref: '#/components/examples/hb_bid_map_update_simple'
+              hb_bid_map_update_full:
+                $ref: '#/components/examples/hb_bid_map_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_id_put
+    patch:
+      summary: Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              hb_bid_map_update_simple:
+                $ref: '#/components/examples/hb_bid_map_update_simple'
+              hb_bid_map_update_full:
+                $ref: '#/components/examples/hb_bid_map_update_full'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_id_patch
+    delete:
+      summary: Destroy
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v0
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v0
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/hb_bid_maps:
+    get:
+      summary: Index
+      parameters:
+      - $ref: ref/params.yaml#/components/parameters/pageParam
+      - $ref: ref/params.yaml#/components/parameters/perParam
+      - $ref: ref/params.yaml#/components/parameters/sortParam
+      - $ref: ref/params.yaml#/components/parameters/searchParam
+      - $ref: ref/params.yaml#/components/parameters/filterParams
+      - $ref: ref/params.yaml#/components/parameters/includeParam
+      - $ref: ref/params.yaml#/components/parameters/idsParam
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HbBidMapsIndexResponse'
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_get
+    post:
+      summary: Create
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/HbBidMapCreateRequest'
+              - type: object
+                properties:
+                  hb_bid_map_entries:
+                    type: array
+                    items:
+                      allOf:
+                      - $ref: '#/components/schemas/HbBidMapEntry'
+                      - type: object
+                        properties:
+                          id:
+                            readOnly: true
+            examples:
+              hb_bid_map_create_simple:
+                $ref: '#/components/examples/hb_bid_map_create_simple'
+              hb_bid_map_create_full:
+                $ref: '#/components/examples/hb_bid_map_create_full'
+          multipart/form-data:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/HbBidMapCreateRequest'
+              - type: object
+                properties:
+                  csv_file:
+                    type: string
+                    format: binary
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/HbBidMapResponseFields'
+                - $ref: '#/components/schemas/HbBidMap'
+                - $ref: '#/components/schemas/HbBidMapEntryArray'
+        '422':
+          $ref: ref/errors.yaml#/components/responses/validationError
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_post
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/hb_bid_maps/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: number
+    get:
+      summary: Show
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/HbBidMap'
+                - $ref: '#/components/schemas/HbBidMapResponseFields'
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_id_get
+    patch:
+      summary: Update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/HbBidMapUpdateRequest'
+              - type: object
+                properties:
+                  hb_bid_map_entries:
+                    type: array
+                    description: Array of bid map entries. Can be used only when the list_action parameter is provided.
+                    items:
+                      $ref: '#/components/schemas/HbBidMapEntry'
+            examples:
+              hb_bid_map_update_simple:
+                $ref: '#/components/examples/hb_bid_map_update_simple'
+              hb_bid_map_update_full:
+                $ref: '#/components/examples/hb_bid_map_update_full_2'
+          multipart/form-data:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/HbBidMapUpdateRequest'
+              - type: object
+                properties:
+                  csv_file:
+                    type: string
+                    format: binary
+                    description: 'CSV file with bid map entries. Can be used only when the list_action parameter is provided. File contains values: bid_floor, parameter_value and id if list_action is remove.'
+      responses:
+        '200':
+          description: Updated
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/HbBidMapResponseFields'
+                - $ref: '#/components/schemas/HbBidMap'
+                - $ref: '#/components/schemas/HbBidMapEntryArray'
+        '422':
+          $ref: ref/errors.yaml#/components/responses/validationError
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_id_patch
+    delete:
+      summary: Delete
+      responses:
+        '204':
+          description: No content
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_id_delete
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/hb_bid_maps/permissions:
+    get:
+      summary: Collection Permissions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/permissions.yaml#/components/schemas/Permissions
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+  /api/v1/hb_bid_maps/{id}/permissions:
+    get:
+      summary: Permissions Member
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: ref/permissions.yaml#/components/schemas/PermissionsWithoutCreate
+      tags:
+      - Hb Bid Maps
+      operationId: hb_bid_maps_id_permissions_get
+    servers:
+    - url: https://console.springserve.com/api/v1
+      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
+    - url: https://console.clearline.magnite.com/api/v1
+      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
+components:
+  examples:
+    hb_bid_map_update_full:
+      summary: Full
+      value:
+        name: HB Bid Map Name
+        description: Updated description
+        hb_bid_map_entries:
+        - parameter_value: ott3_4035_30
+          bid_floor: 1.11
+    hb_bid_map_create_full:
+      summary: Full
+      value:
+        name: HB Bid Map Name
+        bid_platform: amazon
+        hb_bid_map_type: paid
+        description: HB Bid Map description
+        hb_bid_map_entries:
+        - parameter_value: ott1_4033_30
+          bid_floor: 1.11
+        - parameter_value: ott2_4034_60
+          bid_floor: 2.22
+    hb_bid_map_create_simple:
+      summary: Simple
+      value:
+        name: HB Bid Map Name
+        bid_platform: amazon
+        hb_bid_map_type: inventory_split
+    hb_bid_map_update_simple:
+      summary: Simple
+      value:
+        name: HB Bid Map Name
+    hb_bid_map_update_full_2:
+      summary: Full
+      value:
+        name: HB Bid Map Name
+        description: Updated description
+        list_action: append
+        hb_bid_map_entries:
+        - parameter_value: ott3_4035_30
+          bid_floor: 1.11
+  schemas:
+    HbBidMapResponseFields:
+      type: object
+      properties:
+        id:
+          type: integer
+        account_id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    HbBidMap:
+      type: object
+      properties:
+        name:
+          type: string
+          examples:
+          - HB Bid Map
+        description:
+          type: string
+          examples:
+          - Description of the HB Bid Map
+        bid_platform:
+          type: string
+          examples:
+          - amazon
+        hb_bid_map_type:
+          type: string
+          enum:
+          - paid
+          - inventory_split
+          default: inventory_split
+          examples:
+          - paid
+    HbBidMapCreateRequest:
+      allOf:
+      - $ref: '#/components/schemas/HbBidMap'
+      - type: object
+        required:
+        - name
+        - bid_platform
+        - hb_bid_map_type
+    HbBidMapUpdateRequest:
+      allOf:
+      - $ref: '#/components/schemas/HbBidMap'
+      - type: object
+        properties:
+          bid_platform:
+            readOnly: true
+          hb_bid_map_type:
+            readOnly: true
+          list_action:
+            type: string
+            enum:
+            - append
+            - remove
+            - replace
+            default: append
+    HbBidMapEntry:
+      type: object
+      properties:
+        parameter_value:
+          type: string
+          examples:
+          - ott1_4033_30
+        bid_floor:
+          type: number
+          format: float
+          examples:
+          - 15.0
+        id:
+          type: integer
+          examples:
+          - 1
+      required:
+      - parameter_value
+      - bid_floor
+    HbBidMapEntryArray:
+      type: object
+      properties:
+        hb_bid_map_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/HbBidMapEntry'
+    HbBidMapsIndexResponse:
+      allOf:
+      - $ref: ref/params.yaml#/components/schemas/ParamsResponse
+      - type: object
+        properties:
+          results:
+            type: array
+            items:
+              allOf:
+              - $ref: '#/components/schemas/HbBidMap'
+              - $ref: '#/components/schemas/HbBidMapResponseFields'
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: SpringServe authorization token based authentication.
+    bearer_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: SpringServe authorization bearer token based authentication.  This key is included in the response from the /api/v0/auth and /api/v1/auth endpoints.  This key will be automatically set if you run the example for /api/v0/auth or /api/v1/auth
+x-refined-from:
+- rubicon-project-springserve-v0-openapi.yml
+- rubicon-project-springserve-v1-openapi.yml
+x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.
