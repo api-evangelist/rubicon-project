@@ -121,6 +121,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -320,6 +322,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Authentication
+  tags_raw:
   - Auth
   properties:
   - type: OpenAPI
@@ -883,6 +887,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Currency
+  tags_raw:
   - Currencies
   properties:
   - type: OpenAPI
@@ -1582,6 +1588,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -2475,6 +2483,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
