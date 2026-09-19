@@ -455,6 +455,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Changelog
+  tags_raw:
   - Changelogs
   properties:
   - type: OpenAPI
@@ -647,6 +649,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Creative
+  tags_raw:
   - Creatives
   properties:
   - type: OpenAPI
@@ -2031,6 +2035,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Sessions
+  tags_raw:
   - Session
   properties:
   - type: OpenAPI
@@ -2351,6 +2357,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Timezone
+  tags_raw:
   - Timezones
   properties:
   - type: OpenAPI
@@ -2514,6 +2522,8 @@ apis:
   humanURL: https://springserve.atlassian.net/wiki/spaces/SSD/pages/1584726013/SpringServe+API+SDK
   baseURL: https://console.springserve.com/api/v1
   tags:
+  - Video
+  tags_raw:
   - Videos
   properties:
   - type: OpenAPI
