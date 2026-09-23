@@ -3,15 +3,6 @@ info:
   title: Rubicon Project State Lists API
   version: '1.0'
   description: 'Operations tagged State Lists across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://console.springserve.com/api/v0
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v0
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
-- url: https://console.springserve.com/api/v1
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v1
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 security:
 - api_key: []
 - bearer_token: []
@@ -58,11 +49,6 @@ paths:
       tags:
       - State Lists
       operationId: state_lists_post
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/state_lists/{id}:
     parameters:
     - name: id
@@ -112,11 +98,6 @@ paths:
       tags:
       - State Lists
       operationId: state_lists_id_delete
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/state_lists:
     get:
       summary: Index
@@ -188,11 +169,6 @@ paths:
       tags:
       - State Lists
       operationId: state_lists_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/state_lists/{id}:
     get:
       summary: Show
@@ -282,11 +258,6 @@ paths:
       tags:
       - State Lists
       operationId: state_lists_id_delete
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/state_lists/permissions:
     get:
       summary: Collection Permissions
@@ -300,11 +271,6 @@ paths:
       tags:
       - State Lists
       operationId: state_lists_permissions_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/state_lists/{id}/permissions:
     get:
       summary: Permissions Member
@@ -324,17 +290,8 @@ paths:
       tags:
       - State Lists
       operationId: state_lists_id_permissions_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 components:
   examples:
-    state_list_update_simple:
-      summary: Simple
-      value:
-        name: State List Name
     state_list_create_full:
       summary: Full
       value:
@@ -344,13 +301,10 @@ components:
         state_codes:
         - US-CA
         - US-NY
-    state_list_create_simple:
+    state_list_update_simple:
       summary: Simple
       value:
         name: State List Name
-        state_codes:
-        - US-CA
-        - US-NY
     state_list_update_full:
       summary: Full
       value:
@@ -360,6 +314,13 @@ components:
         state_codes:
         - CA-ON
         - GB-ENG
+    state_list_create_simple:
+      summary: Simple
+      value:
+        name: State List Name
+        state_codes:
+        - US-CA
+        - US-NY
     state_list_update_full_2:
       summary: Full
       value:
@@ -371,6 +332,18 @@ components:
         - GB-ENG
         list_action: append
   schemas:
+    StateListErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        error:
+          type: string
+      examples:
+      - error: State codes can't be blank
+        errors:
+          state_codes:
+          - can't be blank
     StateListCreateRequest:
       type: object
       properties:
@@ -443,18 +416,6 @@ components:
           description: The action to perform on the state codes in the state list. Required if state_codes or csv_file is provided.
           examples:
           - append
-    StateListErrorResponse:
-      type: object
-      properties:
-        status:
-          type: integer
-        error:
-          type: string
-      examples:
-      - error: State codes can't be blank
-        errors:
-          state_codes:
-          - can't be blank
   securitySchemes:
     api_key:
       type: apiKey
@@ -469,4 +430,3 @@ components:
 x-refined-from:
 - rubicon-project-springserve-v0-openapi.yml
 - rubicon-project-springserve-v1-openapi.yml
-x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

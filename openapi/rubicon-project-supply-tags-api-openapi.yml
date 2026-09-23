@@ -3,15 +3,6 @@ info:
   title: Rubicon Project Supply Tags API
   version: '1.0'
   description: 'Operations tagged Supply Tags across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://console.springserve.com/api/v0
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v0
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
-- url: https://console.springserve.com/api/v1
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v1
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 security:
 - api_key: []
 - bearer_token: []
@@ -76,11 +67,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_post
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/supply_tags/{id}:
     parameters:
     - name: id
@@ -155,11 +141,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_id_delete
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/supply_tags/{id}/duplicate:
     get:
       summary: Duplicate
@@ -184,11 +165,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_id_duplicate_get
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/supply_tags:
     get:
       summary: Index
@@ -240,11 +216,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/supply_tags/{id}:
     get:
       summary: Show
@@ -264,11 +235,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_id_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/supply_tags/download:
     get:
       summary: Download CSV
@@ -316,11 +282,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_download_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/supply_tags/permissions:
     get:
       summary: Collection Permissions
@@ -334,11 +295,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_permissions_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/supply_tags/{id}/demand_tag_priorities:
     get:
       summary: Demand Tag Priorities
@@ -396,11 +352,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_id_demand_tag_priorities_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/supply_tags/{id}/permissions:
     get:
       summary: Permissions Member
@@ -420,11 +371,6 @@ paths:
       tags:
       - Supply Tags
       operationId: supply_tags_id_permissions_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 components:
   examples:
     supply_tag_bid_link_create_full:
@@ -470,15 +416,74 @@ components:
         vast_ext_return_net_price: false
         code: supply-tag-code
         active: true
-    supply_tag_pause_ad_create_full:
-      summary: Pause Ad Full
+    supply_tag_pause_ad_create_simple:
+      summary: Pause Ad Simple
       value:
         name: Supply Tag Name
         supply_partner_id: 1
         supply_class: 1
         format: pause_ad
+        rate: 1.11
+    supply_tag_update_full:
+      summary: Full
+      value:
+        name: Supply Tag Name
+        rate: 1.11
+        rate_currency: USD
+        payment_terms: CPM
+        rpm_floor: 1.11
+        rpm_floor_hb: false
+        open_market_enabled: false
+        format: video
         environment: desktop
-        screen_setting: in_content
+        domain_targeting: Allowlist
+        domain_list_ids:
+        - 1
+        country_targeting: Include
+        country_source: list
+        country_list_ids:
+        - 1
+        key_value_targeting: true
+        segment_targeting_enabled: true
+        timeout: 1
+        budget_timezone: America/New_York
+        budgets:
+        - budget_period: daily
+          budget_metric: spend
+          budget_value: 1.11
+          budget_pacing: smooth
+        frequency_caps:
+        - imps: 1
+          duration: 1
+          duration_unit: days
+        demand_tag_priorities:
+        - demand_tag_id: 1
+          priority: 1
+          tier: 1
+          ratio: 1
+        macro_overrides:
+        - override_type: static
+          macro_param: '{{IP}}'
+          override_value: '1'
+        advanced_floor_rules:
+        - dimension: adomain
+          values:
+          - example.com
+          floor_price: 1.11
+        supply_label_ids:
+        - 1
+        key_ids:
+        - 1
+        code: supply-tag-code
+        active: true
+    supply_tag_audio_create_full:
+      summary: Audio Full
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        format: audio
+        environment: desktop
         domain_targeting: Allowlist
         domain_list_ids:
         - 1
@@ -644,28 +649,16 @@ components:
         skip_enabled: false
         code: supply-tag-code
         active: true
-    supply_tag_pause_ad_create_simple:
-      summary: Pause Ad Simple
+    supply_tag_tile_create_simple:
+      summary: Tile Simple
       value:
         name: Supply Tag Name
         supply_partner_id: 1
         supply_class: 1
-        format: pause_ad
-        rate: 1.11
-    supply_tag_audio_create_simple:
-      summary: Audio Simple
-      value:
-        name: Supply Tag Name
-        supply_partner_id: 1
-        supply_class: 1
-        format: audio
-        rate: 1.11
-    supply_tag_tag_create_simple:
-      summary: Tag Simple
-      value:
-        name: Supply Tag Name
-        supply_partner_id: 1
-        supply_class: 1
+        format: tile
+        dynamic_tile: false
+        width: 1
+        height: 1
         rate: 1.11
     supply_tag_tile_create_full:
       summary: Tile Full
@@ -702,42 +695,6 @@ components:
         - 1
         code: supply-tag-code
         active: true
-    supply_tag_audio_create_full:
-      summary: Audio Full
-      value:
-        name: Supply Tag Name
-        supply_partner_id: 1
-        supply_class: 1
-        format: audio
-        environment: desktop
-        domain_targeting: Allowlist
-        domain_list_ids:
-        - 1
-        country_targeting: Include
-        country_source: list
-        country_list_ids:
-        - 1
-        key_value_targeting: true
-        segment_targeting_enabled: true
-        rate: 1.11
-        rate_currency: USD
-        payment_terms: CPM
-        rpm_floor: 1.11
-        budget_timezone: America/New_York
-        budgets:
-        - budget_period: daily
-          budget_metric: spend
-          budget_value: 1.11
-          budget_pacing: smooth
-        supply_label_ids:
-        - 1
-        code: supply-tag-code
-        active: true
-    supply_tag_update_simple:
-      summary: Simple
-      value:
-        rate: 1.11
-        active: true
     supply_tag_bid_link_create_simple:
       summary: BidLink Simple
       value:
@@ -745,18 +702,20 @@ components:
         supply_partner_id: 1
         supply_class: 3
         rate: 1.11
-    supply_tag_update_full:
-      summary: Full
+    supply_tag_update_simple:
+      summary: Simple
+      value:
+        rate: 1.11
+        active: true
+    supply_tag_pause_ad_create_full:
+      summary: Pause Ad Full
       value:
         name: Supply Tag Name
-        rate: 1.11
-        rate_currency: USD
-        payment_terms: CPM
-        rpm_floor: 1.11
-        rpm_floor_hb: false
-        open_market_enabled: false
-        format: video
+        supply_partner_id: 1
+        supply_class: 1
+        format: pause_ad
         environment: desktop
+        screen_setting: in_content
         domain_targeting: Allowlist
         domain_list_ids:
         - 1
@@ -766,47 +725,34 @@ components:
         - 1
         key_value_targeting: true
         segment_targeting_enabled: true
-        timeout: 1
+        rate: 1.11
+        rate_currency: USD
+        payment_terms: CPM
+        rpm_floor: 1.11
         budget_timezone: America/New_York
         budgets:
         - budget_period: daily
           budget_metric: spend
           budget_value: 1.11
           budget_pacing: smooth
-        frequency_caps:
-        - imps: 1
-          duration: 1
-          duration_unit: days
-        demand_tag_priorities:
-        - demand_tag_id: 1
-          priority: 1
-          tier: 1
-          ratio: 1
-        macro_overrides:
-        - override_type: static
-          macro_param: '{{IP}}'
-          override_value: '1'
-        advanced_floor_rules:
-        - dimension: adomain
-          values:
-          - example.com
-          floor_price: 1.11
         supply_label_ids:
-        - 1
-        key_ids:
         - 1
         code: supply-tag-code
         active: true
-    supply_tag_tile_create_simple:
-      summary: Tile Simple
+    supply_tag_tag_create_simple:
+      summary: Tag Simple
       value:
         name: Supply Tag Name
         supply_partner_id: 1
         supply_class: 1
-        format: tile
-        dynamic_tile: false
-        width: 1
-        height: 1
+        rate: 1.11
+    supply_tag_audio_create_simple:
+      summary: Audio Simple
+      value:
+        name: Supply Tag Name
+        supply_partner_id: 1
+        supply_class: 1
+        format: audio
         rate: 1.11
   securitySchemes:
     api_key:
@@ -822,4 +768,3 @@ components:
 x-refined-from:
 - rubicon-project-springserve-v0-openapi.yml
 - rubicon-project-springserve-v1-openapi.yml
-x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

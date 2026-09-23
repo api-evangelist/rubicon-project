@@ -3,15 +3,6 @@ info:
   title: Rubicon Project Domain Lists API
   version: '1.0'
   description: 'Operations tagged Domain Lists across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://console.springserve.com/api/v0
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v0
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
-- url: https://console.springserve.com/api/v1
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v1
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 security:
 - api_key: []
 - bearer_token: []
@@ -65,11 +56,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_post
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/domain_lists/{id}:
     get:
       summary: Show
@@ -144,11 +130,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_delete
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/domain_lists/{domain_list_id}/domains:
     get:
       summary: Index domains
@@ -175,11 +156,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_domain_list_id_domains_get
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/domain_lists/{domain_list_id}/domains/bulk_create:
     post:
       summary: Bulk create domains
@@ -213,11 +189,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_domain_list_id_domains_bulk_create_post
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/domain_lists/{domain_list_id}/domains/bulk_delete:
     delete:
       summary: Bulk delete domains
@@ -248,11 +219,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_domain_list_id_domains_bulk_delete_delete
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/domain_lists/{domain_list_id}/domains/bulk_replace:
     post:
       summary: Bulk replace domains
@@ -287,11 +253,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_domain_list_id_domains_bulk_replace_post
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/domain_lists/{domain_list_id}/domains/file_bulk_create:
     post:
       summary: File Bulk Create
@@ -327,11 +288,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_domain_list_id_domains_file_bulk_create_post
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/domain_lists/{domain_list_id}/domains/file_bulk_delete:
     delete:
       summary: File Bulk Delete
@@ -366,11 +322,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_domain_list_id_domains_file_bulk_delete_delete
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/domain_lists/{domain_list_id}/domains/file_bulk_replace:
     post:
       summary: File Bulk Replace
@@ -406,11 +357,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_domain_list_id_domains_file_bulk_replace_post
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists:
     get:
       summary: Index
@@ -469,11 +415,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}:
     parameters:
     - name: id
@@ -524,11 +465,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_delete
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/bulk_update:
     post:
       summary: Bulk Update
@@ -557,11 +493,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_bulk_update_same_attributes_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/permissions:
     get:
       summary: Collection Permissions
@@ -575,11 +506,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_permissions_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/domains:
     get:
       summary: Domains
@@ -604,11 +530,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_domains_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/duplicate:
     parameters:
     - name: id
@@ -644,9 +565,7 @@ paths:
       operationId: domain_lists_id_duplicate_get
     post:
       summary: Create Domain List Duplicate
-      description: 'Persists a new domain list from the submitted basic info and copies the original''s domains into the new list. When demand partner expansion is enabled, demand_partner_permission_ids is required.
-
-        '
+      description: Persists a new domain list from the submitted basic info and copies the original's domains into the new list. When demand partner expansion is enabled, demand_partner_permission_ids is required.
       requestBody:
         content:
           application/json:
@@ -681,11 +600,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_duplicate_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/permissions:
     get:
       summary: Permissions Member
@@ -705,11 +619,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_permissions_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/{resource_type}:
     get:
       summary: Get added targeting resources for list association
@@ -746,9 +655,7 @@ paths:
 
         All resources in the request must use the same `is_allowlist` mode.
 
-        Resources with existing list associations must already use a compatible allowlist mode.
-
-        '
+        Resources with existing list associations must already use a compatible allowlist mode.'
       parameters:
       - name: id
         in: path
@@ -779,11 +686,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_resource_type_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/domains/bulk_create:
     post:
       summary: Bulk Create Domains
@@ -814,11 +716,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_domains_bulk_create_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/domains/bulk_delete:
     delete:
       summary: Bulk Delete Domains
@@ -848,11 +745,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_domains_bulk_delete_delete
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/domains/bulk_replace:
     post:
       summary: Bulk Replace Domains
@@ -883,11 +775,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_domains_bulk_replace_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/domains/file_bulk_create:
     post:
       summary: File Bulk Create Domains
@@ -918,11 +805,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_domains_file_bulk_create_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/domains/file_bulk_delete:
     delete:
       summary: File Bulk Delete Domains
@@ -953,11 +835,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_domains_file_bulk_delete_delete
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/domains/file_bulk_replace:
     post:
       summary: File Bulk Replace Domains
@@ -988,11 +865,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_domains_file_bulk_replace_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/{resource_type}/available:
     get:
       summary: Available Resources
@@ -1021,11 +893,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_resource_type_available_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/{resource_type}/bulk_delete:
     post:
       summary: Bulk delete targeted resources from list
@@ -1033,9 +900,7 @@ paths:
 
         Does not delete the resources themselves, only their association with the list.
 
-        Removing a resource that is not on the list is treated as success.
-
-        '
+        Removing a resource that is not on the list is treated as success.'
       parameters:
       - name: id
         in: path
@@ -1066,11 +931,6 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_resource_type_bulk_delete_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/domain_lists/{id}/{resource_type}/bulk_update:
     post:
       summary: Bulk update targeted resources
@@ -1078,9 +938,7 @@ paths:
 
         Use `is_allowlist` to set allowlist vs blocklist mode for each resource in `object_ids`.
 
-        `is_allowlist` cannot be changed when a resource is associated with multiple lists.
-
-        '
+        `is_allowlist` cannot be changed when a resource is associated with multiple lists.'
       parameters:
       - name: id
         in: path
@@ -1111,38 +969,8 @@ paths:
       tags:
       - Domain Lists
       operationId: domain_lists_id_resource_type_bulk_update_same_attributes_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 components:
   examples:
-    domain_list_domains_bulk_replace_single:
-      summary: Single
-      value:
-        names:
-        - replacement.com
-    domain_list_update_simple:
-      summary: Simple
-      value:
-        name: Domain List Name
-    domain_list_create_full:
-      summary: Full
-      value:
-        name: Domain List Name
-        description: Domain List Description
-        active: true
-    domain_list_create_simple:
-      summary: Simple
-      value:
-        name: Domain List Name
-    domain_list_domains_bulk_create_multiple:
-      summary: Multiple
-      value:
-        names:
-        - cnn.com
-        - abc.com
     domain_list_update_full:
       summary: Full
       value:
@@ -1154,16 +982,100 @@ components:
       value:
         names:
         - example.com
+    domain_list_domains_bulk_replace_single:
+      summary: Single
+      value:
+        names:
+        - replacement.com
+    domain_list_create_simple:
+      summary: Simple
+      value:
+        name: Domain List Name
+    domain_list_domains_bulk_create_multiple:
+      summary: Multiple
+      value:
+        names:
+        - cnn.com
+        - abc.com
     domain_list_domains_bulk_replace_multiple:
       summary: Multiple
       value:
         names:
         - replacement1.com
         - replacement2.com
-    domain_list_duplicate_enabled_demand_partners_expansion:
-      summary: Demand partner expansion enabled
+    domain_list_create_full:
+      summary: Full
+      value:
+        name: Domain List Name
+        description: Domain List Description
+        active: true
+    domain_list_update_simple:
+      summary: Simple
+      value:
+        name: Domain List Name
+    domain_list_resource_add_single:
+      summary: Single
+      value:
+        object_ids:
+        - 1
+        is_allowlist: true
+    domain_list_update_full_2:
+      summary: Full
+      value:
+        name: Domain List Name
+        description: Domain List Description
+        is_active: true
+    domain_list_domains_bulk_create_single_2:
+      summary: Single
+      value:
+        domains:
+        - example.com
+    domain_list_duplicate_disabled_demand_partners_expansion:
+      summary: Demand partner expansion disabled
       value:
         name: Domain List Name (copy)
+        description: Domain List Description
+        is_active: true
+    domain_list_bulk_update_simple:
+      summary: Simple
+      value:
+        is_active: true
+        object_ids:
+        - 1
+    domain_list_resource_bulk_update_multiple:
+      summary: Multiple
+      value:
+        object_ids:
+        - 1
+        - 2
+        is_allowlist: false
+    domain_list_domains_bulk_replace_multiple_2:
+      summary: Multiple
+      value:
+        domains:
+        - bazbop.com
+        - bazfoo.com
+    domain_list_bulk_update_full:
+      summary: Full
+      value:
+        is_active: true
+        object_ids:
+        - 1
+        - 2
+    domain_list_create_another_account:
+      summary: For another account (super admin only)
+      description: 'Super admins may create a domain list in another account by supplying account_id. Other users may only create in their own account; a foreign account_id is rejected with 401.
+
+        '
+      value:
+        name: Domain List Name
+        description: Domain List Description
+        is_active: true
+        account_id: 2
+    domain_list_create_enabled_demand_partners_expansion:
+      summary: Demand partner expansion enabled
+      value:
+        name: Domain List Name
         description: Domain List Description
         is_active: true
         demand_partner_permission_ids:
@@ -1174,18 +1086,39 @@ components:
       value:
         object_ids:
         - 1
-    domain_list_bulk_update_simple:
-      summary: Simple
+    domain_list_domains_bulk_replace_single_2:
+      summary: Single
       value:
+        domains:
+        - example.com
+    domain_list_domains_bulk_create_multiple_2:
+      summary: Multiple
+      value:
+        domains:
+        - aloha.com
+        - shalom.com
+        - ciao.com
+    domain_list_duplicate_enabled_demand_partners_expansion:
+      summary: Demand partner expansion enabled
+      value:
+        name: Domain List Name (copy)
+        description: Domain List Description
         is_active: true
-        object_ids:
+        demand_partner_permission_ids:
         - 1
-    domain_list_resource_add_single:
+        - 2
+    domain_list_resource_bulk_update_single:
       summary: Single
       value:
         object_ids:
         - 1
         is_allowlist: true
+    domain_list_resource_bulk_delete_multiple:
+      summary: Multiple
+      value:
+        object_ids:
+        - 1
+        - 2
     domain_list_duplicate_another_account:
       summary: For another account (super admin only)
       description: 'Super admins may create the duplicate in another account by supplying account_id. Other users may only duplicate into their own account; a foreign account_id is rejected with 401.
@@ -1202,49 +1135,6 @@ components:
         name: Domain List Name
         description: Domain List Description
         is_active: true
-    domain_list_create_another_account:
-      summary: For another account (super admin only)
-      description: 'Super admins may create a domain list in another account by supplying account_id. Other users may only create in their own account; a foreign account_id is rejected with 401.
-
-        '
-      value:
-        name: Domain List Name
-        description: Domain List Description
-        is_active: true
-        account_id: 2
-    domain_list_domains_bulk_create_multiple_2:
-      summary: Multiple
-      value:
-        domains:
-        - aloha.com
-        - shalom.com
-        - ciao.com
-    domain_list_resource_bulk_update_multiple:
-      summary: Multiple
-      value:
-        object_ids:
-        - 1
-        - 2
-        is_allowlist: false
-    domain_list_bulk_update_full:
-      summary: Full
-      value:
-        is_active: true
-        object_ids:
-        - 1
-        - 2
-    domain_list_resource_bulk_delete_multiple:
-      summary: Multiple
-      value:
-        object_ids:
-        - 1
-        - 2
-    domain_list_resource_bulk_update_single:
-      summary: Single
-      value:
-        object_ids:
-        - 1
-        is_allowlist: true
     domain_list_resource_add_multiple:
       summary: Multiple
       value:
@@ -1252,68 +1142,16 @@ components:
         - 1
         - 2
         is_allowlist: true
-    domain_list_update_full_2:
-      summary: Full
-      value:
-        name: Domain List Name
-        description: Domain List Description
-        is_active: true
-    domain_list_create_enabled_demand_partners_expansion:
-      summary: Demand partner expansion enabled
-      value:
-        name: Domain List Name
-        description: Domain List Description
-        is_active: true
-        demand_partner_permission_ids:
-        - 1
-        - 2
-    domain_list_duplicate_disabled_demand_partners_expansion:
-      summary: Demand partner expansion disabled
-      value:
-        name: Domain List Name (copy)
-        description: Domain List Description
-        is_active: true
-    domain_list_domains_bulk_replace_single_2:
-      summary: Single
-      value:
-        domains:
-        - example.com
-    domain_list_domains_bulk_create_single_2:
-      summary: Single
-      value:
-        domains:
-        - example.com
-    domain_list_domains_bulk_replace_multiple_2:
-      summary: Multiple
-      value:
-        domains:
-        - bazbop.com
-        - bazfoo.com
   schemas:
-    DomainListDuplicateEnabledDemandPartnersExpansion:
-      allOf:
-      - $ref: '#/components/schemas/DomainListDuplicateBase'
+    TargetingResourceBatchRequest:
       type: object
       required:
-      - demand_partner_permission_ids
+      - object_ids
       properties:
-        demand_partner_permission_ids:
+        object_ids:
           type: array
           items:
             type: integer
-    DomainListDuplicateRequest:
-      oneOf:
-      - $ref: '#/components/schemas/DomainListDuplicateEnabledDemandPartnersExpansion'
-      - $ref: '#/components/schemas/DomainListDuplicateDisabledDemandPartnersExpansion'
-    TargetingResourceBatchUpdateRequest:
-      allOf:
-      - $ref: '#/components/schemas/TargetingResourceBatchRequest'
-      type: object
-      required:
-      - is_allowlist
-      properties:
-        is_allowlist:
-          type: boolean
     DomainListDuplicateBase:
       type: object
       required:
@@ -1330,15 +1168,30 @@ components:
           description: 'Target account for the duplicate. Only honored for super admins (and equivalent all-accounts users); other users may only create in their own account and a foreign account_id is rejected. Defaults to the requesting user''s account when omitted.
 
             '
+    DomainListDuplicateRequest:
+      oneOf:
+      - $ref: '#/components/schemas/DomainListDuplicateEnabledDemandPartnersExpansion'
+      - $ref: '#/components/schemas/DomainListDuplicateDisabledDemandPartnersExpansion'
+    TargetingResourceBatchUpdateRequest:
+      allOf:
+      - $ref: '#/components/schemas/TargetingResourceBatchRequest'
+      type: object
+      required:
+      - is_allowlist
+      properties:
+        is_allowlist:
+          type: boolean
     DomainListDuplicateDisabledDemandPartnersExpansion:
       allOf:
       - $ref: '#/components/schemas/DomainListDuplicateBase'
-    TargetingResourceBatchRequest:
+    DomainListDuplicateEnabledDemandPartnersExpansion:
+      allOf:
+      - $ref: '#/components/schemas/DomainListDuplicateBase'
       type: object
       required:
-      - object_ids
+      - demand_partner_permission_ids
       properties:
-        object_ids:
+        demand_partner_permission_ids:
           type: array
           items:
             type: integer
@@ -1366,4 +1219,3 @@ components:
 x-refined-from:
 - rubicon-project-springserve-v0-openapi.yml
 - rubicon-project-springserve-v1-openapi.yml
-x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

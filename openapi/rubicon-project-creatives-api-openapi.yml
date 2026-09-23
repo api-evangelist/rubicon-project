@@ -3,15 +3,6 @@ info:
   title: Rubicon Project Creatives API
   version: '1.0'
   description: 'Operations tagged Creatives across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://console.springserve.com/api/v0
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v0
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
-- url: https://console.springserve.com/api/v1
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v1
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 security:
 - api_key: []
 - bearer_token: []
@@ -35,11 +26,6 @@ paths:
       tags:
       - Creatives
       operationId: creatives_get
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/creatives/{id}:
     get:
       summary: Show
@@ -59,11 +45,6 @@ paths:
       tags:
       - Creatives
       operationId: creatives_id_get
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/creatives:
     get:
       summary: Index
@@ -106,11 +87,6 @@ paths:
       tags:
       - Creatives
       operationId: creatives_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/creatives/{id}:
     get:
       summary: Show
@@ -151,11 +127,6 @@ paths:
       tags:
       - Creatives
       operationId: creatives_id_delete
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/creatives/bulk_update:
     post:
       summary: Bulk Update
@@ -290,11 +261,6 @@ paths:
       tags:
       - Creatives
       operationId: creatives_bulk_update_same_attributes_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/creatives/bulk/update:
     post:
       summary: Update Multiple Creatives
@@ -372,19 +338,8 @@ paths:
       tags:
       - Creatives
       operationId: creatives_bulk_update_many_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 components:
   examples:
-    creative_bulk_update_many_single:
-      summary: Single
-      value:
-      - id: 1
-        name: Creative Name
-        is_active: true
     creative_bulk_update_many_multiple:
       summary: Multiple
       value:
@@ -394,18 +349,24 @@ components:
       - id: 2
         name: Creative Name
         is_active: false
+    creative_bulk_update_many_single:
+      summary: Single
+      value:
+      - id: 1
+        name: Creative Name
+        is_active: true
+  parameters:
+    additionalDataParam:
+      name: additional_data
+      description: "Include additional data from non-model sources in the response. \nSupported values: 'quickstats', 'budget_data'. \nMultiple values can be specified as comma-separated (e.g., 'quickstats,budget_data').\n"
+      in: query
+      schema:
+        type: string
+      example: quickstats
   schemas:
-    Country:
+    Browser:
       allOf:
-      - $ref: ref/geo_targeting.yaml#/components/schemas/Country
-      - $ref: '#/components/schemas/ObjectIds'
-    Brand:
-      allOf:
-      - $ref: ref/user_agent_targeting.yaml#/components/schemas/Brand
-      - $ref: '#/components/schemas/ObjectIds'
-    MetroArea:
-      allOf:
-      - $ref: ref/geo_targeting.yaml#/components/schemas/MetroArea
+      - $ref: ref/user_agent_targeting.yaml#/components/schemas/Browser
       - $ref: '#/components/schemas/ObjectIds'
     Status:
       type: object
@@ -424,10 +385,6 @@ components:
       allOf:
       - $ref: ref/geo_targeting.yaml#/components/schemas/Region
       - $ref: '#/components/schemas/ObjectIds'
-    City:
-      allOf:
-      - $ref: ref/geo_targeting.yaml#/components/schemas/City
-      - $ref: '#/components/schemas/ObjectIds'
     ObjectIds:
       type: object
       properties:
@@ -442,6 +399,18 @@ components:
       allOf:
       - $ref: ref/user_agent_targeting.yaml#/components/schemas/OS
       - $ref: '#/components/schemas/ObjectIds'
+    Brand:
+      allOf:
+      - $ref: ref/user_agent_targeting.yaml#/components/schemas/Brand
+      - $ref: '#/components/schemas/ObjectIds'
+    MetroArea:
+      allOf:
+      - $ref: ref/geo_targeting.yaml#/components/schemas/MetroArea
+      - $ref: '#/components/schemas/ObjectIds'
+    Country:
+      allOf:
+      - $ref: ref/geo_targeting.yaml#/components/schemas/Country
+      - $ref: '#/components/schemas/ObjectIds'
     PostalCode:
       allOf:
       - $ref: ref/geo_targeting.yaml#/components/schemas/PostalCode
@@ -450,18 +419,10 @@ components:
       allOf:
       - $ref: ref/user_agent_targeting.yaml#/components/schemas/Device
       - $ref: '#/components/schemas/ObjectIds'
-    Browser:
+    City:
       allOf:
-      - $ref: ref/user_agent_targeting.yaml#/components/schemas/Browser
+      - $ref: ref/geo_targeting.yaml#/components/schemas/City
       - $ref: '#/components/schemas/ObjectIds'
-  parameters:
-    additionalDataParam:
-      name: additional_data
-      description: "Include additional data from non-model sources in the response. \nSupported values: 'quickstats', 'budget_data'. \nMultiple values can be specified as comma-separated (e.g., 'quickstats,budget_data').\n"
-      in: query
-      schema:
-        type: string
-      example: quickstats
   securitySchemes:
     api_key:
       type: apiKey
@@ -476,4 +437,3 @@ components:
 x-refined-from:
 - rubicon-project-springserve-v0-openapi.yml
 - rubicon-project-springserve-v1-openapi.yml
-x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.

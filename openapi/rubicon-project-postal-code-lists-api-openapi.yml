@@ -3,15 +3,6 @@ info:
   title: Rubicon Project Postal Code Lists API
   version: '1.0'
   description: 'Operations tagged Postal Code Lists across 2 of this provider''s published API definitions: rubicon-project-springserve-v0-openapi.yml, rubicon-project-springserve-v1-openapi.yml. Each path carries the servers of the definition it was published in.'
-servers:
-- url: https://console.springserve.com/api/v0
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v0
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
-- url: https://console.springserve.com/api/v1
-  description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-- url: https://console.clearline.magnite.com/api/v1
-  description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 security:
 - api_key: []
 - bearer_token: []
@@ -58,11 +49,6 @@ paths:
       tags:
       - Postal Code Lists
       operationId: postal_code_lists_post
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v0/postal_code_lists/{id}:
     parameters:
     - name: id
@@ -112,11 +98,6 @@ paths:
       tags:
       - Postal Code Lists
       operationId: postal_code_lists_id_delete
-    servers:
-    - url: https://console.springserve.com/api/v0
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v0
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/postal_code_lists:
     get:
       summary: Index
@@ -191,11 +172,6 @@ paths:
       tags:
       - Postal Code Lists
       operationId: postal_code_lists_post
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/postal_code_lists/{id}:
     get:
       summary: Show
@@ -285,11 +261,6 @@ paths:
       tags:
       - Postal Code Lists
       operationId: postal_code_lists_id_delete
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/postal_code_lists/permissions:
     get:
       summary: Collection Permissions
@@ -303,11 +274,6 @@ paths:
       tags:
       - Postal Code Lists
       operationId: postal_code_lists_permissions_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
   /api/v1/postal_code_lists/{id}/permissions:
     get:
       summary: Permissions Member
@@ -327,11 +293,6 @@ paths:
       tags:
       - Postal Code Lists
       operationId: postal_code_lists_id_permissions_get
-    servers:
-    - url: https://console.springserve.com/api/v1
-      description: SpringServe console. Added by API Evangelist from the published documentation (springserve.atlassian.net/wiki/spaces/SSD/pages/1573617663/API+-+Getting+Started, "Base Url https://console.springserve.com/"); the document Magnite serves declares no servers[] block because the Swagger UI infers the host from window.location.
-    - url: https://console.clearline.magnite.com/api/v1
-      description: ClearLine console. The identical contract is served from ClearLine's own host; base URL published at springserve.atlassian.net/wiki/spaces/CLD/pages/3649929217/Clearline+API+SDK.
 components:
   examples:
     postal_code_list_create_full:
@@ -342,12 +303,10 @@ components:
         postal_codes:
         - '10001'
         active: true
-    postal_code_list_create_simple:
+    postal_code_list_update_simple:
       summary: Simple
       value:
         name: Postal Code List Name
-        postal_codes:
-        - '10001'
     postal_code_list_update_full:
       summary: Full
       value:
@@ -356,10 +315,12 @@ components:
         active: true
         postal_codes:
         - '10001'
-    postal_code_list_update_simple:
+    postal_code_list_create_simple:
       summary: Simple
       value:
         name: Postal Code List Name
+        postal_codes:
+        - '10001'
     postal_code_list_update_full_2:
       summary: Full
       value:
@@ -370,24 +331,6 @@ components:
         postal_codes:
         - '10001'
   schemas:
-    PostalCodeListErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: General error message
-          examples:
-          - Postal codes can't be blank
-        errors:
-          type: object
-          description: Detailed validation errors by field
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          examples:
-          - postal_codes:
-            - can't be blank
     PostalCodeListResponse:
       type: object
       properties:
@@ -411,6 +354,41 @@ components:
           type: array
           items:
             type: string
+    PostalCodeListErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: General error message
+          examples:
+          - Postal codes can't be blank
+        errors:
+          type: object
+          description: Detailed validation errors by field
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          examples:
+          - postal_codes:
+            - can't be blank
+    PostalCodeListCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          examples:
+          - Postal Code List Name
+        description:
+          type: string
+          examples:
+          - Postal Code List Description
+        active:
+          type: boolean
+          examples:
+          - true
+      required:
+      - name
     PostalCodeListUpdateRequest:
       type: object
       properties:
@@ -434,23 +412,6 @@ components:
           - remove
           examples:
           - append
-    PostalCodeListCreateRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          examples:
-          - Postal Code List Name
-        description:
-          type: string
-          examples:
-          - Postal Code List Description
-        active:
-          type: boolean
-          examples:
-          - true
-      required:
-      - name
   securitySchemes:
     api_key:
       type: apiKey
@@ -465,4 +426,3 @@ components:
 x-refined-from:
 - rubicon-project-springserve-v0-openapi.yml
 - rubicon-project-springserve-v1-openapi.yml
-x-servers-added-by: https://apievangelist.com — not present in the upstream document; see openapi/_original/ for the verbatim spec.
